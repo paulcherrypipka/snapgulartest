@@ -26,10 +26,10 @@ export class QuestionnaireService {
     }
 
     getSections() {
-        QUESTIONNAIRE.getSections();
+        return QUESTIONNAIRE.getSections();
     }
 
     getQuestions() {
-        QUESTIONNAIRE.getQuestions();
+        return QUESTIONNAIRE.getQuestions();
     }
 }
