@@ -1,0 +1,76 @@
+body {
+    margin: 0 auto;
+}
+
+#content {
+    margin: 10px 5% 50px 5%;
+}
+
+.outline {
+    /*outline: 1px solid gray;*/
+}
+
+.q-question {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.q-section {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.q-answer {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.ic-image {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+#ic-global-error-notice-container {
+    position: fixed;
+    float: left;
+    left: 30px;
+    bottom: 30px;
+}
+
+#ic-global-error-notice-container a {
+    opacity: 0.2;
+}
+
+#ic-global-error-notice-container a:hover {
+    opacity: 0.7;
+}
+
+#ic-global-error-notice-container img {
+    width: 50px;
+    height: 50px;
+}
+
+body.dragging, body.dragging * {
+    cursor: move !important;
+}
+
+.dragged {
+    position: absolute;
+    opacity: 0.5;
+    z-index: 2000;
+}
+
+ol.example li.placeholder {
+    position: relative;
+    /** More li styles **/
+}
+ol.example li.placeholder:before {
+    position: absolute;
+    /** Define arrowhead **/
+}
