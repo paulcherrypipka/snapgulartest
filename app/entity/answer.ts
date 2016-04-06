@@ -4,4 +4,9 @@ export class Answer {
     text: string;
     score: number;
 
+    constructor() {
+        this.id = null;
+        this.text = null;
+        this.score = null;
+    }
 }
