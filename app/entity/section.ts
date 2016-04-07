@@ -13,6 +13,7 @@ export class Section implements IQuestionKeeper {
     //alertOptions: any; //new AlertOptionsModel(),
     questions: any; //new QuestionCollection(),
     //image: any; //new ImageModel()
+    output: string;
 
     constructor() {
 
@@ -26,6 +27,7 @@ export class Section implements IQuestionKeeper {
         //this.alertOptions: any; //new AlertOptionsModel(),
         this.questions = new QuestionCollection();
         //this.image: any; //new ImageModel()
+        this.output = null;
     }
 
     addQuestion(item: Question = null): Question {
@@ -43,4 +45,5 @@ export class Section implements IQuestionKeeper {
     getQuestion(id: number) {
         return this.questions.get(id);
     }
+
 }

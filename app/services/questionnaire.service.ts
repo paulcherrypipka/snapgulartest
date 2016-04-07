@@ -15,9 +15,7 @@ export class QuestionnaireService {
     }
 
     addSection(item: Section = null): Section {
-
         console.log('Add section in questionnaire service!');
-
         return QUESTIONNAIRE.addSection(item);
     }
 
