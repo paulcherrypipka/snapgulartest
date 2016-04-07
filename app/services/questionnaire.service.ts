@@ -2,10 +2,10 @@
 import {Injectable} from 'angular2/core';
 
 // Storage with questionnaire's data
-import {QUESTIONNAIRE} from './mocks/questionnaire-storage';
+import {QUESTIONNAIRE} from '../mocks/questionnaire-storage';
 
-import {Section} from "./entity/section";
-import {Question} from "./entity/question";
+import {Section} from "../entity/section";
+import {Question} from "../entity/question";
 
 @Injectable()
 export class QuestionnaireService {
@@ -14,15 +14,15 @@ export class QuestionnaireService {
         return QUESTIONNAIRE;
     }
 
-    addSection(item: Section = null) {
+    addSection(item: Section = null): Section {
 
         console.log('Add section in questionnaire service!');
 
-        QUESTIONNAIRE.addSection(item);
+        return QUESTIONNAIRE.addSection(item);
     }
 
-    addQuestion(item: Question = null) {
-        QUESTIONNAIRE.addQuestion(item);
+    addQuestion(item: Question = null): Question {
+        return QUESTIONNAIRE.addQuestion(item);
     }
 
     getSections() {

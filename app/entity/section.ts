@@ -1,7 +1,8 @@
-import {QuestionCollection} from "../mocks/question-collection";
+import {QuestionCollection} from "../collections/question-collection";
 import {Question} from "./question";
+import {IQuestionKeeper} from "../interfaces/question-keeper.interface";
 
-export class Section {
+export class Section implements IQuestionKeeper {
 
     id: number; //null,
     name: string; //'Name',
@@ -26,11 +27,12 @@ export class Section {
         //this.image: any; //new ImageModel()
     }
 
-    addQuestion(item: Question = null) {
+    addQuestion(item: Question = null): Question {
         if (item == undefined) {
             item = new Question();
         }
         this.questions.addItem(item);
+        return item;
     }
 
     getQuestions() {

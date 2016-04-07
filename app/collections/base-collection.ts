@@ -1,8 +1,8 @@
-import {Question} from '../entity/question';
+import {ICollection} from "../interfaces/collection.interface";
 
-export class QuestionCollection {
+export abstract class BaseCollection implements ICollection {
 
-    private items: Question[] = [];
+    private items: any[];
 
     constructor() {
         this.items = [];
@@ -16,7 +16,7 @@ export class QuestionCollection {
         return this.items;
     }
 
-    addItem(item: Question) {
+    addItem(item: any) {
         this.items.push(item);
     }
 }

@@ -1,8 +1,9 @@
-import {AnswerCollection} from "../mocks/answer-collection";
+import {AnswerCollection} from "../collections/answer-collection";
 import {Answer} from "./answer";
 import {Answer} from "./answer";
+import {IAnswerKeeper} from "../interfaces/answer-keeper.interface";
 
-export class Question {
+export class Question implements IAnswerKeeper {
 
     id: number; //null,
     //choiceType: any; //this.constructor.CHOICE_TYPE_SINGLE,
@@ -26,11 +27,12 @@ export class Question {
         //this.image = '';
     }
 
-    addAnswer(item: Answer = null) {
+    addAnswer(item: Answer = null): Answer {
         if (item == undefined) {
             item = new Answer();
         }
         this.answers.addItem(item);
+        return item;
     }
 
     getAnswers() {

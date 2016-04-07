@@ -1,11 +1,13 @@
-import {SectionCollection} from "../mocks/section-collection";
-import {QuestionCollection} from "../mocks/question-collection";
+import {SectionCollection} from "../collections/section-collection";
+import {QuestionCollection} from "../collections/question-collection";
 import {Section} from "./section";
 import {Question} from "./question";
 import {Section} from "./section";
 import {QuestionnaireService} from "../questionnaire.service";
+import {IQuestionKeeper} from "../interfaces/question-keeper.interface";
+import {ISectionKeeper} from "../interfaces/section-keeper.interface";
 
-export class Questionnaire {
+export class Questionnaire implements IQuestionKeeper, ISectionKeeper {
 
     id: number;
     name: string;
@@ -29,7 +31,7 @@ export class Questionnaire {
         //this.image: any; //new ImageModel()
     }
 
-    addSection(item: Section = null) {
+    addSection(item: Section = null): Section {
 
         console.log('Add section in Questionnaire entity!');
 
@@ -37,13 +39,15 @@ export class Questionnaire {
             item = new Section();
         }
         this.sections.addItem(item);
+        return item;
     }
 
-    addQuestion(item: Question = null) {
+    addQuestion(item: Question = null): Question {
         if (item == undefined) {
             item = new Question();
         }
         this.questions.addItem(item);
+        return item;
     }
 
     getSections() {
