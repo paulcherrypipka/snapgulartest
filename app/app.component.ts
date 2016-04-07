@@ -27,8 +27,26 @@ export class AppComponent implements OnInit {
         private _questionnaireService: QuestionnaireService
     ) {}
 
+    // Events click define:
+    addSectionClick() {
+        console.log('addSectionClick working');
+    }
+
+    addQuestionnaireQuestionClick() {
+        console.log('addQuestionnaireQuestionClick working');
+    }
+
+    importClick() {
+        console.log('importClick working');
+    }
+
+    saveQuestionnaireClick() {
+        console.log('saveQuestionnaireClick working');
+    }
+
     ngOnInit() {
         console.log('AppComponent init');
+
         // Test add sections and questions
         //console.log('test 007 get instance => ', this._questionnaireService.getQuestionnaire());
 //
@@ -61,24 +79,5 @@ export class AppComponent implements OnInit {
 //
         //console.log('test get sections => ', this._questionnaireService.getSections());
         //console.log('test get questions => ', this._questionnaireService.getQuestions());
-    }
-
-    // Events click define:
-    addSectionClick() {
-        console.log('addSectionClick working');
-        var newSection = this._questionnaireService.addSection();
-        console.log('test get sections => ', this._questionnaireService.getSections());
-    }
-
-    addQuestionnaireQuestionClick() {
-        console.log('addQuestionnaireQuestionClick working');
-    }
-
-    importClick() {
-        console.log('importClick working');
-    }
-
-    saveQuestionnaireClick() {
-        console.log('saveQuestionnaireClick working');
     }
 }

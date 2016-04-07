@@ -2,6 +2,7 @@ import {QuestionCollection} from "../collections/question-collection";
 import {Question} from "./question";
 import {IQuestionKeeper} from "../interfaces/question-keeper.interface";
 
+
 export class Section implements IQuestionKeeper {
 
     id: number; //null,
