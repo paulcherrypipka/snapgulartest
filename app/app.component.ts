@@ -7,7 +7,7 @@ import {Section} from "./entity/section";
 import {Question} from "./entity/question";
 
 import {SectionComponent} from './section.component';
-import {QuestionComponent} from './question.component';
+import {QQuestionComponent} from './qquestion.component';
 
 @Component({
     selector: 'questionnaire',
@@ -17,7 +17,7 @@ import {QuestionComponent} from './question.component';
     ],
     directives: [
         SectionComponent,
-        QuestionComponent
+        QQuestionComponent
     ]
 })
 
@@ -61,8 +61,6 @@ export class AppComponent implements OnInit {
         console.log('AppComponent init');
 
         // Test add sections and questions
-        console.log('test 007 get instance => ', this._questionnaireService.getQuestionnaire());
-
         var sec = this._questionnaireService.addSection();
 
         var q1 = sec.addQuestion();
@@ -90,9 +88,5 @@ export class AppComponent implements OnInit {
         qq2.addAnswer();
         qq2.addAnswer();
 
-        console.log('test get sections => ', this._questionnaireService.getSections());
-        console.log('test get questions => ', this._questionnaireService.getQuestions());
-
-        //this.qsections = this._questionnaireService.getSections();
     }
 }

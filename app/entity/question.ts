@@ -44,4 +44,8 @@ export class Question implements IAnswerKeeper {
     getAnswer(id: number) {
         return this.answers.get(id);
     }
+
+    removeAnswer(item: Answer) {
+        // @todo removeAnswer
+    }
 }

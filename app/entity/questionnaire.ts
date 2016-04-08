@@ -42,14 +42,6 @@ export class Questionnaire implements IQuestionKeeper, ISectionKeeper {
         return item;
     }
 
-    addQuestion(item: Question = null): Question {
-        if (item == undefined) {
-            item = new Question();
-        }
-        this.questions.addItem(item);
-        return item;
-    }
-
     getSections() {
         return this.sections.getAll();
     }
@@ -58,11 +50,27 @@ export class Questionnaire implements IQuestionKeeper, ISectionKeeper {
         return this.sections.get(id);
     }
 
+    removeSection(item: Section) {
+        // @todo removeSection
+    }
+
+    addQuestion(item: Question = null): Question {
+        if (item == undefined) {
+            item = new Question();
+        }
+        this.questions.addItem(item);
+        return item;
+    }
+
     getQuestions() {
         return this.questions.getAll();
     }
 
     getQuestion(id: number) {
         return this.questions.get(id);
+    }
+
+    removeQuestion(item: Question) {
+        // @todo removeQuestion
     }
 }

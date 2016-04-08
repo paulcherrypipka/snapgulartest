@@ -1,0 +1,18 @@
+<div class="test-question">
+    <ul class="test-q-questions">
+        <li class="q-question" *ngFor="#qq of qquestions">
+            <h3>Q-question output - test</h3>
+            <!--<qqanswers-view>[qqanswers]="qqanswers"</qqanswers-view>-->
+            <div class="test-answers">
+                <ul class="test-q-answers">
+                    <li class="q-answer" *ngFor="#answes of qq.getAnswers()">
+                        <h5>
+                            QQAnswer output - test
+                        </h5>
+                    </li>
+                </ul>
+            </div>
+            <button (click)="qq.addAnswer()" type="button" class="q-add-answer btn btn-default">Add answer</button>
+        </li>
+    </ul>
+</div>

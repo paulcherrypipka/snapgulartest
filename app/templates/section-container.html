@@ -1,7 +1,29 @@
 <div class="test-section">
     <ul class="test-q-sections">
-        <li class="q-section" *ngFor="#qs of qsections">
-            <h2>Section output - test</h2>
+        <li class="q-section" *ngFor="#qs of qsections; #sectionNdx = index">
+            <h3>Section output - test</h3>
+            <span>Index sec: {{ sectionNdx }}</span>
+            <!--<squestions-view>[squestions]="squestions"</squestions-view>-->
+            <div class="test-questions">
+                <ul class="test-s-questions">
+                    <li class="q-question" *ngFor="#sq of qs.getQuestions()">
+                        <h4>
+                            S-question output - test
+                        </h4>
+                        <!--<qanswers-view>[qanswers]="qanswers"</qanswers-view>-->
+                        <div class="test-answers">
+                            <ul class="test-q-answers">
+                                <li class="q-answer" *ngFor="#answer of sq.getAnswers()">
+                                    <h5>
+                                        SQAnswer output - test
+                                    </h5>
+                                </li>
+                            </ul>
+                        </div>
+                        <button (click)="sq.addAnswer()" type="button" class="q-add-answer btn btn-default">Add answer</button>
+                    </li>
+                </ul>
+            </div>
             <button (click)="qs.addQuestion()" type="button" class="q-add-question btn btn-default">Add question</button>
         </li>
     </ul>

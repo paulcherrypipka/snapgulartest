@@ -6,13 +6,13 @@ import {QuestionnaireService} from './services/questionnaire.service';
 
 @Component({
     selector: 'qquestions-view',
-    templateUrl: 'app/templates/question-container.html',
+    templateUrl: 'app/templates/qquestion-container.html',
     providers: [
         QuestionnaireService
     ]
 })
 
-export class QuestionComponent {
+export class QQuestionComponent {
 
     qquestions: Question[] = this._questionnaireService.getQuestions();
 

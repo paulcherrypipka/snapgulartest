@@ -4,5 +4,6 @@ export interface ICollection {
     addItem(item: any): any;
     get(id: number): any;
     getAll(): any[];
+    removeItem(item: any);
 
 }
