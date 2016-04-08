@@ -19,4 +19,7 @@ export abstract class BaseCollection implements ICollection {
     addItem(item: any) {
         this.items.push(item);
     }
+
+    // @todo Remove by entity ref
+    // @todo Remove by id
 }

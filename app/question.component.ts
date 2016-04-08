@@ -1,22 +1,23 @@
 import {Component, Input} from 'angular2/core';
 
-import {Section} from './entity/section';
+import {Question} from './entity/question';
 import {QuestionnaireService} from './services/questionnaire.service';
 
 
 @Component({
-    selector: 'qsections-view',
-    templateUrl: 'app/templates/section-container.html',
+    selector: 'qquestions-view',
+    templateUrl: 'app/templates/question-container.html',
     providers: [
         QuestionnaireService
     ]
 })
 
-export class SectionComponent {
+export class QuestionComponent {
 
-    qsections: Section[] = this._questionnaireService.getSections();
+    qquestions: Question[] = this._questionnaireService.getQuestions();
 
     constructor(
         private _questionnaireService: QuestionnaireService
     ) {}
+
 }

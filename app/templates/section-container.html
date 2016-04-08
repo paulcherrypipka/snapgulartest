@@ -1,0 +1,8 @@
+<div class="test-section">
+    <ul class="test-q-sections">
+        <li class="q-section" *ngFor="#qs of qsections">
+            <h2>Section output - test</h2>
+            <button (click)="qs.addQuestion()" type="button" class="q-add-question btn btn-default">Add question</button>
+        </li>
+    </ul>
+</div>

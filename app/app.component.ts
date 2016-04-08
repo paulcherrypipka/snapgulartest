@@ -7,6 +7,7 @@ import {Section} from "./entity/section";
 import {Question} from "./entity/question";
 
 import {SectionComponent} from './section.component';
+import {QuestionComponent} from './question.component';
 
 @Component({
     selector: 'questionnaire',
@@ -15,7 +16,8 @@ import {SectionComponent} from './section.component';
         QuestionnaireService,
     ],
     directives: [
-        SectionComponent
+        SectionComponent,
+        QuestionComponent
     ]
 })
 
@@ -36,20 +38,23 @@ export class AppComponent implements OnInit {
 
     // Events click define:
     addSectionClick() {
-        console.log('addSectionClick working');
+        console.log('addSectionClick');
         this._questionnaireService.addSection();
     }
 
     addQuestionnaireQuestionClick() {
-        console.log('addQuestionnaireQuestionClick working');
+        console.log('addQuestionnaireQuestionClick');
+        this._questionnaireService.addQuestion();
     }
 
     importClick() {
-        console.log('importClick working');
+        // @todo import
+        console.log('importClick');
     }
 
     saveQuestionnaireClick() {
-        console.log('saveQuestionnaireClick working');
+        // @todo save Questionnaire
+        console.log('saveQuestionnaireClick');
     }
 
     ngOnInit() {

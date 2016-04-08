@@ -1,0 +1,8 @@
+<div class="test-question">
+    <ul class="test-q-questions">
+        <li class="q-question" *ngFor="#qq of qquestions">
+            <h2>Q-question output - test</h2>
+            <button (click)="qq.addAnswer()" type="button" class="q-add-answer btn btn-default">Add answer</button>
+        </li>
+    </ul>
+</div>
