@@ -6,11 +6,16 @@ import {Answer} from "./entity/answer";
 import {Section} from "./entity/section";
 import {Question} from "./entity/question";
 
+import {SectionComponent} from './section.component';
+
 @Component({
     selector: 'questionnaire',
     templateUrl: 'app/templates/questionnaire-main.html',
     providers: [
         QuestionnaireService,
+    ],
+    directives: [
+        SectionComponent
     ]
 })
 
@@ -83,6 +88,6 @@ export class AppComponent implements OnInit {
         console.log('test get sections => ', this._questionnaireService.getSections());
         console.log('test get questions => ', this._questionnaireService.getQuestions());
 
-        this.qsections = this._questionnaireService.getSections();
+        //this.qsections = this._questionnaireService.getSections();
     }
 }
