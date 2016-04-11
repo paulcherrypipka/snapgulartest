@@ -2,13 +2,19 @@
     <ul class="test-q-questions">
         <li class="q-question" *ngFor="#qq of qquestions">
             <h3>Q-question output - test</h3>
+            <button (click)="removeQQuestionClick(qq)" type="button" class="btn btn-default remove-form-question-button">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
             <!--<qqanswers-view>[qqanswers]="qqanswers"</qqanswers-view>-->
             <div class="test-answers">
                 <ul class="test-q-answers">
-                    <li class="q-answer" *ngFor="#answes of qq.getAnswers()">
+                    <li class="q-answer" *ngFor="#answer of qq.getAnswers()">
                         <h5>
                             QQAnswer output - test
                         </h5>
+                        <button (click)="qq.removeAnswer(answer)" type="button" class="btn btn-default remove-form-answer-button">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
                     </li>
                 </ul>
             </div>

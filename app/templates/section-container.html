@@ -3,6 +3,9 @@
         <li class="q-section" *ngFor="#qs of qsections; #sectionNdx = index">
             <h3>Section output - test</h3>
             <span>Index sec: {{ sectionNdx }}</span>
+            <button (click)="removeSectionClick(qs)" type="button" class="btn btn-default remove-form-section-button">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
             <!--<squestions-view>[squestions]="squestions"</squestions-view>-->
             <div class="test-questions">
                 <ul class="test-s-questions">
@@ -10,6 +13,9 @@
                         <h4>
                             S-question output - test
                         </h4>
+                        <button (click)="qs.removeQuestion(sq)" type="button" class="btn btn-default remove-form-question-button">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
                         <!--<qanswers-view>[qanswers]="qanswers"</qanswers-view>-->
                         <div class="test-answers">
                             <ul class="test-q-answers">
@@ -17,6 +23,9 @@
                                     <h5>
                                         SQAnswer output - test
                                     </h5>
+                                    <button (click)="sq.removeAnswer(answer)" type="button" class="btn btn-default remove-form-answer-button">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
                                 </li>
                             </ul>
                         </div>

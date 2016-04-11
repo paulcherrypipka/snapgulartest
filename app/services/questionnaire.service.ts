@@ -30,4 +30,12 @@ export class QuestionnaireService {
     getQuestions() {
         return QUESTIONNAIRE.getQuestions();
     }
+
+    removeQuestion(question: Question) {
+        QUESTIONNAIRE.removeQuestion(question);
+    }
+
+    removeSection(section: Section) {
+        QUESTIONNAIRE.removeSection(section);
+    }
 }

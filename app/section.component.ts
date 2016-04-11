@@ -26,4 +26,8 @@ export class SectionComponent {
 
         console.log('secnumindex => ', this.sectionNdx);
     }
+
+    removeSectionClick(section: Section) {
+        this._questionnaireService.removeSection(section);
+    }
 }

@@ -21,9 +21,8 @@ export abstract class BaseCollection implements ICollection {
     }
 
     removeItem(item: any) {
-        this.items.find(item)[0].remove();
+        let ndx = this.items.indexOf(item);
+        this.items.splice(ndx, 1);
     }
 
-    // @todo Remove by entity ref
-    // @todo Remove by id
 }

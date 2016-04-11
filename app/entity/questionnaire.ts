@@ -51,7 +51,7 @@ export class Questionnaire implements IQuestionKeeper, ISectionKeeper {
     }
 
     removeSection(item: Section) {
-        // @todo removeSection
+        this.sections.removeItem(item);
     }
 
     addQuestion(item: Question = null): Question {
@@ -71,6 +71,6 @@ export class Questionnaire implements IQuestionKeeper, ISectionKeeper {
     }
 
     removeQuestion(item: Question) {
-        // @todo removeQuestion
+        this.questions.removeItem(item);
     }
 }

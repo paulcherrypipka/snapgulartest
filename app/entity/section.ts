@@ -49,7 +49,6 @@ export class Section implements IQuestionKeeper {
     }
 
     removeQuestion(item: Question) {
-        // @todo removeQuestion
+        this.questions.removeItem(item);
     }
-
 }

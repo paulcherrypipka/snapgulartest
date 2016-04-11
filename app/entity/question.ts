@@ -46,6 +46,6 @@ export class Question implements IAnswerKeeper {
     }
 
     removeAnswer(item: Answer) {
-        // @todo removeAnswer
+        this.answers.removeItem(item);
     }
 }
