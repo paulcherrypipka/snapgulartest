@@ -18,14 +18,10 @@ import {QuestionnaireService} from './services/questionnaire.service';
 export class SectionComponent {
 
     qsections: Section[] = this._questionnaireService.getSections();
-    sectionNdx: number;
 
     constructor(
         private _questionnaireService: QuestionnaireService
-    ) {
-
-        console.log('secnumindex => ', this.sectionNdx);
-    }
+    ) {}
 
     removeSectionClick(section: Section) {
         this._questionnaireService.removeSection(section);

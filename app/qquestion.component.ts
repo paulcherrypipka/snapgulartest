@@ -2,7 +2,7 @@ import {Component, Input} from 'angular2/core';
 
 import {Question} from './entity/question';
 import {QuestionnaireService} from './services/questionnaire.service';
-
+import {Answer} from "./entity/answer";
 
 @Component({
     selector: 'qquestions-view',
@@ -23,5 +23,16 @@ export class QQuestionComponent {
 
     removeQQuestionClick(qq: Question) {
         this._questionnaireService.removeQuestion(qq);
+    }
+
+    collapseAnswerClick(event) {
+        console.log('event => ', event);
+        /*if (event.target.hasClass('glyphicon-triangle-bottom')) {
+         event.target.removeClass('glyphicon-triangle-bottom');
+         event.target.addClass('glyphicon-triangle-right');
+         } else {
+         event.target.removeClass('glyphicon-triangle-right');
+         event.target.addClass('glyphicon-triangle-bottom');
+         }*/
     }
 }

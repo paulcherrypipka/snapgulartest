@@ -29,7 +29,6 @@ export class Question implements IAnswerKeeper {
 
     addAnswer(item: Answer = null): Answer {
 
-        console.log('Add answer to question => ', this);
         if (item == undefined) {
             item = new Answer();
         }

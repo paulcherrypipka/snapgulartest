@@ -17,8 +17,6 @@ export class Section implements IQuestionKeeper {
 
     constructor() {
 
-        console.log('Point section constructor!');
-
         this.id = null,
         this.name = 'Name',
         this.formula = null,
@@ -32,7 +30,6 @@ export class Section implements IQuestionKeeper {
 
     addQuestion(item: Question = null): Question {
 
-        console.log('Add question to section => ', this);
         if (item == undefined) {
             item = new Question();
         }

@@ -5,18 +5,51 @@
             <button (click)="removeQQuestionClick(qq)" type="button" class="btn btn-default remove-form-question-button">
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
-            <!--<qqanswers-view>[qqanswers]="qqanswers"</qqanswers-view>-->
-            <div class="test-answers">
-                <ul class="test-q-answers">
-                    <li class="q-answer" *ngFor="#answer of qq.getAnswers()">
-                        <h5>
-                            QQAnswer output - test
-                        </h5>
-                        <button (click)="qq.removeAnswer(answer)" type="button" class="btn btn-default remove-form-answer-button">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </button>
-                    </li>
-                </ul>
+
+            <div id="collapsed-container-007-questionnaire" class="collapse in q-question-collapsible-container">
+                <!--<qqanswers-view>[qqanswers]="qqanswers"</qqanswers-view>-->
+                <div class="answers">
+                    <div class="q-answer" *ngFor="#answer of qq.getAnswers()">
+                        <!--################################# A N S W E R ###################################-->
+                        <div class="form-group">
+                            <div class="col-xs-12  col-md-3">
+                                <button type="button" class="btn btn-default move-form-answer-button">
+                                    <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+                                </button>
+                                <button (click)="qq.removeAnswer(answer)" type="button" class="btn btn-default remove-form-answer-button">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button>
+                                <button (click)="collapseAnswerClick($event)" type="button" class="btn btn-default collapse-form-button"  data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + answer.cid">
+                                    <span class="glyphicon {{ answer.collapsed ? 'glyphicon-triangle-right' : 'glyphicon-triangle-bottom' }}" area-hidden="true"></span>
+                                    <span class="q-answer-collapse-button-title">{{ answer.id }}</span>
+                                </button>
+                            </div>
+                            <div class="col-xs-12  col-md-9">
+                                <input [(ngModel)]="answer.text" type="text" class="form-control q-answer-name" placeholder="name">
+                            </div>
+                        </div>
+
+                        <div id="collapsed-container-{{ answer.cid }}" class="collapse {{ answer.collapsed ? '' : 'in' }} q-answer-collapsible-container">
+
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">Id</label>
+                                <div class="col-xs-9">
+                                    <input [(ngModel)]="answer.id" type="text" class="form-control q-answer-id" placeholder="id" [attr.aria-describedby]="'view-' + answer.cid + '-idHelpBlock'">
+                                    <span id="view-{{ answer.cid }}-idHelpBlock" class="help-block"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">Score</label>
+                                <div class="col-xs-9">
+                                    <input [(ngModel)]="answer.score" type="text" class="form-control q-answer-score" placeholder="score">
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--################################## E N D ### A N S W E R #####################################-->
+                    </div>
+                </div>
             </div>
             <button (click)="qq.addAnswer()" type="button" class="q-add-answer btn btn-default">Add answer</button>
         </li>

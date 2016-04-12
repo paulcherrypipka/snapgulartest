@@ -33,8 +33,6 @@ export class Questionnaire implements IQuestionKeeper, ISectionKeeper {
 
     addSection(item: Section = null): Section {
 
-        console.log('Add section in Questionnaire entity');
-
         if (item == undefined) {
             item = new Section();
         }
