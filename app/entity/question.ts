@@ -7,9 +7,11 @@ import {Guid} from '../utils/guid';
 
 export class Question implements IAnswerKeeper {
 
+    public static CHOISE_TYPE_MULTIPLY = 'm';
+    public static CHOISE_TYPE_SINGLE = 's';
+
     id: number; //null,
-    // @todo implement field choiceType
-    //choiceType: any; //this.constructor.CHOICE_TYPE_SINGLE,
+    choiseType: any; //this.constructor.CHOICE_TYPE_SINGLE,
     formula: string; //null,
     text: string; //null,
     required: boolean; //true,
@@ -23,7 +25,7 @@ export class Question implements IAnswerKeeper {
 
     constructor() {
         this.id = null;
-        //this.choiceType = '';
+        this.choiseType = Question.CHOISE_TYPE_SINGLE;
         this.formula = null;
         this.text = null;
         this.required = true;

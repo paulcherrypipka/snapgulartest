@@ -24,5 +24,4 @@ export class QQuestionComponent {
     removeQQuestionClick(qq: Question) {
         this._questionnaireService.removeQuestion(qq);
     }
-
 }

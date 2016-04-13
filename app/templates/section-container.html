@@ -107,7 +107,7 @@
                             <div class="form-group">
                                 <label class="col-xs-2 control-label">ChoiceType</label>
                                 <div class="col-xs-10">
-                                    <select name="choiceType" class="form-control q-question-choice-type">
+                                    <select [(ngModel)]="sq.choiseType" name="choiceType" class="form-control q-question-choice-type">
                                         <!--<option value="m" <%= choiceType === 'm' ? 'selected' : '' %> >Multiple</option>
                                         <option value="s" <%= choiceType === 's' ? 'selected' : '' %> >Single</option>-->
                                         <!--@todo choise type ofr question-->
