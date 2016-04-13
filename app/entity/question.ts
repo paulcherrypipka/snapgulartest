@@ -1,7 +1,7 @@
 import {AnswerCollection} from "../collections/answer-collection";
 import {Answer} from "./answer";
-import {Answer} from "./answer";
 import {IAnswerKeeper} from "../interfaces/answer-keeper.interface";
+import {Image} from "./image";
 
 import {Guid} from '../utils/guid';
 
@@ -19,8 +19,7 @@ export class Question implements IAnswerKeeper {
     // @todo implement field question -> alertOptions
     //alertOptions: any; //new AlertOptionsModel(),
     answers: AnswerCollection; //new AnswerCollection(),
-    // @todo implement field question -> image
-    //image: any; //new ImageModel()
+    image: Image;
     cid: string;
 
     constructor() {
@@ -32,7 +31,7 @@ export class Question implements IAnswerKeeper {
         this.enabled = true;
         //this.alertOptions = '';
         this.answers = new AnswerCollection();
-        //this.image = '';
+        this.image = new Image();
         this.cid = Guid.guid();
     }
 
@@ -55,5 +54,18 @@ export class Question implements IAnswerKeeper {
 
     removeAnswer(item: Answer) {
         this.answers.removeItem(item);
+    }
+
+    fileChange(event) {
+
+        this.image.name = event.srcElement.files[0].name;
+
+        var FR = new FileReader();
+        FR.onload = (e) => {
+
+            //noinspection TypeScriptUnresolvedVariable
+            this.image.source = e.target.result;
+        };
+        FR.readAsDataURL(event.srcElement.files[0]);
     }
 }

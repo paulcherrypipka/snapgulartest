@@ -125,6 +125,20 @@
                                 </div>
                             </div>
 
+                            <div class="image-component">
+                                <div class="form-group">
+                                    <label class="col-xs-2 col-md-2 control-label">Image</label>
+                                    <div class="col-xs-3 col-md-3">
+                                        <input (change)="sq.fileChange($event)" type="file" class="ic-file" [attr.aria-describedby]="'view-' + sq.cid + '-fileHelpBlock'">
+                                        <button type="button" class="ic-clear-button">Clear</button>
+                                        <span id="view-{{ sq.cid }}-fileHelpBlock" class="help-block"></span>
+                                    </div>
+                                    <div class="col-xs-7 col-md-7 ic-image-container">
+                                        <img src="{{ sq.image.source}} " class="ic-image" />
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-xs-10 col-xs-offset-2">
                                     <div class="answers">
