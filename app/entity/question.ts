@@ -3,17 +3,23 @@ import {Answer} from "./answer";
 import {Answer} from "./answer";
 import {IAnswerKeeper} from "../interfaces/answer-keeper.interface";
 
+import {Guid} from '../utils/guid';
+
 export class Question implements IAnswerKeeper {
 
     id: number; //null,
+    // @todo implement field choiceType
     //choiceType: any; //this.constructor.CHOICE_TYPE_SINGLE,
     formula: string; //null,
     text: string; //null,
     required: boolean; //true,
     enabled: boolean; //true,
+    // @todo implement field alertOptions
     //alertOptions: any; //new AlertOptionsModel(),
     answers: AnswerCollection; //new AnswerCollection(),
+    // @todo implement field image
     //image: any; //new ImageModel()
+    cid: string;
 
     constructor() {
         this.id = null;
@@ -25,6 +31,7 @@ export class Question implements IAnswerKeeper {
         //this.alertOptions = '';
         this.answers = new AnswerCollection();
         //this.image = '';
+        this.cid = Guid.guid();
     }
 
     addAnswer(item: Answer = null): Answer {

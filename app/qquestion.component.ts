@@ -25,14 +25,4 @@ export class QQuestionComponent {
         this._questionnaireService.removeQuestion(qq);
     }
 
-    collapseAnswerClick(event) {
-        console.log('event => ', event);
-        /*if (event.target.hasClass('glyphicon-triangle-bottom')) {
-         event.target.removeClass('glyphicon-triangle-bottom');
-         event.target.addClass('glyphicon-triangle-right');
-         } else {
-         event.target.removeClass('glyphicon-triangle-right');
-         event.target.addClass('glyphicon-triangle-bottom');
-         }*/
-    }
 }

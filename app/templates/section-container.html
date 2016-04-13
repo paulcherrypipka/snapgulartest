@@ -1,39 +1,138 @@
 <div class="test-section">
     <ul class="test-q-sections">
-        <li class="q-section" *ngFor="#qs of qsections; #sectionNdx = index">
+        <li class="q-section" *ngFor="#qsec of qsections; #sectionNdx = index">
             <h3>Section output - test</h3>
             <span>Index sec: {{ sectionNdx }}</span>
-            <button (click)="removeSectionClick(qs)" type="button" class="btn btn-default remove-form-section-button">
+            <button (click)="removeSectionClick(qsec)" type="button" class="btn btn-default remove-form-section-button">
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
-            <!--<squestions-view>[squestions]="squestions"</squestions-view>-->
-            <div class="test-questions">
-                <ul class="test-s-questions">
-                    <li class="q-question" *ngFor="#sq of qs.getQuestions()">
-                        <h4>
-                            S-question output - test
-                        </h4>
-                        <button (click)="qs.removeQuestion(sq)" type="button" class="btn btn-default remove-form-question-button">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </button>
-                        <!--<qanswers-view>[qanswers]="qanswers"</qanswers-view>-->
-                        <div class="test-answers">
-                            <ul class="test-q-answers">
-                                <li class="q-answer" *ngFor="#answer of sq.getAnswers()">
-                                    <h5>
-                                        SQAnswer output - test
-                                    </h5>
-                                    <button (click)="sq.removeAnswer(answer)" type="button" class="btn btn-default remove-form-answer-button">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </button>
-                                </li>
-                            </ul>
+            <div class="questions">
+                <div class="q-question" *ngFor="#sq of qsec.getQuestions()">
+                    <div class="form-group">
+                        <div class="col-xs-12  col-md-2">
+                            <button type="button" class="btn btn-default move-form-question-button">
+                                <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+                            </button>
+                            <button (click)="qsec.removeQuestion(sq)" type="button" class="btn btn-default remove-form-question-button">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default collapse-form-button" data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + sq.cid">
+                                <span class="glyphicon {{ sq.collapsed ? 'glyphicon-triangle-right' : 'glyphicon-triangle-bottom' }}" area-hidden="true"></span>
+                                <span class="q-question-collapse-button-title">{{ sq.id }}</span>
+                            </button>
                         </div>
-                        <button (click)="sq.addAnswer()" type="button" class="q-add-answer btn btn-default">Add answer</button>
-                    </li>
-                </ul>
+                        <div class="col-xs-12  col-md-10">
+                            <textarea [(ngModel)]="sq.text" class="form-control q-question-name" placeholder="name">{{ sq.text }}</textarea>
+                        </div>
+                    </div>
+
+                    <div id="collapsed-container-{{ sq.cid }}" class="collapse in q-question-collapsible-container">
+                        <div class="form-group">
+                            <div class="col-xs-10 col-xs-offset-2">
+                                <div class="checkbox">
+                                    <label>
+                                        <input [(ngModel)]="sq.checked" type="checkbox" class="q-question-enabled">Enabled
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-10 col-xs-offset-2">
+                                <div class="checkbox">
+                                    <label>
+                                        <input [(ngModel)]="sq.required" type="checkbox" class="q-question-required">Required
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">Id</label>
+                            <div class="col-xs-10">
+                                <input [(ngModel)]="sq.id" type="text" class="form-control q-question-id" placeholder="id" [attr.area-describedby]="'view-' + sq.cid + '-idHelpBlock'">
+                                <span id="view-{{ sq.cid }}-idHelpBlock" class="help-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">ChoiceType</label>
+                            <div class="col-xs-10">
+                                <select name="choiceType" class="form-control q-question-choice-type">
+                                    <!--<option value="m" <%= choiceType === 'm' ? 'selected' : '' %> >Multiple</option>
+                                    <option value="s" <%= choiceType === 's' ? 'selected' : '' %> >Single</option>-->
+                                    <!--@todo choise type ofr question-->
+                                    <option value="m">Multiple</option>
+                                    <option value="s">Single</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">Formula</label>
+                            <div class="col-xs-10">
+                                <input [(ngModel)]="sq.formula" type="text" class="form-control q-question-formula" placeholder="formula" [attr.aria-describedby]="'view-' + sq.cid + '-formulaHelpBlock'">
+                                <span id="view-{{ sq.cid }}-formulaHelpBlock" class="help-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-10 col-xs-offset-2">
+                                <div class="answers">
+                                    <div class="q-answer" *ngFor="#answer of sq.getAnswers()">
+                                        <!--################################# A N S W E R ###################################-->
+                                        <div class="form-group">
+                                            <div class="col-xs-12  col-md-3">
+                                                <button type="button" class="btn btn-default move-form-answer-button">
+                                                    <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+                                                </button>
+                                                <button (click)="sq.removeAnswer(answer)" type="button" class="btn btn-default remove-form-answer-button">
+                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default collapse-form-button"  data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + answer.cid">
+                                                    <span class="glyphicon {{ answer.collapsed ? 'glyphicon-triangle-right' : 'glyphicon-triangle-bottom' }}" area-hidden="true"></span>
+                                                    <span class="q-answer-collapse-button-title">{{ answer.id }}</span>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-12  col-md-9">
+                                                <input [(ngModel)]="answer.text" type="text" class="form-control q-answer-name" placeholder="name">
+                                            </div>
+                                        </div>
+
+                                        <div id="collapsed-container-{{ answer.cid }}" class="collapse in q-answer-collapsible-container">
+
+                                            <div class="form-group">
+                                                <label class="col-xs-3 control-label">Id</label>
+                                                <div class="col-xs-9">
+                                                    <input [(ngModel)]="answer.id" type="text" class="form-control q-answer-id" placeholder="id" [attr.area-describedby]="'view-' + answer.cid + '-idHelpBlock'">
+                                                    <span id="view-{{ answer.cid }}-idHelpBlock" class="help-block"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-xs-3 control-label">Score</label>
+                                                <div class="col-xs-9">
+                                                    <input [(ngModel)]="answer.score" type="text" class="form-control q-answer-score" placeholder="score">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!--################################## E N D ### A N S W E R #####################################-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-2">
+                                <button (click)="sq.addAnswer()" type="button" class="q-add-answer btn btn-default">Add answer</button>
+                            </div>
+                            <div class="col-cs-10"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button (click)="qs.addQuestion()" type="button" class="q-add-question btn btn-default">Add question</button>
+            <button (click)="qsec.addQuestion()" type="button" class="q-add-question btn btn-default">Add question</button>
         </li>
     </ul>
 </div>
