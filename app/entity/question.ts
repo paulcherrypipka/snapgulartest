@@ -16,10 +16,10 @@ export class Question implements IAnswerKeeper {
     text: string; //null,
     required: boolean; //true,
     enabled: boolean; //true,
-    // @todo implement field alertOptions
+    // @todo implement field question -> alertOptions
     //alertOptions: any; //new AlertOptionsModel(),
     answers: AnswerCollection; //new AnswerCollection(),
-    // @todo implement field image
+    // @todo implement field question -> image
     //image: any; //new ImageModel()
     cid: string;
 

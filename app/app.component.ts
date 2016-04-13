@@ -10,7 +10,7 @@ import {SectionComponent} from './section.component';
 import {QQuestionComponent} from './qquestion.component';
 
 @Component({
-    selector: 'questionnaire',
+    selector: 'div#questionnaire',
     templateUrl: 'app/templates/questionnaire-main.html',
     providers: [
         QuestionnaireService,
@@ -80,14 +80,14 @@ export class AppComponent implements OnInit {
         //q3.addAnswer();
         //q3.addAnswer();
 
-        var qq1 = this._questionnaireService.addQuestion();
-        var qq2 = this._questionnaireService.addQuestion();
+        //var qq1 = this._questionnaireService.addQuestion();
+        //var qq2 = this._questionnaireService.addQuestion();
 
-        qq1.addAnswer();
-        qq1.addAnswer();
+        //qq1.addAnswer();
+        //qq1.addAnswer();
 
-        qq2.addAnswer();
-        qq2.addAnswer();
+        //qq2.addAnswer();
+        //qq2.addAnswer();
 
     }
 }

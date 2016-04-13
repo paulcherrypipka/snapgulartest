@@ -11,8 +11,10 @@ export class Section implements IQuestionKeeper {
     formula: string; //null,
     enabled: boolean; //true,
     minRequired: any; //null,
+    // @todo implements field section -> alertOptions
     //alertOptions: any; //new AlertOptionsModel(),
     questions: any; //new QuestionCollection(),
+    // @todo implements field section -> image
     //image: any; //new ImageModel()
     output: string;
     cid: string;
