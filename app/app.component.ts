@@ -64,12 +64,12 @@ export class AppComponent implements OnInit {
         // Test add sections and questions
         var sec = this._questionnaireService.addSection();
 
-         var q1 = sec.addQuestion();
+         //var q1 = sec.addQuestion();
          //var q2 = sec.addQuestion();
          //var q3 = sec.addQuestion();
 
-         q1.addAnswer();
-         q1.addAnswer();
+         //q1.addAnswer();
+         //q1.addAnswer();
          //q1.addAnswer();
 
          //q2.addAnswer();

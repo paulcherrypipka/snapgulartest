@@ -2,6 +2,7 @@ import {QuestionCollection} from "../collections/question-collection";
 import {Question} from "./question";
 import {IQuestionKeeper} from "../interfaces/question-keeper.interface";
 
+import {Guid} from '../utils/guid';
 
 export class Section implements IQuestionKeeper {
 
@@ -14,6 +15,7 @@ export class Section implements IQuestionKeeper {
     questions: any; //new QuestionCollection(),
     //image: any; //new ImageModel()
     output: string;
+    cid: string;
 
     constructor() {
 
@@ -26,6 +28,7 @@ export class Section implements IQuestionKeeper {
         this.questions = new QuestionCollection();
         //this.image: any; //new ImageModel()
         this.output = null;
+        this.cid = Guid.guid();
     }
 
     addQuestion(item: Question = null): Question {
