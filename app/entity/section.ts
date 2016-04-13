@@ -1,6 +1,7 @@
 import {QuestionCollection} from "../collections/question-collection";
 import {Question} from "./question";
 import {IQuestionKeeper} from "../interfaces/question-keeper.interface";
+import {Image} from './image';
 
 import {Guid} from '../utils/guid';
 
@@ -14,9 +15,7 @@ export class Section implements IQuestionKeeper {
     // @todo implements field section -> alertOptions
     //alertOptions: any; //new AlertOptionsModel(),
     questions: any; //new QuestionCollection(),
-    // @todo implements field section -> image
-    //image: any; //new ImageModel()
-    output: string;
+    image: Image; //new ImageModel()
     cid: string;
 
     constructor() {
@@ -28,8 +27,7 @@ export class Section implements IQuestionKeeper {
         this.minRequired = null,
         //this.alertOptions: any; //new AlertOptionsModel(),
         this.questions = new QuestionCollection();
-        //this.image: any; //new ImageModel()
-        this.output = null;
+        this.image = new Image(); //new ImageModel()
         this.cid = Guid.guid();
     }
 
@@ -52,5 +50,29 @@ export class Section implements IQuestionKeeper {
 
     removeQuestion(item: Question) {
         this.questions.removeItem(item);
+    }
+
+    imageFileChange(event) {
+        if (event.srcElement.files[0] instanceof File) {
+
+            if (!event.srcElement.files[0].type.match('image.*')) {
+                this.image.source = '';
+                return;
+            }
+
+            this.image.name = event.srcElement.files[0].name;
+
+            let FR = new FileReader();
+            FR.onload = (e) => {
+
+                //noinspection TypeScriptUnresolvedVariable
+                this.image.source = e.target.result;
+            };
+            FR.readAsDataURL(event.srcElement.files[0]);
+        }
+    }
+
+    imageFileClear(event) {
+        this.image = new Image();
     }
 }

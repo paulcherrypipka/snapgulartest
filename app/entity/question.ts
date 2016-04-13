@@ -4,6 +4,7 @@ import {IAnswerKeeper} from "../interfaces/answer-keeper.interface";
 import {Image} from "./image";
 
 import {Guid} from '../utils/guid';
+import {Image} from "./image";
 
 export class Question implements IAnswerKeeper {
 
@@ -56,16 +57,28 @@ export class Question implements IAnswerKeeper {
         this.answers.removeItem(item);
     }
 
-    fileChange(event) {
+    imageFileChange(event) {
+        if (event.srcElement.files[0] instanceof File) {
 
-        this.image.name = event.srcElement.files[0].name;
+            if (!event.srcElement.files[0].type.match('image.*')) {
+                this.image = new Image();
+                return;
+            }
 
-        var FR = new FileReader();
-        FR.onload = (e) => {
+            this.image = new Image();
+            this.image.name = event.srcElement.files[0].name;
 
-            //noinspection TypeScriptUnresolvedVariable
-            this.image.source = e.target.result;
-        };
-        FR.readAsDataURL(event.srcElement.files[0]);
+            let FR = new FileReader();
+            FR.onload = (e) => {
+
+                //noinspection TypeScriptUnresolvedVariable
+                this.image.source = e.target.result;
+            };
+            FR.readAsDataURL(event.srcElement.files[0]);
+        }
+    }
+
+    imageFileClear(event) {
+        this.image = new Image();
     }
 }

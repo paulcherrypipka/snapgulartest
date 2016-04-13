@@ -53,6 +53,21 @@
             </div>
         </div>
 
+        <div class="image-component">
+
+            <div class="form-group">
+                <label class="col-xs-2 col-md-2 control-label">Image</label>
+                <div class="col-xs-3 col-md-3">
+                    <input (change)="qsec.imageFileChange($event)" type="file" class="ic-file" [attr.aria-describedby]="'view-' + qsec.cid + '-fileHelpBlock'">
+                    <button (click)="qsec.imageFileClear($event)" type="button" class="ic-clear-button">Clear</button>
+                    <span id="view-{{ qsec.cid }}-fileHelpBlock" class="help-block"></span>
+                </div>
+                <div class="col-xs-7 col-md-7 ic-image-container">
+                    <img *ngIf="qsec.image.source" src="{{ qsec.image.source }}" class="ic-image">
+                </div>
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-xs-10 col-xs-offset-2">
                 <div class="questions">
@@ -129,12 +144,12 @@
                                 <div class="form-group">
                                     <label class="col-xs-2 col-md-2 control-label">Image</label>
                                     <div class="col-xs-3 col-md-3">
-                                        <input (change)="sq.fileChange($event)" type="file" class="ic-file" [attr.aria-describedby]="'view-' + sq.cid + '-fileHelpBlock'">
-                                        <button type="button" class="ic-clear-button">Clear</button>
+                                        <input (change)="sq.imageFileChange($event)" type="file" class="ic-file" [attr.aria-describedby]="'view-' + sq.cid + '-fileHelpBlock'">
+                                        <button (click)="sq.imageFileClear($event)" type="button" class="ic-clear-button">Clear</button>
                                         <span id="view-{{ sq.cid }}-fileHelpBlock" class="help-block"></span>
                                     </div>
                                     <div class="col-xs-7 col-md-7 ic-image-container">
-                                        <img src="{{ sq.image.source}} " class="ic-image" />
+                                        <img *ngIf="sq.image.source" src="{{ sq.image.source }} " class="ic-image" />
                                     </div>
                                 </div>
                             </div>
