@@ -8,8 +8,8 @@
             <button (click)="removeSectionClick(qsec)" type="button" class="btn btn-default remove-form-section-button">
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
-            <button type="button" class="btn btn-default collapse-form-button" data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + qsec.cid">
-                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+            <button (click)="qsec.collapse()" type="button" class="btn btn-default collapse-form-button" data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + qsec.cid">
+                <span class="glyphicon" [class.glyphicon-triangle-bottom]="!qsec.collapsed" [class.glyphicon-triangle-right]="qsec.collapsed" aria-hidden="true"></span>
                 <span class="q-section-collapse-button-title">{{ qsec.id }}</span>
             </button>
         </div>
@@ -82,8 +82,8 @@
                                 <button (click)="qsec.removeQuestion(sq)" type="button" class="btn btn-default remove-form-question-button">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </button>
-                                <button type="button" class="btn btn-default collapse-form-button" data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + sq.cid">
-                                    <span class="glyphicon glyphicon-triangle-bottom" area-hidden="true"></span>
+                                <button (click)="sq.collapse()" type="button" class="btn btn-default collapse-form-button" data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + sq.cid">
+                                    <span class="glyphicon" [class.glyphicon-triangle-bottom]="!sq.collapsed" [class.glyphicon-triangle-right]="sq.collapsed" area-hidden="true"></span>
                                     <span class="q-question-collapse-button-title">{{ sq.id }}</span>
                                 </button>
                             </div>
@@ -171,8 +171,8 @@
                                                     <button (click)="sq.removeAnswer(answer)" type="button" class="btn btn-default remove-form-answer-button">
                                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                                     </button>
-                                                    <button type="button" class="btn btn-default collapse-form-button"  data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + answer.cid">
-                                                        <span class="glyphicon glyphicon-triangle-bottom" area-hidden="true"></span>
+                                                    <button (click)="answer.collapse()" type="button" class="btn btn-default collapse-form-button"  data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + answer.cid">
+                                                        <span class="glyphicon" [class.glyphicon-triangle-bottom]="!answer.collapsed" [class.glyphicon-triangle-right]="answer.collapsed" area-hidden="true"></span>
                                                         <span class="q-answer-collapse-button-title">{{ answer.id }}</span>
                                                     </button>
                                                 </div>

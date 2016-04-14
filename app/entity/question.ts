@@ -24,6 +24,7 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait {
     answers: AnswerCollection;
     image: Image;
     cid: string;
+    collapsed: boolean;
 
     constructor() {
         this.id = null;
@@ -36,6 +37,7 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait {
         this.answers = new AnswerCollection();
         this.image = new Image();
         this.cid = Guid.guid();
+        this.collapsed = false;
     }
 
     addAnswer(item: Answer = null): Answer {
@@ -57,6 +59,10 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait {
 
     removeAnswer(item: Answer) {
         this.answers.removeItem(item);
+    }
+
+    collapse() {
+        this.collapsed = !this.collapsed;
     }
 
     imageFileChange: (event: any) => void;

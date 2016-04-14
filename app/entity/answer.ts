@@ -14,24 +14,10 @@ export class Answer {
         this.text = null;
         this.score = null;
         this.cid = Guid.guid();
-        this.collapsed = true;
-
-        if (this.id) {
-            this.collapsed = false;
-        }
-    }
-
-    collapse() {
-        console.log('entity collapse');
-        this.collapsed = true;
-    }
-
-    expand() {
-        console.log('entity expand');
         this.collapsed = false;
     }
 
-    isCollapsed(): boolean {
-        return this.collapsed;
+    collapse() {
+        this.collapsed = !this.collapsed;
     }
 }

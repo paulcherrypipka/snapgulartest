@@ -7,8 +7,8 @@
             <button (click)="removeQQuestionClick(qq)" type="button" class="btn btn-default remove-form-question-button">
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
-            <button type="button" class="btn btn-default collapse-form-button" data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + qq.cid">
-                <span class="glyphicon {{ qq.collapsed ? 'glyphicon-triangle-right' : 'glyphicon-triangle-bottom' }}" area-hidden="true"></span>
+            <button (click)="qq.collapse()" type="button" class="btn btn-default collapse-form-button" data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + qq.cid">
+                <span class="glyphicon" [class.glyphicon-triangle-bottom]="!qq.collapsed" [class.glyphicon-triangle-right]="qq.collapsed" area-hidden="true"></span>
                 <span class="q-question-collapse-button-title">{{ qq.id }}</span>
             </button>
         </div>
@@ -93,8 +93,8 @@
                                 <button (click)="qq.removeAnswer(answer)" type="button" class="btn btn-default remove-form-answer-button">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </button>
-                                <button type="button" class="btn btn-default collapse-form-button"  data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + answer.cid">
-                                    <span class="glyphicon {{ answer.collapsed ? 'glyphicon-triangle-right' : 'glyphicon-triangle-bottom' }}" area-hidden="true"></span>
+                                <button (click)="answer.collapse()" type="button" class="btn btn-default collapse-form-button"  data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + answer.cid">
+                                    <span class="glyphicon" [class.glyphicon-triangle-bottom]="!answer.collapsed" [class.glyphicon-triangle-right]="answer.collapsed" area-hidden="true"></span>
                                     <span class="q-answer-collapse-button-title">{{ answer.id }}</span>
                                 </button>
                             </div>
