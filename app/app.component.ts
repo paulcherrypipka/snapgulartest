@@ -8,6 +8,7 @@ import {Question} from "./entity/question";
 
 import {SectionComponent} from './section.component';
 import {QQuestionComponent} from './qquestion.component';
+import {Questionnaire} from "./entity/questionnaire";
 
 @Component({
     selector: 'div#questionnaire',
@@ -23,18 +24,13 @@ import {QQuestionComponent} from './qquestion.component';
 
 export class AppComponent implements OnInit {
 
-    private id = null;
-    private cid = 'test';
-    private name = null;
-    private formula = null;
-    private fractionLength = 2;
-    private displayingFormat = null;
-
-    private qsections: Section[];
+    questionnaire: Questionnaire;
 
     constructor(
         private _questionnaireService: QuestionnaireService
-    ) {}
+    ) {
+        this.questionnaire = this._questionnaireService.getQuestionnaire();
+    }
 
     // Events click define:
     addSectionClick() {

@@ -5,37 +5,52 @@
     <div class="form-group">
         <label class="col-xs-3  col-md-2  control-label" for="q-name">Name</label>
         <div class="col-xs-9  col-md-10">
-            <input type="text" class="form-control" id="q-name" placeholder="name" value="{{ name }}">
+            <input type="text" class="form-control" id="q-name" placeholder="name" value="{{ questionnaire.name }}">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-xs-3  col-md-2  control-label" for="q-id">Id</label>
         <div class="col-xs-9  col-md-10">
-            <input type="text" class="form-control" id="q-id" placeholder="id" value="{{ id }}" >
-            <span id="view-{{ cid }}-idHelpBlock" class="help-block"></span>
+            <input type="text" class="form-control" id="q-id" placeholder="id" value="{{ questionnaire.id }}" >
+            <span id="view-{{ questionnaire.cid }}-idHelpBlock" class="help-block"></span>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-xs-3  col-md-2  control-label" for="q-fractionLength">FractionLength</label>
         <div class="col-xs-9  col-md-10">
-            <input type="number" class="form-control" id="q-fractionLength" placeholder="fraction length" value="{{ fractionLength }}">
+            <input type="number" class="form-control" id="q-fractionLength" placeholder="fraction length" value="{{ questionnaire.fractionLength }}">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-xs-3  col-md-2  control-label" for="q-formula">Formula</label>
         <div class="col-xs-9  col-md-10">
-            <input type="text" class="form-control" id="q-formula" placeholder="formula" value="{{ formula }}" >
-            <span id="view-{{ cid }}-formulaHelpBlock" class="help-block"></span>
+            <input type="text" class="form-control" id="q-formula" placeholder="formula" value="{{ questionnaire.formula }}" >
+            <span id="view-{{ questionnaire.cid }}-formulaHelpBlock" class="help-block"></span>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-xs-3  col-md-2  control-label" for="q-displayingFormat">Format</label>
         <div class="col-xs-9  col-md-10">
-            <input type="text" class="form-control" id="q-displayingFormat" placeholder="format" value="{{ displayingFormat }}">
+            <input type="text" class="form-control" id="q-displayingFormat" placeholder="format" value="{{ questionnaire.displayingFormat }}">
+        </div>
+    </div>
+
+    <div class="image-component">
+
+        <div class="form-group">
+            <label class="col-xs-2 col-md-2 control-label">Image</label>
+            <div class="col-xs-3 col-md-3">
+                <input (change)="questionnaire.imageFileChange($event)" type="file" class="ic-file" [attr.aria-describedby]="'view-' + questionnaire.cid + '-fileHelpBlock'">
+                <button (click)="questionnaire.imageFileClear($event)" type="button" class="ic-clear-button">Clear</button>
+                <span id="view-{{ questionnaire.cid }}-fileHelpBlock" class="help-block"></span>
+            </div>
+            <div class="col-xs-7 col-md-7 ic-image-container">
+                <img *ngIf="questionnaire.image.source" src="{{ questionnaire.image.source }}" class="ic-image">
+            </div>
         </div>
     </div>
 

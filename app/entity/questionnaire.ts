@@ -6,6 +6,10 @@ import {Section} from "./section";
 import {QuestionnaireService} from "../questionnaire.service";
 import {IQuestionKeeper} from "../interfaces/question-keeper.interface";
 import {ISectionKeeper} from "../interfaces/section-keeper.interface";
+import {Guid} from '../utils/guid';
+
+import {Image} from "./image";
+
 
 export class Questionnaire implements IQuestionKeeper, ISectionKeeper {
 
@@ -17,7 +21,8 @@ export class Questionnaire implements IQuestionKeeper, ISectionKeeper {
     //alertOptions: any; //new AlertOptionsModel(),
     sections: SectionCollection; //new SectionCollection(),
     questions: QuestionCollection; //new QuestionCollection(),
-    //image: any; //new ImageModel()
+    cid: string;
+    image: Image; //new ImageModel()
 
     constructor() {
         this.id = null;
@@ -28,7 +33,8 @@ export class Questionnaire implements IQuestionKeeper, ISectionKeeper {
         //this.alertOptions: any; //new AlertOptionsModel(),
         this.sections = new SectionCollection();
         this.questions = new QuestionCollection();
-        //this.image: any; //new ImageModel()
+        this.cid = Guid.guid();
+        this.image = new Image(); //new ImageModel()
     }
 
     addSection(item: Section = null): Section {
@@ -70,5 +76,30 @@ export class Questionnaire implements IQuestionKeeper, ISectionKeeper {
 
     removeQuestion(item: Question) {
         this.questions.removeItem(item);
+    }
+
+    imageFileChange(event) {
+        if (event.srcElement.files[0] instanceof File) {
+
+            if (!event.srcElement.files[0].type.match('image.*')) {
+                this.image = new Image();
+                return;
+            }
+
+            this.image = new Image();
+            this.image.name = event.srcElement.files[0].name;
+
+            let FR = new FileReader();
+            FR.onload = (e) => {
+
+                //noinspection TypeScriptUnresolvedVariable
+                this.image.source = e.target.result;
+            };
+            FR.readAsDataURL(event.srcElement.files[0]);
+        }
+    }
+
+    imageFileClear(event) {
+        this.image = new Image();
     }
 }
