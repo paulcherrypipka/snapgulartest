@@ -4,26 +4,26 @@ import {Section} from "./section";
 import {Question} from "./question";
 import {Section} from "./section";
 import {QuestionnaireService} from "../questionnaire.service";
-import {IQuestionKeeper} from "../interfaces/question-keeper.interface";
-import {ISectionKeeper} from "../interfaces/section-keeper.interface";
 import {Guid} from '../utils/guid';
 
 import {Image} from "./image";
 
 import {ImageKeeperTrait} from "../mixins/image.trait";
+import {QuestionKeeperTrait} from "../mixins/questionkeeper.trait";
+import {SectionKeeperTrait} from "../mixins/sectionkeeper.trait";
 
-export class Questionnaire implements ISectionKeeper, IQuestionKeeper, ImageKeeperTrait {
+export class Questionnaire implements SectionKeeperTrait, QuestionKeeperTrait, ImageKeeperTrait {
 
     id: number;
     name: string;
     formula: string;
     fractionLength: number;
-    displayingFormat: any; //null,
+    displayingFormat: any;
     //alertOptions: any; //new AlertOptionsModel(),
-    sections: SectionCollection; //new SectionCollection(),
-    questions: QuestionCollection; //new QuestionCollection(),
+    sections: SectionCollection;
+    questions: QuestionCollection;
     cid: string;
-    image: Image; //new ImageModel()
+    image: Image;
 
     constructor() {
         this.id = null;
@@ -35,49 +35,18 @@ export class Questionnaire implements ISectionKeeper, IQuestionKeeper, ImageKeep
         this.sections = new SectionCollection();
         this.questions = new QuestionCollection();
         this.cid = Guid.guid();
-        this.image = new Image(); //new ImageModel()
+        this.image = new Image();
     }
 
-    addSection(item: Section = null): Section {
+    addSection: (item: Section = null) => Section;
+    getSections: () => Section[];
+    getSection: (id: number) => Section;
+    removeSection: (item: Section) => void;
 
-        if (item == undefined) {
-            item = new Section();
-        }
-        this.sections.addItem(item);
-        return item;
-    }
-
-    getSections() {
-        return this.sections.getAll();
-    }
-
-    getSection(id: number) {
-        return this.sections.get(id);
-    }
-
-    removeSection(item: Section) {
-        this.sections.removeItem(item);
-    }
-
-    addQuestion(item: Question = null): Question {
-        if (item == undefined) {
-            item = new Question();
-        }
-        this.questions.addItem(item);
-        return item;
-    }
-
-    getQuestions() {
-        return this.questions.getAll();
-    }
-
-    getQuestion(id: number) {
-        return this.questions.get(id);
-    }
-
-    removeQuestion(item: Question) {
-        this.questions.removeItem(item);
-    }
+    addQuestion:(item: Question = null) => Question;
+    getQuestions: () => Question[];
+    getQuestion: (id: number) => Question;
+    removeQuestion: (item: Question) => void;
 
     imageFileChange: (event: any) => void;
     imageFileClear: (event: any) => void;
@@ -92,4 +61,4 @@ function applyMixins(derivedCtor: any, baseCtors: any[]) {
         });
     });
 }
-applyMixins(Questionnaire ,[ImageKeeperTrait]);
+applyMixins(Questionnaire ,[SectionKeeperTrait, QuestionKeeperTrait, ImageKeeperTrait]);

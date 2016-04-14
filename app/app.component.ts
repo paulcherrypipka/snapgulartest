@@ -34,12 +34,10 @@ export class AppComponent implements OnInit {
 
     // Events click define:
     addSectionClick() {
-        console.log('addSectionClick');
         this._questionnaireService.addSection();
     }
 
     addQuestionnaireQuestionClick() {
-        console.log('addQuestionnaireQuestionClick');
         this._questionnaireService.addQuestion();
     }
 
@@ -63,25 +61,20 @@ export class AppComponent implements OnInit {
         //var q1 = sec.addQuestion();
         //var q2 = sec.addQuestion();
         //var q3 = sec.addQuestion();
-
         //q1.addAnswer();
         //q1.addAnswer();
         //q1.addAnswer();
-
         //q2.addAnswer();
         //q2.addAnswer();
         //q2.addAnswer();
-
         //q3.addAnswer();
         //q3.addAnswer();
         //q3.addAnswer();
 
         //var qq1 = this._questionnaireService.addQuestion();
         //var qq2 = this._questionnaireService.addQuestion();
-
         //qq1.addAnswer();
         //qq1.addAnswer();
-
         //qq2.addAnswer();
         //qq2.addAnswer();
 

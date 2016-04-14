@@ -13,15 +13,15 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait {
     public static CHOISE_TYPE_MULTIPLY = 'm';
     public static CHOISE_TYPE_SINGLE = 's';
 
-    id: number; //null,
-    choiseType: any; //this.constructor.CHOICE_TYPE_SINGLE,
-    formula: string; //null,
-    text: string; //null,
-    required: boolean; //true,
-    enabled: boolean; //true,
+    id: number;
+    choiseType: any;
+    formula: string;
+    text: string;
+    required: boolean;
+    enabled: boolean;
     // @todo implement field question -> alertOptions
     //alertOptions: any; //new AlertOptionsModel(),
-    answers: AnswerCollection; //new AnswerCollection(),
+    answers: AnswerCollection;
     image: Image;
     cid: string;
 

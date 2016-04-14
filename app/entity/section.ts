@@ -1,23 +1,23 @@
 import {QuestionCollection} from "../collections/question-collection";
 import {Question} from "./question";
-import {IQuestionKeeper} from "../interfaces/question-keeper.interface";
 import {Image} from './image';
 
 import {Guid} from '../utils/guid';
 
 import {ImageKeeperTrait} from "../mixins/image.trait";
+import {QuestionKeeperTrait} from "../mixins/questionkeeper.trait";
 
-export class Section implements IQuestionKeeper, ImageKeeperTrait {
+export class Section implements QuestionKeeperTrait, ImageKeeperTrait {
 
-    id: number; //null,
-    name: string; //'Name',
-    formula: string; //null,
-    enabled: boolean; //true,
-    minRequired: any; //null,
+    id: number;
+    name: string;
+    formula: string;
+    enabled: boolean;
+    minRequired: any;
     // @todo implements field section -> alertOptions
     //alertOptions: any; //new AlertOptionsModel(),
-    questions: any; //new QuestionCollection(),
-    image: Image; //new ImageModel()
+    questions: any;
+    image: Image;
     cid: string;
 
     constructor() {
@@ -33,26 +33,10 @@ export class Section implements IQuestionKeeper, ImageKeeperTrait {
         this.cid = Guid.guid();
     }
 
-    addQuestion(item: Question = null): Question {
-
-        if (item == undefined) {
-            item = new Question();
-        }
-        this.questions.addItem(item);
-        return item;
-    }
-
-    getQuestions() {
-        return this.questions.getAll();
-    }
-
-    getQuestion(id: number) {
-        return this.questions.get(id);
-    }
-
-    removeQuestion(item: Question) {
-        this.questions.removeItem(item);
-    }
+    addQuestion: (item: Question = null) => Question;
+    getQuestions: () => Question[];
+    getQuestion: (id: number) => Question;
+    removeQuestion: (item: Question) => void;
 
     imageFileChange: (event: any) => void;
     imageFileClear: (event: any) => void;
@@ -67,4 +51,4 @@ function applyMixins(derivedCtor: any, baseCtors: any[]) {
         });
     });
 }
-applyMixins(Section, [ImageKeeperTrait]);
+applyMixins(Section, [QuestionKeeperTrait, ImageKeeperTrait]);
