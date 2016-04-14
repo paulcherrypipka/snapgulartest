@@ -1,11 +1,12 @@
-import {AnswerCollection} from "../collections/answer-collection";
 import {Answer} from "./answer";
-import {IAnswerKeeper} from "../interfaces/answer-keeper.interface";
+import {AnswerCollection} from "../collections/answer-collection";
 import {Image} from "./image";
+import {AlertOptions} from './alertoptions';
 
 import {Guid} from '../utils/guid';
 import {Image} from "./image";
 
+import {IAnswerKeeper} from "../interfaces/answer-keeper.interface";
 import {ImageKeeperTrait} from "../mixins/image.trait";
 
 export class Question implements IAnswerKeeper, ImageKeeperTrait {
@@ -19,8 +20,7 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait {
     text: string;
     required: boolean;
     enabled: boolean;
-    // @todo implement field question -> alertOptions
-    //alertOptions: any; //new AlertOptionsModel(),
+    alertOptions: AlertOptions;
     answers: AnswerCollection;
     image: Image;
     cid: string;
@@ -33,7 +33,7 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait {
         this.text = null;
         this.required = true;
         this.enabled = true;
-        //this.alertOptions = '';
+        this.alertOptions = new AlertOptions();
         this.answers = new AnswerCollection();
         this.image = new Image();
         this.cid = Guid.guid();

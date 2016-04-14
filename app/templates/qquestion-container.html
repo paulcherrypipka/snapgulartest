@@ -64,6 +64,45 @@
             </div>
         </div>
 
+        <div class="alert-options">
+
+            <div class="form-group">
+                <label class="col-xs-3  col-md-2  control-label">AlertCondition</label>
+                <div class="col-xs-9  col-md-10">
+                    <input [(ngModel)]="qq.alertOptions.condition" type="text" class="ac-alertCondition form-control" placeholder="alert condition" value="" [attr.aria-describedby]="'view-' + qq.cid +'-conditionHelpBlock'">
+                    <span id="view-{{ qq.cid }}-conditionHelpBlock" class="help-block"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3  col-md-2  control-label">AlertText</label>
+                <div class="col-xs-9  col-md-10">
+                    <input [(ngModel)]="qq.alertOptions.text" type="text" class="ac-alertText form-control" placeholder="alert text" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3  col-md-2  control-label">AlertType</label>
+                <div class="col-xs-9  col-md-10">
+                    <select [(ngModel)]="qq.alertOptions.type" class="ac-alertType form-control">
+                        <option value="care" selected="">Care</option>
+                        <option value="technical" selected="">Technical</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-3  col-md-2  control-label">AlertSeverity</label>
+                <div class="col-xs-9  col-md-10">
+                    <select [(ngModel)]="qq.alertOptions.severity" class="ac-alertSeverity form-control">
+                        <option value="red" selected="">Red</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="info">Info</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
         <div class="image-component">
             <div class="form-group" [class.has-error]="qq.image.hasError">
                 <label class="col-xs-2 col-md-2 control-label">Image</label>

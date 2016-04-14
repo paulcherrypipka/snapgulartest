@@ -1,16 +1,16 @@
-import {SectionCollection} from "../collections/section-collection";
-import {QuestionCollection} from "../collections/question-collection";
 import {Section} from "./section";
 import {Question} from "./question";
-import {Section} from "./section";
+import {SectionCollection} from "../collections/section-collection";
+import {QuestionCollection} from "../collections/question-collection";
+import {Image} from "./image";
+import {AlertOptions} from './alertoptions';
+
 import {QuestionnaireService} from "../questionnaire.service";
 import {Guid} from '../utils/guid';
 
-import {Image} from "./image";
-
-import {ImageKeeperTrait} from "../mixins/image.trait";
-import {QuestionKeeperTrait} from "../mixins/questionkeeper.trait";
 import {SectionKeeperTrait} from "../mixins/sectionkeeper.trait";
+import {QuestionKeeperTrait} from "../mixins/questionkeeper.trait";
+import {ImageKeeperTrait} from "../mixins/image.trait";
 
 export class Questionnaire implements SectionKeeperTrait, QuestionKeeperTrait, ImageKeeperTrait {
 
@@ -19,7 +19,7 @@ export class Questionnaire implements SectionKeeperTrait, QuestionKeeperTrait, I
     formula: string;
     fractionLength: number;
     displayingFormat: any;
-    //alertOptions: any; //new AlertOptionsModel(),
+    alertOptions: AlertOptions;
     sections: SectionCollection;
     questions: QuestionCollection;
     cid: string;
@@ -31,7 +31,7 @@ export class Questionnaire implements SectionKeeperTrait, QuestionKeeperTrait, I
         this.formula = null;
         this.fractionLength = 2;
         this.displayingFormat = null;
-        //this.alertOptions: any; //new AlertOptionsModel(),
+        this.alertOptions = new AlertOptions();
         this.sections = new SectionCollection();
         this.questions = new QuestionCollection();
         this.cid = Guid.guid();

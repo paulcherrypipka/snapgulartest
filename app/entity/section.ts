@@ -1,6 +1,7 @@
-import {QuestionCollection} from "../collections/question-collection";
 import {Question} from "./question";
+import {QuestionCollection} from "../collections/question-collection";
 import {Image} from './image';
+import {AlertOptions} from './alertoptions';
 
 import {Guid} from '../utils/guid';
 
@@ -14,8 +15,7 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait {
     formula: string;
     enabled: boolean;
     minRequired: any;
-    // @todo implements field section -> alertOptions
-    //alertOptions: any; //new AlertOptionsModel(),
+    alertOptions: AlertOptions;
     questions: any;
     image: Image;
     cid: string;
@@ -28,9 +28,9 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait {
         this.formula = null,
         this.enabled = true,
         this.minRequired = null,
-        //this.alertOptions: any; //new AlertOptionsModel(),
+        this.alertOptions = new AlertOptions();
         this.questions = new QuestionCollection();
-        this.image = new Image(); //new ImageModel()
+        this.image = new Image();
         this.cid = Guid.guid();
         this.collapsed = false;
     }
