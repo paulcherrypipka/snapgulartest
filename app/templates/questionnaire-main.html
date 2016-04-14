@@ -41,12 +41,14 @@
 
     <div class="image-component">
 
-        <div class="form-group">
+        <div class="form-group" [class.has-error]="questionnaire.image.hasError">
             <label class="col-xs-2 col-md-2 control-label">Image</label>
             <div class="col-xs-3 col-md-3">
                 <input (change)="questionnaire.imageFileChange($event)" type="file" class="ic-file" [attr.aria-describedby]="'view-' + questionnaire.cid + '-fileHelpBlock'">
                 <button (click)="questionnaire.imageFileClear($event)" type="button" class="ic-clear-button">Clear</button>
-                <span id="view-{{ questionnaire.cid }}-fileHelpBlock" class="help-block"></span>
+                <span *ngIf="questionnaire.image.hasError" id="view-{{ questionnaire.cid }}-fileHelpBlock" class="help-block">
+                    File is not an image.
+                </span>
             </div>
             <div class="col-xs-7 col-md-7 ic-image-container">
                 <img *ngIf="questionnaire.image.source" src="{{ questionnaire.image.source }}" class="ic-image">

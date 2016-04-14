@@ -65,12 +65,14 @@
         </div>
 
         <div class="image-component">
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="qq.image.hasError">
                 <label class="col-xs-2 col-md-2 control-label">Image</label>
                 <div class="col-xs-3 col-md-3">
                     <input (change)="qq.imageFileChange($event)" type="file" class="ic-file" [attr.aria-describedby]="'view-' + qq.cid + '-fileHelpBlock'">
                     <button (click)="qq.imageFileClear($event)" type="button" class="ic-clear-button">Clear</button>
-                    <span id="view-{{ qq.cid }}-fileHelpBlock" class="help-block"></span>
+                    <span *ngIf="qq.image.hasError" id="view-{{ qq.cid }}-fileHelpBlock" class="help-block">
+                        File is not an image.
+                    </span>
                 </div>
                 <div class="col-xs-7 col-md-7 ic-image-container">
                     <img *ngIf="qq.image.source" src="{{ qq.image.source }}" class="ic-image" />

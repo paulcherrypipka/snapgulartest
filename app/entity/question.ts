@@ -6,7 +6,9 @@ import {Image} from "./image";
 import {Guid} from '../utils/guid';
 import {Image} from "./image";
 
-export class Question implements IAnswerKeeper {
+import {ImageKeeperTrait} from "../mixins/image.trait";
+
+export class Question implements IAnswerKeeper, ImageKeeperTrait {
 
     public static CHOISE_TYPE_MULTIPLY = 'm';
     public static CHOISE_TYPE_SINGLE = 's';
@@ -57,28 +59,17 @@ export class Question implements IAnswerKeeper {
         this.answers.removeItem(item);
     }
 
-    imageFileChange(event) {
-        if (event.srcElement.files[0] instanceof File) {
-
-            if (!event.srcElement.files[0].type.match('image.*')) {
-                this.image = new Image();
-                return;
-            }
-
-            this.image = new Image();
-            this.image.name = event.srcElement.files[0].name;
-
-            let FR = new FileReader();
-            FR.onload = (e) => {
-
-                //noinspection TypeScriptUnresolvedVariable
-                this.image.source = e.target.result;
-            };
-            FR.readAsDataURL(event.srcElement.files[0]);
-        }
-    }
-
-    imageFileClear(event) {
-        this.image = new Image();
-    }
+    imageFileChange: (event: any) => void;
+    imageFileClear: (event: any) => void;
 }
+
+function applyMixins(derivedCtor: any, baseCtors: any[]) {
+    baseCtors.forEach(baseCtor => {
+        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+            if (name !== 'constructor') {
+                derivedCtor.prototype[name] = baseCtor.prototype[name];
+            }
+        });
+    });
+}
+applyMixins(Question, [ImageKeeperTrait]);
