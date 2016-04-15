@@ -6,7 +6,7 @@ import {Answer} from "./entity/answer";
 import {Section} from "./entity/section";
 import {Question} from "./entity/question";
 
-import {SectionComponent} from './section.component';
+import {SectionsComponent} from './sections.component';
 import {QQuestionComponent} from './qquestion.component';
 import {Questionnaire} from "./entity/questionnaire";
 
@@ -17,7 +17,7 @@ import {Questionnaire} from "./entity/questionnaire";
         QuestionnaireService,
     ],
     directives: [
-        SectionComponent,
+        SectionsComponent,
         QQuestionComponent
     ]
 })
@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
         console.log('saveQuestionnaireClick');
         console.log('questionnaire => ', this._questionnaireService.getQuestionnaire());
     }
+
 
     ngOnInit() {
         console.log('AppComponent init');

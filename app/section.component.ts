@@ -1,16 +1,13 @@
-import {Component} from 'angular2/core';
+import {Component, Input} from 'angular2/core';
 
-import {Section} from './entity/section';
-import {QuestionnaireService} from './services/questionnaire.service';
-import {AnswerComponent} from "./answer.component";
+import {Section} from './entity/section'
+import {Questionnaire} from "./entity/questionnaire";
+
 import {QuestionComponent} from "./question.component";
 
 @Component({
-    selector: 'qsections-view',
-    templateUrl: 'app/templates/section-container.html',
-    providers: [
-        QuestionnaireService
-    ],
+    selector: 'section',
+    templateUrl: 'app/templates/section-item.html',
     directives: [
         QuestionComponent
     ]
@@ -18,13 +15,7 @@ import {QuestionComponent} from "./question.component";
 
 export class SectionComponent {
 
-    qsections: Section[] = this._questionnaireService.getSections();
+    @Input() sectionItem: Section;
 
-    constructor(
-        private _questionnaireService: QuestionnaireService
-    ) {}
-
-    removeSectionClick(section: Section) {
-        this._questionnaireService.removeSection(section);
-    }
+    @Input() parentEntity: any;
 }
