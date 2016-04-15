@@ -1,4 +1,10 @@
 *.js
 *.js.map
+
+
+!app/js/*.js
+!app/js/*.js.map
+
+
 node_modules/
 typings/
