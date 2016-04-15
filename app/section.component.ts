@@ -2,6 +2,8 @@ import {Component} from 'angular2/core';
 
 import {Section} from './entity/section';
 import {QuestionnaireService} from './services/questionnaire.service';
+import {AnswerComponent} from "./answer.component";
+
 //import {SQuestionComponent} from "./squestion.component";
 
 @Component({
@@ -9,10 +11,10 @@ import {QuestionnaireService} from './services/questionnaire.service';
     templateUrl: 'app/templates/section-container.html',
     providers: [
         QuestionnaireService
+    ],
+    directives: [
+        AnswerComponent
     ]
-    //directives: [
-    //    SQuestionComponent
-    //]
 })
 
 export class SectionComponent {
