@@ -3,8 +3,7 @@ import {Component} from 'angular2/core';
 import {Section} from './entity/section';
 import {QuestionnaireService} from './services/questionnaire.service';
 import {AnswerComponent} from "./answer.component";
-
-//import {SQuestionComponent} from "./squestion.component";
+import {QuestionComponent} from "./question.component";
 
 @Component({
     selector: 'qsections-view',
@@ -13,7 +12,7 @@ import {AnswerComponent} from "./answer.component";
         QuestionnaireService
     ],
     directives: [
-        AnswerComponent
+        QuestionComponent
     ]
 })
 
