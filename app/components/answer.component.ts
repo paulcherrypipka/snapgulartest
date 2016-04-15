@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input, OnInit, ElementRef} from 'angular2/core';
 
 import {Answer} from 'app/entity/answer'
 import {Question} from "app/entity/question";
@@ -8,9 +8,20 @@ import {Question} from "app/entity/question";
     templateUrl: 'app/templates/answer-item.html'
 })
 
-export class AnswerComponent {
+export class AnswerComponent implements OnInit {
 
     @Input() answerItem: Answer;
     @Input() parentQuestion: Question;
 
+    elementRef: ElementRef;
+
+    constructor(elementRef: ElementRef) {
+        this.elementRef = elementRef;
+    }
+
+    ngOnInit() {
+        console.log('Answer OnINit');
+        console.log('elementRef => ', this.elementRef);
+
+    }
 }

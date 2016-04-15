@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input, OnInit, ElementRef} from 'angular2/core';
 
 import {Question} from "app/entity/question";
 import {Questionnaire} from "app/entity/questionnaire";
@@ -13,9 +13,46 @@ import {AnswerComponent} from "app/components/answer.component";
     ]
 })
 
-export class QuestionComponent {
+export class QuestionComponent implements OnInit {
 
     @Input() questionItem: Question;
-
     @Input() parentEntity: any;
+
+    elementRef: ElementRef;
+
+    constructor(elementRef: ElementRef) {
+        this.elementRef = elementRef;
+    }
+
+    ngOnInit() {
+        console.log('Question OnInit');
+        console.log('elementRef => ', this.elementRef);
+
+        this.initializeDragAndDrop(this.answersContainer(), '.move-form-answer-button');
+    }
+
+    initializeDragAndDrop(container, selectorMove) {
+        //noinspection TypeScriptUnresolvedFunction
+        let elemDrake = dragula(container.toArray(), {
+            moves: function (el, source, handle) {
+
+                //noinspection TypeScriptUnresolvedFunction
+                let aButton = $(handle).closest(selectorMove);
+                return aButton.length;
+            },
+            direction: 'vertical',
+            ignoreInputTextSelection: true
+        });
+        elemDrake.on('drop', el => {
+
+            console.log('Answer drag drop action');
+            // @todo implaments Sort by selector element's order
+            this.questionItem.answers.sort(this.answersContainer());
+        });
+    }
+
+    answersContainer() {
+        //noinspection TypeScriptUnresolvedFunction,TypeScriptUnresolvedVariable
+        return $(this.elementRef.nativeElement).find('.answers');
+    }
 }

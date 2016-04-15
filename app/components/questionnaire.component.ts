@@ -1,5 +1,5 @@
 //noinspection TypeScriptCheckImport
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, ElementRef} from 'angular2/core';
 
 import {QuestionnaireService} from 'app/services/questionnaire.service';
 import {Answer} from "app/entity/answer";
@@ -29,12 +29,17 @@ export class QuestionnaireComponent implements OnInit {
     qsections: Section[];
     qquestions: Question[];
 
+    elementRef: ElementRef;
+
     constructor(
-        private _questionnaireService: QuestionnaireService
+        private _questionnaireService: QuestionnaireService,
+        elementRef: ElementRef
     ) {
         this.questionnaire = this._questionnaireService.getQuestionnaire();
         this.qsections = this.questionnaire.getSections();
         this.qquestions = this.questionnaire.getQuestions();
+
+        this.elementRef = elementRef;
     }
 
     // Events click define:
@@ -60,6 +65,7 @@ export class QuestionnaireComponent implements OnInit {
 
     ngOnInit() {
         console.log('AppComponent init');
+        console.log('elementRef => ', this.elementRef);
 
         // Test add sections and questions
         //var sec = this._questionnaireService.addSection();

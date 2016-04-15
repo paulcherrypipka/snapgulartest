@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input, OnInit, ElementRef} from 'angular2/core';
 
 import {Section} from 'app/entity/section'
 import {Questionnaire} from "app/entity/questionnaire";
@@ -13,9 +13,19 @@ import {QuestionComponent} from "app/components/question.component";
     ]
 })
 
-export class SectionComponent {
+export class SectionComponent implements OnInit {
 
     @Input() sectionItem: Section;
-
     @Input() parentEntity: any;
+
+    elementRef: ElementRef;
+
+    constructor(elementRef: ElementRef) {
+        this.elementRef = elementRef;
+    }
+
+    ngOnInit() {
+        console.log('Section OnINit');
+        console.log('elementRef => ', this.elementRef);
+    }
 }
