@@ -1,14 +1,15 @@
 //noinspection TypeScriptCheckImport
 import {Component, OnInit} from 'angular2/core';
 
-import {QuestionnaireService} from './services/questionnaire.service';
-import {Answer} from "./entity/answer";
-import {Section} from "./entity/section";
-import {Question} from "./entity/question";
+import {QuestionnaireService} from 'app/services/questionnaire.service';
+import {Answer} from "app/entity/answer";
+import {Section} from "app/entity/section";
+import {Question} from "app/entity/question";
 
-import {SectionsComponent} from './sections.component';
-import {QQuestionComponent} from './qquestion.component';
-import {Questionnaire} from "./entity/questionnaire";
+import {Questionnaire} from "app/entity/questionnaire";
+
+import {SectionComponent} from "app/components/section.component";
+import {QuestionComponent} from "app/components/question.component";
 
 @Component({
     selector: 'div#questionnaire',
@@ -17,19 +18,23 @@ import {Questionnaire} from "./entity/questionnaire";
         QuestionnaireService,
     ],
     directives: [
-        SectionsComponent,
-        QQuestionComponent
+        SectionComponent,
+        QuestionComponent
     ]
 })
 
-export class AppComponent implements OnInit {
+export class QuestionnaireComponent implements OnInit {
 
     questionnaire: Questionnaire;
+    qsections: Section[];
+    qquestions: Question[];
 
     constructor(
         private _questionnaireService: QuestionnaireService
     ) {
         this.questionnaire = this._questionnaireService.getQuestionnaire();
+        this.qsections = this.questionnaire.getSections();
+        this.qquestions = this.questionnaire.getQuestions();
     }
 
     // Events click define:

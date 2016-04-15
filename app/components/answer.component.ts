@@ -1,7 +1,7 @@
 import {Component, Input} from 'angular2/core';
 
-import {Answer} from './entity/answer'
-import {Question} from "./entity/question";
+import {Answer} from 'app/entity/answer'
+import {Question} from "app/entity/question";
 
 @Component({
     selector: 'answer',

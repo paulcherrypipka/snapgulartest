@@ -1,9 +1,9 @@
 import {Component, Input} from 'angular2/core';
 
-import {Section} from './entity/section'
-import {Questionnaire} from "./entity/questionnaire";
+import {Section} from 'app/entity/section'
+import {Questionnaire} from "app/entity/questionnaire";
 
-import {QuestionComponent} from "./question.component";
+import {QuestionComponent} from "app/components/question.component";
 
 @Component({
     selector: 'section',

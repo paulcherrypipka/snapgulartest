@@ -1,6 +1,6 @@
 //noinspection TypeScriptCheckImport
 import {bootstrap} from 'angular2/platform/browser';
 
-import {AppComponent} from './app.component';
+import {QuestionnaireComponent} from './components/questionnaire.component';
 
-bootstrap(AppComponent);
+bootstrap(QuestionnaireComponent);
