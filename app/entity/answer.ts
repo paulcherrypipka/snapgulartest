@@ -1,6 +1,8 @@
 import {Guid} from '../utils/guid';
 
-export class Answer {
+import {ElementKeeperTrait} from "app/mixins/element-keeper.trait";
+
+export class Answer implements ElementKeeperTrait {
 
     id: string;
     text: string;
@@ -23,11 +25,17 @@ export class Answer {
         this.collapsed = !this.collapsed;
     }
 
-    setElementRef(ref: any) {
-        this.elementRef = ref;
-    }
-
-    getElementRef() {
-        return this.elementRef;
-    }
+    setElementRef: (ref: any) => void;
+    getElementRef: () => any;
 }
+
+function applyMixins(derivedCtor: any, baseCtors: any[]) {
+    baseCtors.forEach(baseCtor => {
+        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+            if (name !== 'constructor') {
+                derivedCtor.prototype[name] = baseCtor.prototype[name];
+            }
+        });
+    });
+}
+applyMixins(Answer, [ElementKeeperTrait]);

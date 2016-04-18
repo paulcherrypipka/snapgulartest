@@ -7,8 +7,10 @@ import {Guid} from '../utils/guid';
 
 import {ImageKeeperTrait} from "../mixins/image.trait";
 import {QuestionKeeperTrait} from "../mixins/questionkeeper.trait";
+import {ElementKeeperTrait} from "app/mixins/element-keeper.trait";
 
-export class Section implements QuestionKeeperTrait, ImageKeeperTrait {
+
+export class Section implements QuestionKeeperTrait, ImageKeeperTrait, ElementKeeperTrait {
 
     id: number;
     name: string;
@@ -41,13 +43,8 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait {
         this.collapsed = !this.collapsed;
     }
 
-    setElementRef(ref: any) {
-        this.elementRef = ref;
-    }
-
-    getElementRef() {
-        return this.elementRef;
-    }
+    setElementRef: (ref: any) => void;
+    getElementRef: () => any;
 
     addQuestion: (item: Question = null) => Question;
     getQuestions: () => Question[];
@@ -67,4 +64,4 @@ function applyMixins(derivedCtor: any, baseCtors: any[]) {
         });
     });
 }
-applyMixins(Section, [QuestionKeeperTrait, ImageKeeperTrait]);
+applyMixins(Section, [QuestionKeeperTrait, ImageKeeperTrait, ElementKeeperTrait]);

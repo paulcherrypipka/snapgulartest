@@ -8,8 +8,9 @@ import {Image} from "./image";
 
 import {IAnswerKeeper} from "../interfaces/answer-keeper.interface";
 import {ImageKeeperTrait} from "../mixins/image.trait";
+import {ElementKeeperTrait} from "app/mixins/element-keeper.trait";
 
-export class Question implements IAnswerKeeper, ImageKeeperTrait {
+export class Question implements IAnswerKeeper, ImageKeeperTrait, ElementKeeperTrait {
 
     public static CHOISE_TYPE_MULTIPLY = 'm';
     public static CHOISE_TYPE_SINGLE = 's';
@@ -67,13 +68,8 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait {
         this.collapsed = !this.collapsed;
     }
 
-    setElementRef(ref: any) {
-        this.elementRef = ref;
-    }
-
-    getElementRef() {
-        return this.elementRef;
-    }
+    setElementRef: (ref: any) => void;
+    getElementRef: () => any;
 
     imageFileChange: (event: any) => void;
     imageFileClear: (event: any) => void;
@@ -88,4 +84,4 @@ function applyMixins(derivedCtor: any, baseCtors: any[]) {
         });
     });
 }
-applyMixins(Question, [ImageKeeperTrait]);
+applyMixins(Question, [ImageKeeperTrait, ElementKeeperTrait]);
