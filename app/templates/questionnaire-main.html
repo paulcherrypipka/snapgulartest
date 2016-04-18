@@ -100,7 +100,7 @@
             <div id="sections">
                 <div class="q-section" *ngFor="#qsec of qsections">
                     <section
-                            [sectionItem]="qsec"
+                            [item]="qsec"
                             [parentEntity]="questionnaire"
                     ></section>
                 </div>
@@ -113,7 +113,7 @@
             <div id="questions">
                 <div class="q-question" *ngFor="#qq of qquestions">
                     <question
-                            [questionItem]="qq"
+                            [item]="qq"
                             [parentEntity]="questionnaire"
                     ></question>
                 </div>

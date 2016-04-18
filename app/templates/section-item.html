@@ -4,26 +4,26 @@
         <button type="button" class="btn btn-default move-form-section-button">
             <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
         </button>
-        <button (click)="parentEntity.removeSection(sectionItem)" type="button" class="btn btn-default remove-form-section-button">
+        <button (click)="parentEntity.removeSection(item)" type="button" class="btn btn-default remove-form-section-button">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </button>
-        <button (click)="sectionItem.collapse()" type="button" class="btn btn-default collapse-form-button" data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + sectionItem.cid">
-            <span class="glyphicon" [class.glyphicon-triangle-bottom]="!sectionItem.collapsed" [class.glyphicon-triangle-right]="sectionItem.collapsed" aria-hidden="true"></span>
-            <span class="q-section-collapse-button-title">{{ sectionItem.id }}</span>
+        <button (click)="item.collapse()" type="button" class="btn btn-default collapse-form-button" data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + item.cid">
+            <span class="glyphicon" [class.glyphicon-triangle-bottom]="!item.collapsed" [class.glyphicon-triangle-right]="item.collapsed" aria-hidden="true"></span>
+            <span class="q-section-collapse-button-title">{{ item.id }}</span>
         </button>
     </div>
 
     <div class="col-xs-12  col-md-10">
-        <textarea [(ngModel)]="sectionItem.name" class="form-control q-section-name" placeholder="name"></textarea>
+        <textarea [(ngModel)]="item.name" class="form-control q-section-name" placeholder="name"></textarea>
     </div>
 </div>
 
-<div id="collapsed-container-{{ sectionItem.cid }}" class="collapse in q-section-collapsible-container">
+<div id="collapsed-container-{{ item.cid }}" class="collapse in q-section-collapsible-container">
     <div class="form-group">
         <div class="col-xs-12  col-md-10 col-md-offset-2">
             <div class="checkbox">
                 <label>
-                    <input [(ngModel)]="sectionItem.enabled" type="checkbox" class="q-section-enabled">Enabled
+                    <input [(ngModel)]="item.enabled" type="checkbox" class="q-section-enabled">Enabled
                 </label>
             </div>
         </div>
@@ -32,23 +32,23 @@
     <div class="form-group">
         <label class="col-xs-12  col-md-2 control-label">Id</label>
         <div class="col-xs-12  col-md-10">
-            <input [(ngModel)]="sectionItem.id" type="text" class="form-control q-section-id" placeholder="id" [attr.aria-describedby]="'view-' + sectionItem.cid + '-idHelpBlock'">
-            <span id="view-{{ sectionItem.cid }}-idHelpBlock" class="help-block"></span>
+            <input [(ngModel)]="item.id" type="text" class="form-control q-section-id" placeholder="id" [attr.aria-describedby]="'view-' + item.cid + '-idHelpBlock'">
+            <span id="view-{{ item.cid }}-idHelpBlock" class="help-block"></span>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-xs-12  col-md-2 control-label">Min required</label>
         <div class="col-xs-12  col-md-10">
-            <input [(ngModel)]="sectionItem.minRequired" type="number" class="form-control q-section-minRequired" placeholder="min required">
+            <input [(ngModel)]="item.minRequired" type="number" class="form-control q-section-minRequired" placeholder="min required">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-xs-12  col-md-2 control-label">Formula</label>
         <div class="col-xs-12  col-md-10">
-            <input [(ngModel)]="sectionItem.formula" type="text" class="form-control q-section-formula" placeholder="formula" [attr.aria-describedby]="'view-' + sectionItem.cid + '-formulaHelpBlock'">
-            <span id="view-{{ sectionItem.cid }}-formulaHelpBlock" class="help-block"></span>
+            <input [(ngModel)]="item.formula" type="text" class="form-control q-section-formula" placeholder="formula" [attr.aria-describedby]="'view-' + item.cid + '-formulaHelpBlock'">
+            <span id="view-{{ item.cid }}-formulaHelpBlock" class="help-block"></span>
         </div>
     </div>
 
@@ -57,22 +57,22 @@
         <div class="form-group">
             <label class="col-xs-3  col-md-2  control-label">AlertCondition</label>
             <div class="col-xs-9  col-md-10">
-                <input [(ngModel)]="sectionItem.alertOptions.condition" type="text" class="ac-alertCondition form-control" placeholder="alert condition" value="" [attr.aria-describedby]="'view-' + sectionItem.cid +'-conditionHelpBlock'">
-                <span id="view-{{ sectionItem.cid }}-conditionHelpBlock" class="help-block"></span>
+                <input [(ngModel)]="item.alertOptions.condition" type="text" class="ac-alertCondition form-control" placeholder="alert condition" value="" [attr.aria-describedby]="'view-' + item.cid +'-conditionHelpBlock'">
+                <span id="view-{{ item.cid }}-conditionHelpBlock" class="help-block"></span>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-xs-3  col-md-2  control-label">AlertText</label>
             <div class="col-xs-9  col-md-10">
-                <input [(ngModel)]="sectionItem.alertOptions.text" type="text" class="ac-alertText form-control" placeholder="alert text" value="">
+                <input [(ngModel)]="item.alertOptions.text" type="text" class="ac-alertText form-control" placeholder="alert text" value="">
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-xs-3  col-md-2  control-label">AlertType</label>
             <div class="col-xs-9  col-md-10">
-                <select [(ngModel)]="sectionItem.alertOptions.type" class="ac-alertType form-control">
+                <select [(ngModel)]="item.alertOptions.type" class="ac-alertType form-control">
                     <option value="care" selected="">Care</option>
                     <option value="technical" selected="">Technical</option>
                 </select>
@@ -82,7 +82,7 @@
         <div class="form-group">
             <label class="col-xs-3  col-md-2  control-label">AlertSeverity</label>
             <div class="col-xs-9  col-md-10">
-                <select [(ngModel)]="sectionItem.alertOptions.severity" class="ac-alertSeverity form-control">
+                <select [(ngModel)]="item.alertOptions.severity" class="ac-alertSeverity form-control">
                     <option value="red" selected="">Red</option>
                     <option value="yellow">Yellow</option>
                     <option value="info">Info</option>
@@ -93,17 +93,17 @@
 
     <div class="image-component">
 
-        <div class="form-group" [class.has-error]="sectionItem.image.hasError">
+        <div class="form-group" [class.has-error]="item.image.hasError">
             <label class="col-xs-2 col-md-2 control-label">Image</label>
             <div class="col-xs-3 col-md-3">
-                <input (change)="sectionItem.imageFileChange($event)" type="file" class="ic-file" [attr.aria-describedby]="'view-' + sectionItem.cid + '-fileHelpBlock'">
-                <button (click)="sectionItem.imageFileClear($event)" type="button" class="ic-clear-button">Clear</button>
-                    <span *ngIf="sectionItem.image.hasError" id="view-{{ sectionItem.cid }}-fileHelpBlock" class="help-block">
+                <input (change)="item.imageFileChange($event)" type="file" class="ic-file" [attr.aria-describedby]="'view-' + item.cid + '-fileHelpBlock'">
+                <button (click)="item.imageFileClear($event)" type="button" class="ic-clear-button">Clear</button>
+                    <span *ngIf="item.image.hasError" id="view-{{ item.cid }}-fileHelpBlock" class="help-block">
                         File is not an image.
                     </span>
             </div>
             <div class="col-xs-7 col-md-7 ic-image-container">
-                <img *ngIf="sectionItem.image.source" src="{{ sectionItem.image.source }}" class="ic-image">
+                <img *ngIf="item.image.source" src="{{ item.image.source }}" class="ic-image">
             </div>
         </div>
     </div>
@@ -111,10 +111,10 @@
     <div class="form-group">
         <div class="col-xs-10 col-xs-offset-2">
             <div class="questions">
-                <div class="q-question" *ngFor="#sq of sectionItem.getQuestions()">
+                <div class="q-question" *ngFor="#sq of item.getQuestions()">
                     <question
-                            [questionItem]="sq"
-                            [parentEntity]="sectionItem"
+                            [item]="sq"
+                            [parentEntity]="item"
                     ></question>
                 </div>
             </div>
@@ -123,7 +123,7 @@
 
     <div class="form-group">
         <div class="col-xs-2">
-            <button (click)="sectionItem.addQuestion()" type="button" class="q-add-question btn btn-default">Add question</button>
+            <button (click)="item.addQuestion()" type="button" class="q-add-question btn btn-default">Add question</button>
         </div>
         <div class="col-xs-10">
 

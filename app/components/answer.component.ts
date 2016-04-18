@@ -10,7 +10,7 @@ import {Question} from "app/entity/question";
 
 export class AnswerComponent implements OnInit {
 
-    @Input() answerItem: Answer;
+    @Input() item: Answer;
     @Input() parentQuestion: Question;
 
     elementRef: ElementRef;
@@ -23,6 +23,6 @@ export class AnswerComponent implements OnInit {
         console.log('Answer OnINit');
         console.log('elementRef => ', this.elementRef);
 
-        this.answerItem.setElementRef(this.elementRef);
+        this.item.setElementRef(this.elementRef);
     }
 }

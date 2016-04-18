@@ -15,7 +15,7 @@ import {AnswerComponent} from "app/components/answer.component";
 
 export class QuestionComponent implements OnInit {
 
-    @Input() questionItem: Question;
+    @Input() item: Question;
     @Input() parentEntity: any;
 
     elementRef: ElementRef;
@@ -28,7 +28,7 @@ export class QuestionComponent implements OnInit {
         console.log('Question OnInit');
         console.log('elementRef => ', this.elementRef);
 
-        this.questionItem.setElementRef(this.elementRef);
+        this.item.setElementRef(this.elementRef);
         this.initializeDragAndDrop(this.answersContainer(), '.move-form-answer-button', 'answers');
     }
 
@@ -44,7 +44,7 @@ export class QuestionComponent implements OnInit {
             ignoreInputTextSelection: true
         });
         elemDrake.on('drop', el => {
-            this.questionItem[collectionName].sortBySelectorsOrder();
+            this.item[collectionName].sortBySelectorsOrder();
         });
     }
 

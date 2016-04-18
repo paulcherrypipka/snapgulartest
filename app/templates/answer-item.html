@@ -3,33 +3,33 @@
         <button type="button" class="btn btn-default move-form-answer-button">
             <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
         </button>
-        <button (click)="parentQuestion.removeAnswer(answerItem)" type="button" class="btn btn-default remove-form-answer-button">
+        <button (click)="parentQuestion.removeAnswer(item)" type="button" class="btn btn-default remove-form-answer-button">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </button>
-        <button (click)="answerItem.collapse()" type="button" class="btn btn-default collapse-form-button"  data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + answerItem.cid">
-            <span class="glyphicon" [class.glyphicon-triangle-bottom]="!answerItem.collapsed" [class.glyphicon-triangle-right]="answerItem.collapsed" area-hidden="true"></span>
-            <span class="q-answer-collapse-button-title">{{ answerItem.id }}</span>
+        <button (click)="item.collapse()" type="button" class="btn btn-default collapse-form-button"  data-toggle="collapse" [attr.data-target]="'#collapsed-container-' + item.cid">
+            <span class="glyphicon" [class.glyphicon-triangle-bottom]="!item.collapsed" [class.glyphicon-triangle-right]="item.collapsed" area-hidden="true"></span>
+            <span class="q-answer-collapse-button-title">{{ item.id }}</span>
         </button>
     </div>
     <div class="col-xs-12  col-md-9">
-        <input [(ngModel)]="answerItem.text" type="text" class="form-control q-answer-name" placeholder="name">
+        <input [(ngModel)]="item.text" type="text" class="form-control q-answer-name" placeholder="name">
     </div>
 </div>
 
-<div id="collapsed-container-{{ answerItem.cid }}" class="collapse in q-answer-collapsible-container">
+<div id="collapsed-container-{{ item.cid }}" class="collapse in q-answer-collapsible-container">
 
     <div class="form-group">
         <label class="col-xs-3 control-label">Id</label>
         <div class="col-xs-9">
-            <input [(ngModel)]="answerItem.id" type="text" class="form-control q-answer-id" placeholder="id" [attr.area-describedby]="'view-' + answerItem.cid + '-idHelpBlock'">
-            <span id="view-{{ answerItem.cid }}-idHelpBlock" class="help-block"></span>
+            <input [(ngModel)]="item.id" type="text" class="form-control q-answer-id" placeholder="id" [attr.area-describedby]="'view-' + item.cid + '-idHelpBlock'">
+            <span id="view-{{ item.cid }}-idHelpBlock" class="help-block"></span>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-xs-3 control-label">Score</label>
         <div class="col-xs-9">
-            <input [(ngModel)]="answerItem.score" type="text" class="form-control q-answer-score" placeholder="score">
+            <input [(ngModel)]="item.score" type="text" class="form-control q-answer-score" placeholder="score">
         </div>
     </div>
 
