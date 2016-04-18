@@ -59,9 +59,22 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
     }
 
     saveQuestionnaireClick() {
-        // @todo save Questionnaire
+        // @todo export/save Questionnaire
         console.log('saveQuestionnaireClick');
         console.log('questionnaire => ', this._questionnaireService.getQuestionnaire());
+
+        let formData = this._questionnaireService.getQuestionnaire().toJSON();
+
+        let blob = new Blob([formData], { type: "application/octet-stream;charset=utf-8" });
+        let downloadUrl = window.URL.createObjectURL(blob);
+        let fileName = 'export_questionnaire' + (new Date).getTime() + '.json';
+        let a = document.createElement("a");
+        //document.body.appendChild(a);
+        a.style = "display: none";
+        a.href = downloadUrl;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(downloadUrl);
     }
 
 

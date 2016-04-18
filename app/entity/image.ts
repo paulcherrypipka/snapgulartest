@@ -11,4 +11,8 @@ export class Image {
         this.source = null;
         this.hasError = false;
     }
+
+    toJSON() {
+        return this.source;
+    }
 }

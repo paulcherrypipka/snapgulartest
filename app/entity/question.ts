@@ -68,6 +68,20 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait, ElementKeeperT
         this.collapsed = !this.collapsed;
     }
 
+    toJSON() {
+        return {
+            id: this.id,
+            choiseType: this.choiseType,
+            formula: this.formula,
+            text: this.text,
+            required: this.required,
+            enabled: this.enabled,
+            alertOptions: this.alertOptions.toJSON(),
+            answers: this.answers.toJSON(),
+            image: this.image.toJSON()
+        };
+    }
+
     setElementRef: (ref: any) => void;
     getElementRef: () => any;
 

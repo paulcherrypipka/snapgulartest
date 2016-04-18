@@ -6,5 +6,6 @@ export interface ICollection {
     getAll(): any[];
     removeItem(item: any);
     sortBySelectorsOrder(): void;
+    toJSON(): any[];
 
 }

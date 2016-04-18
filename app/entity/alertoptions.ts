@@ -19,4 +19,13 @@ export class AlertOptions {
         this.severity = AlertOptions.SEVERITY_RED;
         this.condition = null;
     }
+
+    toJSON() {
+        return {
+            type: this.type,
+            text: this.text,
+            severity: this.severity,
+            condition: this.condition
+        };
+    }
 }

@@ -38,6 +38,20 @@ export class Questionnaire implements SectionKeeperTrait, QuestionKeeperTrait, I
         this.image = new Image();
     }
 
+    toJSON() {
+        let questionnaireJson = {};
+        questionnaireJson['id'] = this.id;
+        questionnaireJson['name'] = this.name;
+        questionnaireJson['formula'] = this.formula;
+        questionnaireJson['fractionLength'] = this.fractionLength;
+        questionnaireJson['displayingFormat'] = this.displayingFormat;
+        questionnaireJson['alertOptions'] = this.alertOptions.toJSON();
+        questionnaireJson['sections'] = this.sections.toJSON();
+        questionnaireJson['questions'] = this.questions.toJSON();
+        questionnaireJson['image'] = this.image.toJSON();
+        return JSON.stringify(questionnaireJson);
+    }
+
     addSection: (item: Section = null) => Section;
     getSections: () => Section[];
     getSection: (id: number) => Section;
