@@ -29,11 +29,13 @@ export abstract class BaseCollection implements ICollection {
         this.items = this.items.sort((elemFirst: any, elemSecond: any) => {
 
             //noinspection TypeScriptUnresolvedFunction
-            if ($(elemFirst.getElementRef().nativeElement).parent().index() > $(elemSecond.getElementRef().nativeElement).parent().index())
-                return 1;
-
+            let ndxFirst = $(elemFirst.getElementRef().nativeElement).parent().index();
             //noinspection TypeScriptUnresolvedFunction
-            if ($(elemFirst.getElementRef().nativeElement).parent().index() == $(elemSecond.getElementRef().nativeElement).parent().index())
+            let ndxSecond = $(elemSecond.getElementRef().nativeElement).parent().index();
+
+            if (ndxFirst > ndxSecond)
+                return 1;
+            if (ndxFirst === ndxSecond)
                 return 0;
             return -1;
         });
