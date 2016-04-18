@@ -5,6 +5,6 @@ export interface ICollection {
     get(id: number): any;
     getAll(): any[];
     removeItem(item: any);
-    sort(): void;
+    sortBySelectorsOrder(): void;
 
 }

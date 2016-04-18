@@ -5,37 +5,37 @@
     <div class="form-group">
         <label class="col-xs-3  col-md-2  control-label" for="q-name">Name</label>
         <div class="col-xs-9  col-md-10">
-            <input type="text" class="form-control" id="q-name" placeholder="name" value="{{ questionnaire.name }}">
+            <input type="text" class="form-control" id="q-name" placeholder="name" value="{{ item.name }}">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-xs-3  col-md-2  control-label" for="q-id">Id</label>
         <div class="col-xs-9  col-md-10">
-            <input type="text" class="form-control" id="q-id" placeholder="id" value="{{ questionnaire.id }}" >
-            <span id="view-{{ questionnaire.cid }}-idHelpBlock" class="help-block"></span>
+            <input type="text" class="form-control" id="q-id" placeholder="id" value="{{ item.id }}" >
+            <span id="view-{{ item.cid }}-idHelpBlock" class="help-block"></span>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-xs-3  col-md-2  control-label" for="q-fractionLength">FractionLength</label>
         <div class="col-xs-9  col-md-10">
-            <input type="number" class="form-control" id="q-fractionLength" placeholder="fraction length" value="{{ questionnaire.fractionLength }}">
+            <input type="number" class="form-control" id="q-fractionLength" placeholder="fraction length" value="{{ item.fractionLength }}">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-xs-3  col-md-2  control-label" for="q-formula">Formula</label>
         <div class="col-xs-9  col-md-10">
-            <input type="text" class="form-control" id="q-formula" placeholder="formula" value="{{ questionnaire.formula }}" >
-            <span id="view-{{ questionnaire.cid }}-formulaHelpBlock" class="help-block"></span>
+            <input type="text" class="form-control" id="q-formula" placeholder="formula" value="{{ item.formula }}" >
+            <span id="view-{{ item.cid }}-formulaHelpBlock" class="help-block"></span>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-xs-3  col-md-2  control-label" for="q-displayingFormat">Format</label>
         <div class="col-xs-9  col-md-10">
-            <input type="text" class="form-control" id="q-displayingFormat" placeholder="format" value="{{ questionnaire.displayingFormat }}">
+            <input type="text" class="form-control" id="q-displayingFormat" placeholder="format" value="{{ item.displayingFormat }}">
         </div>
     </div>
 
@@ -44,22 +44,22 @@
         <div class="form-group">
             <label class="col-xs-3  col-md-2  control-label">AlertCondition</label>
             <div class="col-xs-9  col-md-10">
-                <input [(ngModel)]="questionnaire.alertOptions.condition" type="text" class="ac-alertCondition form-control" placeholder="alert condition" value="" [attr.aria-describedby]="'view-' + questionnaire.cid +'-conditionHelpBlock'">
-                <span id="view-{{ questionnaire.cid }}-conditionHelpBlock" class="help-block"></span>
+                <input [(ngModel)]="item.alertOptions.condition" type="text" class="ac-alertCondition form-control" placeholder="alert condition" value="" [attr.aria-describedby]="'view-' + item.cid +'-conditionHelpBlock'">
+                <span id="view-{{ item.cid }}-conditionHelpBlock" class="help-block"></span>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-xs-3  col-md-2  control-label">AlertText</label>
             <div class="col-xs-9  col-md-10">
-                <input [(ngModel)]="questionnaire.alertOptions.text" type="text" class="ac-alertText form-control" placeholder="alert text" value="">
+                <input [(ngModel)]="item.alertOptions.text" type="text" class="ac-alertText form-control" placeholder="alert text" value="">
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-xs-3  col-md-2  control-label">AlertType</label>
             <div class="col-xs-9  col-md-10">
-                <select [(ngModel)]="questionnaire.alertOptions.type" class="ac-alertType form-control">
+                <select [(ngModel)]="item.alertOptions.type" class="ac-alertType form-control">
                     <option value="care" selected="">Care</option>
                     <option value="technical" selected="">Technical</option>
                 </select>
@@ -69,7 +69,7 @@
         <div class="form-group">
             <label class="col-xs-3  col-md-2  control-label">AlertSeverity</label>
             <div class="col-xs-9  col-md-10">
-                <select [(ngModel)]="questionnaire.alertOptions.severity" class="ac-alertSeverity form-control">
+                <select [(ngModel)]="item.alertOptions.severity" class="ac-alertSeverity form-control">
                     <option value="red" selected="">Red</option>
                     <option value="yellow">Yellow</option>
                     <option value="info">Info</option>
@@ -80,17 +80,17 @@
 
     <div class="image-component">
 
-        <div class="form-group" [class.has-error]="questionnaire.image.hasError">
+        <div class="form-group" [class.has-error]="item.image.hasError">
             <label class="col-xs-2 col-md-2 control-label">Image</label>
             <div class="col-xs-3 col-md-3">
-                <input (change)="questionnaire.imageFileChange($event)" type="file" class="ic-file" [attr.aria-describedby]="'view-' + questionnaire.cid + '-fileHelpBlock'">
-                <button (click)="questionnaire.imageFileClear($event)" type="button" class="ic-clear-button">Clear</button>
-                <span *ngIf="questionnaire.image.hasError" id="view-{{ questionnaire.cid }}-fileHelpBlock" class="help-block">
+                <input (change)="item.imageFileChange($event)" type="file" class="ic-file" [attr.aria-describedby]="'view-' + item.cid + '-fileHelpBlock'">
+                <button (click)="item.imageFileClear($event)" type="button" class="ic-clear-button">Clear</button>
+                <span *ngIf="item.image.hasError" id="view-{{ item.cid }}-fileHelpBlock" class="help-block">
                     File is not an image.
                 </span>
             </div>
             <div class="col-xs-7 col-md-7 ic-image-container">
-                <img *ngIf="questionnaire.image.source" src="{{ questionnaire.image.source }}" class="ic-image">
+                <img *ngIf="item.image.source" src="{{ item.image.source }}" class="ic-image">
             </div>
         </div>
     </div>
@@ -101,7 +101,7 @@
                 <div class="q-section" *ngFor="#qsec of qsections">
                     <section
                             [item]="qsec"
-                            [parentEntity]="questionnaire"
+                            [parentEntity]="item"
                     ></section>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                 <div class="q-question" *ngFor="#qq of qquestions">
                     <question
                             [item]="qq"
-                            [parentEntity]="questionnaire"
+                            [parentEntity]="item"
                     ></question>
                 </div>
             </div>

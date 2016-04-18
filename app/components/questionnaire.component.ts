@@ -11,6 +11,8 @@ import {Questionnaire} from "app/entity/questionnaire";
 import {SectionComponent} from "app/components/section.component";
 import {QuestionComponent} from "app/components/question.component";
 
+import {DraggableComponentTrait} from "app/mixins/draggable.component.trait";
+
 @Component({
     selector: 'div#questionnaire',
     templateUrl: 'app/templates/questionnaire-main.html',
@@ -23,9 +25,9 @@ import {QuestionComponent} from "app/components/question.component";
     ]
 })
 
-export class QuestionnaireComponent implements OnInit {
+export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
 
-    questionnaire: Questionnaire;
+    item: Questionnaire;
     qsections: Section[];
     qquestions: Question[];
 
@@ -35,9 +37,9 @@ export class QuestionnaireComponent implements OnInit {
         private _questionnaireService: QuestionnaireService,
         elementRef: ElementRef
     ) {
-        this.questionnaire = this._questionnaireService.getQuestionnaire();
-        this.qsections = this.questionnaire.getSections();
-        this.qquestions = this.questionnaire.getQuestions();
+        this.item = this._questionnaireService.getQuestionnaire();
+        this.qsections = this.item.getSections();
+        this.qquestions = this.item.getQuestions();
 
         this.elementRef = elementRef;
     }
@@ -94,22 +96,6 @@ export class QuestionnaireComponent implements OnInit {
         //qq2.addAnswer();
     }
 
-    initializeDragAndDrop(container, selectorMove, collectionName) {
-        //noinspection TypeScriptUnresolvedFunction
-        let elemDrake = dragula(container.toArray(), {
-            moves: function (el, source, handle) {
-                //noinspection TypeScriptUnresolvedFunction
-                let aButton = $(handle).closest(selectorMove);
-                return aButton.length;
-            },
-            direction: 'vertical',
-            ignoreInputTextSelection: true
-        });
-        elemDrake.on('drop', el => {
-            this.questionnaire[collectionName].sortBySelectorsOrder();
-        });
-    }
-
     questionsContainer() {
         //noinspection TypeScriptUnresolvedFunction,TypeScriptUnresolvedVariable
         return $(this.elementRef.nativeElement).find('#questions');
@@ -119,4 +105,18 @@ export class QuestionnaireComponent implements OnInit {
         //noinspection TypeScriptUnresolvedFunction,TypeScriptUnresolvedVariable
         return $(this.elementRef.nativeElement).find('#sections');
     }
+
+    initializeDragAndDrop: (container: string, selectorMove: string, collectionName: string) => void;
 }
+
+function applyMixins(derivedCtor: any, baseCtors: any[]) {
+    baseCtors.forEach(baseCtor => {
+        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+            if (name !== 'constructor') {
+                derivedCtor.prototype[name] = baseCtor.prototype[name];
+            }
+        });
+    });
+}
+
+applyMixins(QuestionnaireComponent, [DraggableComponentTrait]);

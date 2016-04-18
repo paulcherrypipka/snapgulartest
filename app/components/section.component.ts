@@ -5,6 +5,8 @@ import {Questionnaire} from "app/entity/questionnaire";
 
 import {QuestionComponent} from "app/components/question.component";
 
+import {DraggableComponentTrait} from "app/mixins/draggable.component.trait";
+
 @Component({
     selector: 'section',
     templateUrl: 'app/templates/section-item.html',
@@ -13,7 +15,7 @@ import {QuestionComponent} from "app/components/question.component";
     ]
 })
 
-export class SectionComponent implements OnInit {
+export class SectionComponent implements OnInit, DraggableComponentTrait {
 
     @Input() item: Section;
     @Input() parentEntity: any;
@@ -32,24 +34,23 @@ export class SectionComponent implements OnInit {
         this.initializeDragAndDrop(this.questionsContainer(), '.move-form-question-button', 'questions');
     }
 
-    initializeDragAndDrop(container, selectorMove, collectionName) {
-        //noinspection TypeScriptUnresolvedFunction
-        let elemDrake = dragula(container.toArray(), {
-            moves: function (el, source, handle) {
-                //noinspection TypeScriptUnresolvedFunction
-                let aButton = $(handle).closest(selectorMove);
-                return aButton.length;
-            },
-            direction: 'vertical',
-            ignoreInputTextSelection: true
-        });
-        elemDrake.on('drop', el => {
-            this.item[collectionName].sortBySelectorsOrder();
-        });
-    }
-
     questionsContainer() {
         //noinspection TypeScriptUnresolvedFunction,TypeScriptUnresolvedVariable
         return $(this.elementRef.nativeElement).find('.questions');
     }
+
+    initializeDragAndDrop: (container: string, selectorMove: string, collectionName: string) => void;
+
 }
+
+function applyMixins(derivedCtor: any, baseCtors: any[]) {
+    baseCtors.forEach(baseCtor => {
+        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+            if (name !== 'constructor') {
+                derivedCtor.prototype[name] = baseCtor.prototype[name];
+            }
+        });
+    });
+}
+
+applyMixins(SectionComponent, [DraggableComponentTrait]);
