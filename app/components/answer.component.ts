@@ -23,5 +23,6 @@ export class AnswerComponent implements OnInit {
         console.log('Answer OnINit');
         console.log('elementRef => ', this.elementRef);
 
+        this.answerItem.setElementRef(this.elementRef);
     }
 }

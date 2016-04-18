@@ -26,6 +26,8 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait {
     cid: string;
     collapsed: boolean;
 
+    elementRef: any;
+
     constructor() {
         this.id = null;
         this.choiseType = Question.CHOISE_TYPE_SINGLE;
@@ -61,8 +63,16 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait {
         this.answers.removeItem(item);
     }
 
-    collapse() {
+    collapse(event) {
         this.collapsed = !this.collapsed;
+    }
+
+    setElementRef(ref: any) {
+        this.elementRef = ref;
+    }
+
+    getElementRef() {
+        return this.elementRef;
     }
 
     imageFileChange: (event: any) => void;

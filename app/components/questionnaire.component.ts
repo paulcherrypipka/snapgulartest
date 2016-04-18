@@ -67,6 +67,9 @@ export class QuestionnaireComponent implements OnInit {
         console.log('AppComponent init');
         console.log('elementRef => ', this.elementRef);
 
+        this.initializeDragAndDrop(this.sectionsContainer(), '.move-form-section-button', 'sections');
+        this.initializeDragAndDrop(this.questionsContainer(), '.move-form-question-button', 'questions');
+
         // Test add sections and questions
         //var sec = this._questionnaireService.addSection();
 
@@ -89,6 +92,31 @@ export class QuestionnaireComponent implements OnInit {
         //qq1.addAnswer();
         //qq2.addAnswer();
         //qq2.addAnswer();
+    }
 
+    initializeDragAndDrop(container, selectorMove, collectionName) {
+        //noinspection TypeScriptUnresolvedFunction
+        let elemDrake = dragula(container.toArray(), {
+            moves: function (el, source, handle) {
+                //noinspection TypeScriptUnresolvedFunction
+                let aButton = $(handle).closest(selectorMove);
+                return aButton.length;
+            },
+            direction: 'vertical',
+            ignoreInputTextSelection: true
+        });
+        elemDrake.on('drop', el => {
+            this.questionnaire[collectionName].sortBySelectorsOrder();
+        });
+    }
+
+    questionsContainer() {
+        //noinspection TypeScriptUnresolvedFunction,TypeScriptUnresolvedVariable
+        return $(this.elementRef.nativeElement).find('#questions');
+    }
+
+    sectionsContainer() {
+        //noinspection TypeScriptUnresolvedFunction,TypeScriptUnresolvedVariable
+        return $(this.elementRef.nativeElement).find('#sections');
     }
 }

@@ -9,6 +9,8 @@ export class Answer {
 
     collapsed: boolean;
 
+    elementRef: any;
+
     constructor() {
         this.id = null;
         this.text = null;
@@ -19,5 +21,13 @@ export class Answer {
 
     collapse() {
         this.collapsed = !this.collapsed;
+    }
+
+    setElementRef(ref: any) {
+        this.elementRef = ref;
+    }
+
+    getElementRef() {
+        return this.elementRef;
     }
 }

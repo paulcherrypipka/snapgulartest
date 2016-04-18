@@ -21,6 +21,8 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait {
     cid: string;
     collapsed: boolean;
 
+    elementRef: any;
+
     constructor() {
 
         this.id = null,
@@ -37,6 +39,14 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait {
 
     collapse() {
         this.collapsed = !this.collapsed;
+    }
+
+    setElementRef(ref: any) {
+        this.elementRef = ref;
+    }
+
+    getElementRef() {
+        return this.elementRef;
     }
 
     addQuestion: (item: Question = null) => Question;

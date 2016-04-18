@@ -27,5 +27,29 @@ export class SectionComponent implements OnInit {
     ngOnInit() {
         console.log('Section OnINit');
         console.log('elementRef => ', this.elementRef);
+
+        this.sectionItem.setElementRef(this.elementRef);
+        this.initializeDragAndDrop(this.questionsContainer(), '.move-form-question-button', 'questions');
+    }
+
+    initializeDragAndDrop(container, selectorMove, collectionName) {
+        //noinspection TypeScriptUnresolvedFunction
+        let elemDrake = dragula(container.toArray(), {
+            moves: function (el, source, handle) {
+                //noinspection TypeScriptUnresolvedFunction
+                let aButton = $(handle).closest(selectorMove);
+                return aButton.length;
+            },
+            direction: 'vertical',
+            ignoreInputTextSelection: true
+        });
+        elemDrake.on('drop', el => {
+            this.sectionItem.questions.sortBySelectorsOrder();
+        });
+    }
+
+    questionsContainer() {
+        //noinspection TypeScriptUnresolvedFunction,TypeScriptUnresolvedVariable
+        return $(this.elementRef.nativeElement).find('.questions');
     }
 }

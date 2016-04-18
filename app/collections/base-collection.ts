@@ -25,25 +25,17 @@ export abstract class BaseCollection implements ICollection {
         this.items.splice(ndx, 1);
     }
 
-    sort(containerJqueryElement: any) {
+    sortBySelectorsOrder() {
+        this.items = this.items.sort((elemFirst: any, elemSecond: any) => {
 
-        let data = containerJqueryElement.find('.q-answer');
-        let answerMapping = [];
+            //noinspection TypeScriptUnresolvedFunction
+            if ($(elemFirst.getElementRef().nativeElement).parent().index() > $(elemSecond.getElementRef().nativeElement).parent().index())
+                return 1;
 
-        for(let ndx = 0; ndx < data.length; ndx ++) {
-
-            console.log('data[ndx] => ', data[ndx]);
-            answerMapping.push(data[ndx]);
-        }
-
-        console.log('data => ', data);
-
-        console.log('containerJqueryElement => ', containerJqueryElement);
-
-        this.items = this.items.sort((el1: any, el2: any) => {
-            console.log('ell => ', el1);
-            console.log('el2 => ', el2);
+            //noinspection TypeScriptUnresolvedFunction
+            if ($(elemFirst.getElementRef().nativeElement).parent().index() == $(elemSecond.getElementRef().nativeElement).parent().index())
+                return 0;
+            return -1;
         });
     }
-
 }

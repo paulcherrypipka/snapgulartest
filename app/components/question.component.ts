@@ -28,14 +28,14 @@ export class QuestionComponent implements OnInit {
         console.log('Question OnInit');
         console.log('elementRef => ', this.elementRef);
 
-        this.initializeDragAndDrop(this.answersContainer(), '.move-form-answer-button');
+        this.questionItem.setElementRef(this.elementRef);
+        this.initializeDragAndDrop(this.answersContainer(), '.move-form-answer-button', 'answers');
     }
 
-    initializeDragAndDrop(container, selectorMove) {
+    initializeDragAndDrop(container, selectorMove, collectionName) {
         //noinspection TypeScriptUnresolvedFunction
         let elemDrake = dragula(container.toArray(), {
             moves: function (el, source, handle) {
-
                 //noinspection TypeScriptUnresolvedFunction
                 let aButton = $(handle).closest(selectorMove);
                 return aButton.length;
@@ -44,10 +44,7 @@ export class QuestionComponent implements OnInit {
             ignoreInputTextSelection: true
         });
         elemDrake.on('drop', el => {
-
-            console.log('Answer drag drop action');
-            // @todo implaments Sort by selector element's order
-            this.questionItem.answers.sort(this.answersContainer());
+            this.questionItem[collectionName].sortBySelectorsOrder();
         });
     }
 
