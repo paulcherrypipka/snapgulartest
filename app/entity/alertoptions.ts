@@ -13,11 +13,11 @@ export class AlertOptions {
     severity: string;
     condition: string;
 
-    constructor() {
-        this.type = AlertOptions.TYPE_CARE;
-        this.text = null;
-        this.severity = AlertOptions.SEVERITY_RED;
-        this.condition = null;
+    constructor(data: any = new Object()) {
+        this.type = data.type || AlertOptions.TYPE_CARE;
+        this.text = data.text || null;
+        this.severity = data.severity || AlertOptions.SEVERITY_RED;
+        this.condition = data.condition || null;
     }
 
     toJSON() {

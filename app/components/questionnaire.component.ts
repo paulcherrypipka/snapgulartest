@@ -72,7 +72,7 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
     saveQuestionnaireClick() {
 
         let formData = this._questionnaireService.getQuestionnaire().toJSON();
-        let fileName = 'export_questionnaire' + (new Date).getTime() + '.json';
+        let fileName = 'data.json';
 
         //noinspection TypeScriptUnresolvedFunction
         let zip = new JSZip();
@@ -89,17 +89,6 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
             a.click();
             window.URL.revokeObjectURL(downloadUrl);
         });
-
-        // Example from git
-        /*var zip = new JSZip();
-         zip.file("Hello.txt", "Hello World\n");
-         var img = zip.folder("images");
-         img.file("smile.gif", imgData, {base64: true});
-         zip.generateAsync({type:"blob"})
-         .then(function(content) {
-         // see FileSaver.js
-         saveAs(content, "example.zip");
-         });*/
     }
 
 

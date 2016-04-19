@@ -13,6 +13,7 @@ import {SectionCollection} from "../collections/section-collection";
 import {QuestionCollection} from "../collections/question-collection";
 import {AnswerCollection} from "../collections/answer-collection";
 import {Answer} from "../entity/answer";
+import {AlertOptions} from "../entity/alertoptions";
 
 @Injectable()
 export class QuestionnaireService {
@@ -59,7 +60,12 @@ export class QuestionnaireService {
             formula: parsedQuestionnaireData.formula,
             fractionLength: parsedQuestionnaireData.fractionLength,
             displayingFormat: parsedQuestionnaireData.displayingFormat,
-            alertOptions: parsedQuestionnaireData.alertOptions,
+            alertOptions: new AlertOptions({
+                type: parsedQuestionnaireData.alertOptions.type,
+                text: parsedQuestionnaireData.alertOptions.text,
+                severity: parsedQuestionnaireData.alertOptions.severity,
+                condition: parsedQuestionnaireData.alertOptions.condition
+            }),
             sections: this.buildSections(parsedQuestionnaireData.sections),
             questions: this.buildQuestions(parsedQuestionnaireData.questions)
         });
@@ -95,10 +101,10 @@ export class QuestionnaireService {
                 text: data.text,
                 required: data.required,
                 enabled: data.enabled,
-                alertOptions: data.alertOptions,
+                alertOptions: this.buildAlertOptions(data.alertOptions),
                 answers: this.buildAnswers(data.answers),
                 // @todo implements image field import
-                image: new Image()
+
             }));
         });
         return questionCollection;
@@ -114,12 +120,22 @@ export class QuestionnaireService {
                 formula: data.formula,
                 enabled: data.enabled,
                 minRequired: data.minRequired,
-                alertOptions: data.alertOptions,
+                alertOptions: this.buildAlertOptions(data.alertOptions),
                 questions: this.buildQuestions(data.questions),
                 // @todo implements image field import
-                image: new Image()
+
             }));
         });
         return sectionCollection;
+    }
+
+    buildAlertOptions(dataAlertOptions: any) {
+        let alertOptions = new AlertOptions({
+            type: dataAlertOptions.type,
+            text: dataAlertOptions.text,
+            severity: dataAlertOptions.severity,
+            condition: dataAlertOptions.condition
+        });
+        return alertOptions;
     }
 }
