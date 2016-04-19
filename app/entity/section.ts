@@ -25,16 +25,16 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait, ElementKe
 
     elementRef: any;
 
-    constructor() {
+    constructor(data: any = new Object()) {
 
-        this.id = null,
-        this.name = 'Name',
-        this.formula = null,
-        this.enabled = true,
-        this.minRequired = null,
-        this.alertOptions = new AlertOptions();
-        this.questions = new QuestionCollection();
-        this.image = new Image();
+        this.id = data.id || null,
+        this.name = data.name || 'Name',
+        this.formula = data.formula || null,
+        this.enabled = data.enabled || true,
+        this.minRequired = data.minRequired || null,
+        this.alertOptions = data.alertOptions || new AlertOptions();
+        this.questions = data.questions || new QuestionCollection();
+        this.image = data.image || new Image();
         this.cid = Guid.guid();
         this.collapsed = false;
     }

@@ -29,16 +29,16 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait, ElementKeeperT
 
     elementRef: any;
 
-    constructor() {
-        this.id = null;
-        this.choiseType = Question.CHOISE_TYPE_SINGLE;
-        this.formula = null;
-        this.text = null;
-        this.required = true;
-        this.enabled = true;
-        this.alertOptions = new AlertOptions();
-        this.answers = new AnswerCollection();
-        this.image = new Image();
+    constructor(data: any = new Object()) {
+        this.id = data.id || null;
+        this.choiseType = data.choiseType || Question.CHOISE_TYPE_SINGLE;
+        this.formula = data.formula || null;
+        this.text = data.text || null;
+        this.required = data.required || true;
+        this.enabled = data.enabled || true;
+        this.alertOptions = data.alertOptions || new AlertOptions();
+        this.answers = data.answers || new AnswerCollection();
+        this.image = data.image || new Image();
         this.cid = Guid.guid();
         this.collapsed = false;
     }

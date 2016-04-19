@@ -1,0 +1,23 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button (click)="closeModalClick()" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Import questionnaire</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-inline col-xs-12">
+                    <div class="form-group">
+                        <label for="importFile">Select file with questionnaire</label>
+                        <input (change)="selectImportFile($event)" type="file" id="importFile">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button (click)="closeModalClick()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button (click)="importActionClick($event)" type="button" class="btn btn-primary import-button">Import</button>
+        </div>
+    </div>
+</div>

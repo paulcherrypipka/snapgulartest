@@ -13,10 +13,10 @@ export class Answer implements ElementKeeperTrait {
 
     elementRef: any;
 
-    constructor() {
-        this.id = null;
-        this.text = null;
-        this.score = null;
+    constructor(data: any = new Object()) {
+        this.id = data.id || null;
+        this.text = data.text || null;
+        this.score = data.score || null;
         this.cid = Guid.guid();
         this.collapsed = false;
     }

@@ -25,17 +25,17 @@ export class Questionnaire implements SectionKeeperTrait, QuestionKeeperTrait, I
     cid: string;
     image: Image;
 
-    constructor() {
-        this.id = null;
-        this.name = null;
-        this.formula = null;
-        this.fractionLength = 2;
-        this.displayingFormat = null;
-        this.alertOptions = new AlertOptions();
-        this.sections = new SectionCollection();
-        this.questions = new QuestionCollection();
+    constructor(data: any = new Object()) {
+        this.id = data.id || null;
+        this.name = data.name || null;
+        this.formula = data.formula || null;
+        this.fractionLength = data.fractionLength || 2;
+        this.displayingFormat = data.displayingFormat || null;
+        this.alertOptions = data.alertOptions || new AlertOptions();
+        this.sections = data.sections || new SectionCollection();
+        this.questions = data.questions || new QuestionCollection();
         this.cid = Guid.guid();
-        this.image = new Image();
+        this.image = data.image || new Image();
     }
 
     toJSON() {

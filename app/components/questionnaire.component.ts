@@ -10,18 +10,20 @@ import {Questionnaire} from "app/entity/questionnaire";
 
 import {SectionComponent} from "app/components/section.component";
 import {QuestionComponent} from "app/components/question.component";
+import {ImportComponent} from "app/components/import.component";
 
 import {DraggableComponentTrait} from "app/mixins/draggable.component.trait";
 
 @Component({
-    selector: 'div#questionnaire',
+    selector: 'body',
     templateUrl: 'app/templates/questionnaire-main.html',
     providers: [
         QuestionnaireService,
     ],
     directives: [
         SectionComponent,
-        QuestionComponent
+        QuestionComponent,
+        ImportComponent
     ]
 })
 
@@ -38,6 +40,8 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
         elementRef: ElementRef
     ) {
         this.item = this._questionnaireService.getQuestionnaire();
+        this._questionnaireService.component = this;
+
         this.qsections = this.item.getSections();
         this.qquestions = this.item.getQuestions();
 
@@ -54,8 +58,15 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
     }
 
     importClick() {
-        // @todo import
-        console.log('importClick');
+        console.log('Import start in questionnaire component');
+
+        let openedClass = 'modal-open';
+        //noinspection TypeScriptUnresolvedVariable,TypeScriptUnresolvedFunction
+        let bodyMainView = $(this.elementRef.nativeElement);
+        bodyMainView.find('.modal').addClass('in').slideDown(1000);
+        bodyMainView.addClass(openedClass);
+        //noinspection TypeScriptUnresolvedFunction
+        bodyMainView.find('.modal').after($('<div>').addClass('modal-backdrop fade in'));
     }
 
     saveQuestionnaireClick() {
@@ -94,8 +105,6 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
 
     ngOnInit() {
         console.log('AppComponent init');
-        console.log('elementRef => ', this.elementRef);
-
         this.initializeDragAndDrop(this.sectionsContainer(), '.move-form-section-button', 'sections');
         this.initializeDragAndDrop(this.questionsContainer(), '.move-form-question-button', 'questions');
 
