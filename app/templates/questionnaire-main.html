@@ -5,7 +5,7 @@
     <div class="form-group">
         <label class="col-xs-3  col-md-2  control-label" for="q-name">Name</label>
         <div class="col-xs-9  col-md-10">
-            <input type="text" class="form-control" id="q-name" placeholder="name" value="{{ item.name }}">
+            <input [(ngModel)]="item.name" type="text" class="form-control" id="q-name" placeholder="name">
         </div>
     </div>
 
