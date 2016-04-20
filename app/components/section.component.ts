@@ -19,16 +19,28 @@ export class SectionComponent implements OnInit, DraggableComponentTrait {
 
     @Input() item: Section;
     @Input() parentEntity: any;
+    tooltipText: string;
 
     elementRef: ElementRef;
 
     constructor(elementRef: ElementRef) {
         this.elementRef = elementRef;
+        this.tooltipText = 'Additional variables: ANSWERED  - will be replaced with count of answered questions';
     }
 
     ngOnInit() {
         this.item.setElementRef(this.elementRef);
         this.initializeDragAndDrop(this.questionsContainer(), '.move-form-question-button', 'questions');
+        this.initializeTooltip();
+    }
+
+    initializeTooltip() {
+        //noinspection TypeScriptUnresolvedFunction
+        let tooltipElement = $('<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip"></i>')
+            .attr('title', this.tooltipText)
+            .attr('data-placement', 'top').tooltip();
+        //noinspection TypeScriptUnresolvedVariable,TypeScriptUnresolvedFunction
+        $(this.elementRef.nativeElement).find('.form-group input.q-section-formula').parent().prev().prepend(tooltipElement);
     }
 
     questionsContainer() {
