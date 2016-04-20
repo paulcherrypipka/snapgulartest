@@ -91,9 +91,7 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
                 if (question.image.name)
                     allImages.push(question.image);
             })
-        })
-
-        console.log('Exported images => ', allImages);
+        });
 
         //noinspection TypeScriptUnresolvedFunction
         let zip = new JSZip();

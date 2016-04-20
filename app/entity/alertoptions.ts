@@ -14,7 +14,7 @@ export class AlertOptions {
     condition: string;
 
     constructor(data: any = new Object()) {
-        this.type = data.type || AlertOptions.TYPE_CARE;
+        this.type = data.type || AlertOptions.TYPE_TECHNICAL;
         this.text = data.text || null;
         this.severity = data.severity || AlertOptions.SEVERITY_RED;
         this.condition = data.condition || null;
