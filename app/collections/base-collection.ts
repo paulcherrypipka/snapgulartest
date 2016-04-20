@@ -41,7 +41,7 @@ export abstract class BaseCollection implements ICollection {
         });
     }
 
-    toJSON() {
+    toJSON(): any[] {
         let itemsData = [];
 
         this.items.forEach((item) => {

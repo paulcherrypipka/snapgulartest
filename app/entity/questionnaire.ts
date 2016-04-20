@@ -5,7 +5,6 @@ import {QuestionCollection} from "../collections/question-collection";
 import {Image} from "./image";
 import {AlertOptions} from './alertoptions';
 
-import {QuestionnaireService} from "../questionnaire.service";
 import {Guid} from '../utils/guid';
 
 import {SectionKeeperTrait} from "../mixins/sectionkeeper.trait";
@@ -38,7 +37,7 @@ export class Questionnaire implements SectionKeeperTrait, QuestionKeeperTrait, I
         this.image = data.image || new Image();
     }
 
-    toJSON() {
+    toJSON(): string {
         let questionnaireJson = {};
         questionnaireJson['id'] = this.id;
         questionnaireJson['name'] = this.name;

@@ -34,7 +34,7 @@ export class SectionComponent implements OnInit, DraggableComponentTrait {
         this.initializeTooltip();
     }
 
-    initializeTooltip() {
+    initializeTooltip(): void {
         //noinspection TypeScriptUnresolvedFunction
         let tooltipElement = $('<i class="glyphicon glyphicon-info-sign" data-toggle="tooltip"></i>')
             .attr('title', this.tooltipText)
@@ -43,7 +43,7 @@ export class SectionComponent implements OnInit, DraggableComponentTrait {
         $(this.elementRef.nativeElement).find('.form-group input.q-section-formula').parent().prev().prepend(tooltipElement);
     }
 
-    questionsContainer() {
+    questionsContainer(): any {
         //noinspection TypeScriptUnresolvedFunction,TypeScriptUnresolvedVariable
         return $(this.elementRef.nativeElement).find('.questions');
     }

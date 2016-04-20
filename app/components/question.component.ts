@@ -31,7 +31,7 @@ export class QuestionComponent implements OnInit, DraggableComponentTrait {
         this.initializeDragAndDrop(this.answersContainer(), '.move-form-answer-button', 'answers');
     }
 
-    answersContainer() {
+    answersContainer(): any {
         //noinspection TypeScriptUnresolvedFunction,TypeScriptUnresolvedVariable
         return $(this.elementRef.nativeElement).find('.answers');
     }

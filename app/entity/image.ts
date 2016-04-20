@@ -12,7 +12,7 @@ export class Image {
         this.hasError = false;
     }
 
-    toJSON() {
+    toJSON(): string {
         return this.name;
     }
 }

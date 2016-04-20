@@ -21,7 +21,7 @@ export class QuestionnaireService {
 
     component: QuestionnaireComponent;
 
-    getQuestionnaire() {
+    getQuestionnaire(): Questionnaire {
         return QUESTIONNAIRE;
     }
 
@@ -33,23 +33,23 @@ export class QuestionnaireService {
         return QUESTIONNAIRE.addQuestion(item);
     }
 
-    getSections() {
+    getSections(): Section[] {
         return QUESTIONNAIRE.getSections();
     }
 
-    getQuestions() {
+    getQuestions(): Question[] {
         return QUESTIONNAIRE.getQuestions();
     }
 
-    removeQuestion(question: Question) {
+    removeQuestion(question: Question): void {
         QUESTIONNAIRE.removeQuestion(question);
     }
 
-    removeSection(section: Section) {
+    removeSection(section: Section): void {
         QUESTIONNAIRE.removeSection(section);
     }
 
-    buildQuestionnaire(dataJson: string, images: any[]) {
+    buildQuestionnaire(dataJson: string, images: any[]): void {
 
         let parsedQuestionnaireData = JSON.parse(dataJson);
         let questionnaire = new Questionnaire({
@@ -76,7 +76,7 @@ export class QuestionnaireService {
         this.component.qquestions = QUESTIONNAIRE.getQuestions();
     }
 
-    buildAnswers(dataAnswers: any) {
+    buildAnswers(dataAnswers: any): AnswerCollection {
         let answerCollection = new AnswerCollection();
         dataAnswers.forEach((data) => {
             answerCollection.addItem(new Answer({
@@ -88,7 +88,7 @@ export class QuestionnaireService {
         return answerCollection;
     }
 
-    buildQuestions(dataQuestions: any, images: any[]) {
+    buildQuestions(dataQuestions: any, images: any[]): QuestionCollection {
         let questionCollection = new QuestionCollection();
         dataQuestions.forEach((data) => {
             questionCollection.addItem(new Question({
@@ -106,7 +106,7 @@ export class QuestionnaireService {
         return questionCollection;
     }
 
-    buildSections(dataSections: any, images: any[]) {
+    buildSections(dataSections: any, images: any[]): SectionCollection {
         let sectionCollection = new SectionCollection();
         dataSections.forEach((data) => {
             sectionCollection.addItem(new Section({
@@ -123,7 +123,7 @@ export class QuestionnaireService {
         return sectionCollection;
     }
 
-    buildAlertOptions(dataAlertOptions: any) {
+    buildAlertOptions(dataAlertOptions: any): AlertOptions {
         let alertOptions = new AlertOptions({
             type: dataAlertOptions.type,
             text: dataAlertOptions.text,

@@ -2,11 +2,11 @@ export class ElementKeeperTrait {
 
     elementRef: any;
 
-    setElementRef(ref: any) {
+    setElementRef(ref: any): void {
         this.elementRef = ref;
     }
 
-    getElementRef() {
+    getElementRef(): any {
         return this.elementRef;
     }
 

@@ -2,7 +2,7 @@ export class DraggableComponentTrait {
 
     item: any;
 
-    initializeDragAndDrop(container, selectorMove, collectionName) {
+    initializeDragAndDrop(container, selectorMove, collectionName): void {
         //noinspection TypeScriptUnresolvedFunction
         let elemDrake = dragula(container.toArray(), {
             moves: function (el, source, handle) {

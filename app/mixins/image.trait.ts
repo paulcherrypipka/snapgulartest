@@ -4,7 +4,7 @@ export class ImageKeeperTrait {
 
     image: Image;
 
-    imageFileChange(event) {
+    imageFileChange(event): void {
         if (event.srcElement.files[0] instanceof File) {
 
             if (!event.srcElement.files[0].type.match('image.*')) {
@@ -26,7 +26,7 @@ export class ImageKeeperTrait {
         }
     }
 
-    imageFileClear(event) {
+    imageFileClear(event): void {
         this.image = new Image();
     }
 

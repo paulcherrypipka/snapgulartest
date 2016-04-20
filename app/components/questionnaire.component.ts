@@ -49,15 +49,15 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
     }
 
     // Events click define:
-    addSectionClick() {
+    addSectionClick(): void {
         this._questionnaireService.addSection();
     }
 
-    addQuestionnaireQuestionClick() {
+    addQuestionnaireQuestionClick(): void {
         this._questionnaireService.addQuestion();
     }
 
-    importClick() {
+    importClick(): void {
         console.log('Import start in questionnaire component');
 
         let openedClass = 'modal-open';
@@ -69,7 +69,7 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
         bodyMainView.find('.modal').after($('<div>').addClass('modal-backdrop fade in'));
     }
 
-    saveQuestionnaireClick() {
+    saveQuestionnaireClick(): void {
 
         let formData = this._questionnaireService.getQuestionnaire().toJSON();
         let fileName = 'data.json';
@@ -146,12 +146,12 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
         //qq2.addAnswer();
     }
 
-    questionsContainer() {
+    questionsContainer(): any {
         //noinspection TypeScriptUnresolvedFunction,TypeScriptUnresolvedVariable
         return $(this.elementRef.nativeElement).find('#questions');
     }
 
-    sectionsContainer() {
+    sectionsContainer(): any {
         //noinspection TypeScriptUnresolvedFunction,TypeScriptUnresolvedVariable
         return $(this.elementRef.nativeElement).find('#sections');
     }

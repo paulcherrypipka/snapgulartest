@@ -20,7 +20,7 @@ export class ImportComponent implements OnInit {
         this.images = [];
     }
 
-    closeModalClick() {
+    closeModalClick(): void {
         //noinspection TypeScriptUnresolvedVariable,TypeScriptUnresolvedFunction
         let modalComponentElement = $(this.elementRef.nativeElement);
         let elementMainBody = modalComponentElement.parents('body');
@@ -28,14 +28,14 @@ export class ImportComponent implements OnInit {
         elementMainBody.removeClass('modal-open').find('.modal-backdrop').remove();
     }
 
-    importActionClick(event) {
+    importActionClick(event): void {
         if (this.isValid) {
             this._questionnaireService.buildQuestionnaire(this.selectedImportFileContent, this.images);
             this.closeModalClick();
         }
     }
 
-    selectImportFile(event: any) {
+    selectImportFile(event: any): void {
 
         if (event.srcElement.files[0] instanceof File) {
 

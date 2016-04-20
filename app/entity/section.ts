@@ -43,7 +43,7 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait, ElementKe
         this.collapsed = !this.collapsed;
     }
 
-    toJSON() {
+    toJSON(): any {
         return {
             id: this.id,
             name: this.name,

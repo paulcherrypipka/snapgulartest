@@ -52,23 +52,23 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait, ElementKeeperT
         return item;
     }
 
-    getAnswers() {
+    getAnswers(): Answer[] {
         return this.answers.getAll();
     }
 
-    getAnswer(id: number) {
+    getAnswer(id: number): Answer {
         return this.answers.get(id);
     }
 
-    removeAnswer(item: Answer) {
+    removeAnswer(item: Answer): void {
         this.answers.removeItem(item);
     }
 
-    collapse(event) {
+    collapse(event): void {
         this.collapsed = !this.collapsed;
     }
 
-    toJSON() {
+    toJSON(): any {
         return {
             id: this.id,
             choiseType: this.choiseType,

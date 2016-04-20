@@ -25,7 +25,7 @@ export class Answer implements ElementKeeperTrait {
         this.collapsed = !this.collapsed;
     }
 
-    toJSON() {
+    toJSON(): any {
         return {
             id: this.id,
             text: this.text,

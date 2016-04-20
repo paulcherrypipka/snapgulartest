@@ -1,4 +1,3 @@
-
 export class AlertOptions {
 
     public static TYPE_CARE = 'care';
@@ -20,7 +19,7 @@ export class AlertOptions {
         this.condition = data.condition || null;
     }
 
-    toJSON() {
+    toJSON(): any {
         return {
             type: this.type,
             text: this.text,

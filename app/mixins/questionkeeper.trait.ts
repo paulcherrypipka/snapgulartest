@@ -15,15 +15,15 @@ export class QuestionKeeperTrait implements IQuestionKeeper {
         return item;
     }
 
-    getQuestions() {
+    getQuestions(): Question[] {
         return this.questions.getAll();
     }
 
-    getQuestion(id: number) {
+    getQuestion(id: number): Question {
         return this.questions.get(id);
     }
 
-    removeQuestion(item: Question) {
+    removeQuestion(item: Question): void {
         this.questions.removeItem(item);
     }
 }

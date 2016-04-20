@@ -15,15 +15,15 @@ export class SectionKeeperTrait implements ISectionKeeper {
         return item;
     }
 
-    getSections() {
+    getSections(): Section[] {
         return this.sections.getAll();
     }
 
-    getSection(id: number) {
+    getSection(id: number): Section {
         return this.sections.get(id);
     }
 
-    removeSection(item: Section) {
+    removeSection(item: Section): void {
         this.sections.removeItem(item);
     }
 }
