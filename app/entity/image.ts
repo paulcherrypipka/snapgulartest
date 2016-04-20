@@ -13,6 +13,6 @@ export class Image {
     }
 
     toJSON() {
-        return this.source;
+        return this.name;
     }
 }

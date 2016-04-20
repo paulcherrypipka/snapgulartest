@@ -73,21 +73,49 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
 
         let formData = this._questionnaireService.getQuestionnaire().toJSON();
         let fileName = 'data.json';
+        let allImages = [];
+
+        let quesionnaire = this._questionnaireService.getQuestionnaire();
+
+        if (quesionnaire.image.name)
+            allImages.push(quesionnaire.image);
+
+        quesionnaire.getQuestions().forEach((question: Question) => {
+            if (question.image)
+                allImages.push(question.image);
+        });
+        quesionnaire.getSections().forEach((section: Section) => {
+            if (section.image.name)
+                allImages.push(section.image);
+            section.getQuestions().forEach((question: Question) => {
+                if (question.image.name)
+                    allImages.push(question.image);
+            })
+        })
+
+        console.log('Exported images => ', allImages);
 
         //noinspection TypeScriptUnresolvedFunction
         let zip = new JSZip();
         zip.file(fileName, formData);
-        // @todo export/save images to questionnaire archive
-        zip.generateAsync({type: "blob"}).then((blob) => {
-            let downloadUrl = window.URL.createObjectURL(blob);
-            let a = document.createElement("a");
-            //document.body.appendChild(a);
-            a.style = "display: none";
-            a.href = downloadUrl;
-            a.download = (this.item.name || 'questionnaire') + '_' + (new Date).getTime() + '.zip';
-            a.click();
-            window.URL.revokeObjectURL(downloadUrl);
+        // Add images to archive
+        allImages.forEach((image) => {
+            let raw = atob(image.source.split('base64,')[1]);
+            let rawLength = raw.length;
+            var imageContent = new Uint8Array(new ArrayBuffer(rawLength));
+            for(let i = 0; i < rawLength; i ++) {
+                imageContent[i] = raw.charCodeAt(i);
+            }
+            zip.file(image.name, imageContent);
         });
+
+        let content = zip.generate();
+        //location.href="data:application/zip;base64," + content;
+        let a = document.createElement("a");
+        a.style = "display: none";
+        a.href = "data:application/zip;base64," + content;
+        a.download = (this.item.name || 'questionnaire') + '_' + (new Date).getTime() + '.zip';
+        a.click();
     }
 
 
