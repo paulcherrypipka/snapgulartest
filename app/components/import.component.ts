@@ -37,7 +37,6 @@ export class ImportComponent implements OnInit {
 
     selectImportFile(event: any) {
 
-        // @todo implements - import from archive with IMAGES
         if (event.srcElement.files[0] instanceof File) {
 
             // Get extension helper
