@@ -20,9 +20,6 @@ export class AnswerComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('Answer OnINit');
-        console.log('elementRef => ', this.elementRef);
-
         this.item.setElementRef(this.elementRef);
     }
 }

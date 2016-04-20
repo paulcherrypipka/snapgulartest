@@ -5,10 +5,10 @@ export class Image {
     source: string;
     hasError: boolean;
 
-    constructor() {
+    constructor(data: any = new Object()) {
         this.file = null;
-        this.name = null;
-        this.source = null;
+        this.name = data.name || null;
+        this.source = data.source || null;
         this.hasError = false;
     }
 

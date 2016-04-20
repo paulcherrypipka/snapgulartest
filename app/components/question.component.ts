@@ -27,9 +27,6 @@ export class QuestionComponent implements OnInit, DraggableComponentTrait {
     }
 
     ngOnInit() {
-        console.log('Question OnInit');
-        console.log('elementRef => ', this.elementRef);
-
         this.item.setElementRef(this.elementRef);
         this.initializeDragAndDrop(this.answersContainer(), '.move-form-answer-button', 'answers');
     }

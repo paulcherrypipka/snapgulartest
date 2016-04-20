@@ -27,9 +27,6 @@ export class SectionComponent implements OnInit, DraggableComponentTrait {
     }
 
     ngOnInit() {
-        console.log('Section OnINit');
-        console.log('elementRef => ', this.elementRef);
-
         this.item.setElementRef(this.elementRef);
         this.initializeDragAndDrop(this.questionsContainer(), '.move-form-question-button', 'questions');
     }

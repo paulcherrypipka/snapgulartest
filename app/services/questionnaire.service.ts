@@ -14,6 +14,7 @@ import {QuestionCollection} from "../collections/question-collection";
 import {AnswerCollection} from "../collections/answer-collection";
 import {Answer} from "../entity/answer";
 import {AlertOptions} from "../entity/alertoptions";
+import {Image} from "../entity/image";
 
 @Injectable()
 export class QuestionnaireService {
@@ -48,11 +49,8 @@ export class QuestionnaireService {
         QUESTIONNAIRE.removeSection(section);
     }
 
-    buildQuestionnaire(dataJson: string) {
-        // @todo import service operation
-        //console.log('importClick event => ', event);
-        //noinspection TypeScriptUnresolvedFunction
-        //let jsZip = new JSZip();
+    buildQuestionnaire(dataJson: string, images: any[]) {
+
         let parsedQuestionnaireData = JSON.parse(dataJson);
         let questionnaire = new Questionnaire({
             id: parsedQuestionnaireData.id,
@@ -66,8 +64,9 @@ export class QuestionnaireService {
                 severity: parsedQuestionnaireData.alertOptions.severity,
                 condition: parsedQuestionnaireData.alertOptions.condition
             }),
-            sections: this.buildSections(parsedQuestionnaireData.sections),
-            questions: this.buildQuestions(parsedQuestionnaireData.questions)
+            sections: this.buildSections(parsedQuestionnaireData.sections, images),
+            questions: this.buildQuestions(parsedQuestionnaireData.questions, images),
+            image: new Image(images[parsedQuestionnaireData.image])
         });
         QUESTIONNAIRE = questionnaire;
 
@@ -78,7 +77,6 @@ export class QuestionnaireService {
     }
 
     buildAnswers(dataAnswers: any) {
-        console.log('Answers => ', dataAnswers);
         let answerCollection = new AnswerCollection();
         dataAnswers.forEach((data) => {
             answerCollection.addItem(new Answer({
@@ -90,8 +88,7 @@ export class QuestionnaireService {
         return answerCollection;
     }
 
-    buildQuestions(dataQuestions: any) {
-        console.log('dataQuestions => ', dataQuestions);
+    buildQuestions(dataQuestions: any, images: any[]) {
         let questionCollection = new QuestionCollection();
         dataQuestions.forEach((data) => {
             questionCollection.addItem(new Question({
@@ -103,15 +100,13 @@ export class QuestionnaireService {
                 enabled: data.enabled,
                 alertOptions: this.buildAlertOptions(data.alertOptions),
                 answers: this.buildAnswers(data.answers),
-                // @todo implements image field import
-
+                image: new Image(images[data.image])
             }));
         });
         return questionCollection;
     }
 
-    buildSections(dataSections: any) {
-        console.log('dataSections => ', dataSections);
+    buildSections(dataSections: any, images: any[]) {
         let sectionCollection = new SectionCollection();
         dataSections.forEach((data) => {
             sectionCollection.addItem(new Section({
@@ -121,9 +116,8 @@ export class QuestionnaireService {
                 enabled: data.enabled,
                 minRequired: data.minRequired,
                 alertOptions: this.buildAlertOptions(data.alertOptions),
-                questions: this.buildQuestions(data.questions),
-                // @todo implements image field import
-
+                questions: this.buildQuestions(data.questions, images),
+                image: new Image(images[data.image])
             }));
         });
         return sectionCollection;

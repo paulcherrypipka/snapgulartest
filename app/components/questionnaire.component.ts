@@ -84,7 +84,6 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
             //document.body.appendChild(a);
             a.style = "display: none";
             a.href = downloadUrl;
-            console.log('this.item => ', this.item);
             a.download = (this.item.name || 'questionnaire') + '_' + (new Date).getTime() + '.zip';
             a.click();
             window.URL.revokeObjectURL(downloadUrl);
