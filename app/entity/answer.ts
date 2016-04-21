@@ -1,4 +1,5 @@
 import {Guid} from '../utils/guid';
+import {applyMixins} from 'app/utils/mixins';
 
 import {ElementKeeperTrait} from "app/mixins/element-keeper.trait";
 
@@ -37,13 +38,4 @@ export class Answer implements ElementKeeperTrait {
     getElementRef: () => any;
 }
 
-function applyMixins(derivedCtor: any, baseCtors: any[]) {
-    baseCtors.forEach(baseCtor => {
-        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
-            if (name !== 'constructor') {
-                derivedCtor.prototype[name] = baseCtor.prototype[name];
-            }
-        });
-    });
-}
 applyMixins(Answer, [ElementKeeperTrait]);

@@ -1,5 +1,6 @@
 //noinspection TypeScriptCheckImport
 import {Component, OnInit, ElementRef} from 'angular2/core';
+import {applyMixins} from 'app/utils/mixins';
 
 import {QuestionnaireService} from 'app/services/questionnaire.service';
 import {QuestionnaireValidate} from 'app/utils/questionnaire.validate';
@@ -146,16 +147,6 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
     }
 
     initializeDragAndDrop: (container: string, selectorMove: string, collectionName: string) => void;
-}
-
-function applyMixins(derivedCtor: any, baseCtors: any[]) {
-    baseCtors.forEach(baseCtor => {
-        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
-            if (name !== 'constructor') {
-                derivedCtor.prototype[name] = baseCtor.prototype[name];
-            }
-        });
-    });
 }
 
 applyMixins(QuestionnaireComponent, [DraggableComponentTrait]);

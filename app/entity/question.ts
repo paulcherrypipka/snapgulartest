@@ -2,6 +2,7 @@ import {Answer} from "./answer";
 import {AnswerCollection} from "../collections/answer-collection";
 import {Image} from "./image";
 import {AlertOptions} from './alertoptions';
+import {applyMixins} from 'app/utils/mixins';
 
 import {Guid} from '../utils/guid';
 import {Image} from "./image";
@@ -93,13 +94,4 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait, ElementKeeperT
     imageFileClear: (event: any) => void;
 }
 
-function applyMixins(derivedCtor: any, baseCtors: any[]) {
-    baseCtors.forEach(baseCtor => {
-        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
-            if (name !== 'constructor') {
-                derivedCtor.prototype[name] = baseCtor.prototype[name];
-            }
-        });
-    });
-}
 applyMixins(Question, [ImageKeeperTrait, ElementKeeperTrait]);

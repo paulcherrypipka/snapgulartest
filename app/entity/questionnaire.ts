@@ -4,6 +4,7 @@ import {SectionCollection} from "../collections/section-collection";
 import {QuestionCollection} from "../collections/question-collection";
 import {Image} from "./image";
 import {AlertOptions} from './alertoptions';
+import {applyMixins} from 'app/utils/mixins';
 
 import {Guid} from '../utils/guid';
 
@@ -58,25 +59,16 @@ export class Questionnaire implements SectionKeeperTrait, QuestionKeeperTrait, I
 
     addSection: (item: Section = null) => Section;
     getSections: () => Section[];
-    getSection: (id: number) => Section;
+    getSection: (id: string) => Section;
     removeSection: (item: Section) => void;
 
     addQuestion:(item: Question = null) => Question;
     getQuestions: () => Question[];
-    getQuestion: (id: number) => Question;
+    getQuestion: (id: string) => Question;
     removeQuestion: (item: Question) => void;
 
     imageFileChange: (event: any) => void;
     imageFileClear: (event: any) => void;
 }
 
-function applyMixins(derivedCtor: any, baseCtors: any[]) {
-    baseCtors.forEach(baseCtor => {
-        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
-            if (name !== 'constructor') {
-                derivedCtor.prototype[name] = baseCtor.prototype[name];
-            }
-        });
-    });
-}
 applyMixins(Questionnaire ,[SectionKeeperTrait, QuestionKeeperTrait, ImageKeeperTrait]);

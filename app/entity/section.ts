@@ -2,6 +2,7 @@ import {Question} from "./question";
 import {QuestionCollection} from "../collections/question-collection";
 import {Image} from './image';
 import {AlertOptions} from './alertoptions';
+import {applyMixins} from 'app/utils/mixins';
 
 import {Guid} from '../utils/guid';
 
@@ -73,13 +74,4 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait, ElementKe
     imageFileClear: (event: any) => void;
 }
 
-function applyMixins(derivedCtor: any, baseCtors: any[]) {
-    baseCtors.forEach(baseCtor => {
-        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
-            if (name !== 'constructor') {
-                derivedCtor.prototype[name] = baseCtor.prototype[name];
-            }
-        });
-    });
-}
 applyMixins(Section, [QuestionKeeperTrait, ImageKeeperTrait, ElementKeeperTrait]);

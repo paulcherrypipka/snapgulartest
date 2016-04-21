@@ -19,7 +19,7 @@ export class SectionKeeperTrait implements ISectionKeeper {
         return this.sections.getAll();
     }
 
-    getSection(id: number): Section {
+    getSection(id: string): Section {
         return this.sections.get(id);
     }
 

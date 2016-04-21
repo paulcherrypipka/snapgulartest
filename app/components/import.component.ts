@@ -28,7 +28,7 @@ export class ImportComponent implements OnInit {
         elementMainBody.removeClass('modal-open').find('.modal-backdrop').remove();
     }
 
-    importActionClick(event): void {
+    importActionClick(event: any): void {
         if (this.isValid) {
             this._questionnaireService.buildQuestionnaire(this.selectedImportFileContent, this.images);
             this.closeModalClick();

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit, ElementRef, Inject, forwardRef} from 'angular2/core';
+import {applyMixins} from 'app/utils/mixins';
 
 import {Question} from "app/entity/question";
 import {Questionnaire} from "app/entity/questionnaire";
@@ -54,13 +55,4 @@ export class QuestionComponent implements OnInit, DraggableComponentTrait {
     initializeDragAndDrop: (container: string, selectorMove: string, collectionName: string) => void;
 }
 
-function applyMixins(derivedCtor: any, baseCtors: any[]) {
-    baseCtors.forEach(baseCtor => {
-        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
-            if (name !== 'constructor') {
-                derivedCtor.prototype[name] = baseCtor.prototype[name];
-            }
-        });
-    });
-}
 applyMixins(QuestionComponent, [DraggableComponentTrait]);
