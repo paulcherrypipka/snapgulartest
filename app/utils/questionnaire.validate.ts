@@ -8,60 +8,11 @@ export class QuestionnaireValidate {
 
     constructor() { }
 
-    private idCheckExist(id: string): boolean {
-
-        let result = false;
-
-        // Check Sections
-        let findedSection = this.component.item.getSection(id);
-        if (findedSection !== undefined) {
-            result = true;
-        }
-
-        // Check Q Questions
-        let findedQuestion = this.component.item.getQuestion(id);
-        if (findedQuestion !== undefined) {
-            result = true;
-        }
-
-        // Check Q Q Answers
-        this.component.item.getQuestions().forEach((question: Question) => {
-
-            let answer = question.getAnswer(id);
-            if (answer !== undefined) {
-                result = true;
-                return false; // forEach() => break;
-            }
-        });
-
-
-        this.component.item.getSections().forEach((section: Section) => {
-
-            // Check section's Question
-            let question = section.getQuestion(id);
-            if (question !== undefined) {
-                result = true;
-                return false; // break;
-            }
-
-            section.getQuestions().forEach((question: Question) => {
-
-                // Check Sec Question's answers
-                let answer = question.getAnswer(id);
-                if (answer !== undefined) {
-                    result = true;
-                    return false; // break;
-                }
-            })
-        });
-        return result;
-    }
-
-    isIdExist(component: QuestionnaireComponent): void {
+    isIdExist(questionnaireComponent: QuestionnaireComponent, targetComponent: any): void {
 
         // Refresh error status
-        component.item.haveFormulaError = false;
-        this.component = component;
+        targetComponent.item.haveFormulaError = false;
+        this.component = questionnaireComponent;
 
         //noinspection TypeScriptUnresolvedVariable
         let inputedFormula = event.target.value;
@@ -74,15 +25,16 @@ export class QuestionnaireValidate {
 
         while (matches = idExpr.exec(inputedFormula)) {
             parsedId = matches[1];
-            if (!this.idCheckExist(parsedId)) {
+            if (!this.idCheckExistHelper(parsedId)) {
                 invalidIds.push(parsedId);
                 isValid = false;
             }
         }
 
         if (!isValid) {
-            component.item.haveFormulaError = true;
-            component.invalidIdentifiers = invalidIds.join(', ');
+            console.log('event => ', event);
+            targetComponent.item.haveFormulaError = true;
+            targetComponent.invalidIdentifiers = invalidIds.join(', ');
         }
     }
 
@@ -129,6 +81,58 @@ export class QuestionnaireValidate {
                 elem.haveEqualIdError = true;
             });
         }
+    }
+
+    private idCheckExistHelper(id: string): boolean {
+
+        let result = false;
+        if (this.component.item.id == id) {
+            return true;
+        }
+
+        // Check Sections
+        let findedSection = this.component.item.getSection(id);
+        if (findedSection !== undefined) {
+            result = true;
+        }
+
+        // Check Q Questions
+        let findedQuestion = this.component.item.getQuestion(id);
+        if (findedQuestion !== undefined) {
+            result = true;
+        }
+
+        // Check Q Q Answers
+        this.component.item.getQuestions().forEach((question: Question) => {
+
+            let answer = question.getAnswer(id);
+            if (answer !== undefined) {
+                result = true;
+                return false; // forEach() => break;
+            }
+        });
+
+
+        this.component.item.getSections().forEach((section: Section) => {
+
+            // Check section's Question
+            let question = section.getQuestion(id);
+            if (question !== undefined) {
+                result = true;
+                return false; // break;
+            }
+
+            section.getQuestions().forEach((question: Question) => {
+
+                // Check Sec Question's answers
+                let answer = question.getAnswer(id);
+                if (answer !== undefined) {
+                    result = true;
+                    return false; // break;
+                }
+            })
+        });
+        return result;
     }
 
     private checkQuestions(parentQuestions: any, inputedId: string): Question[] {

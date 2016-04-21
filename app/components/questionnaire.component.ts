@@ -128,7 +128,7 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
     }
 
     validateIdExists(event: any) {
-        (new QuestionnaireValidate()).isIdExist(this);
+        (new QuestionnaireValidate()).isIdExist(this, this);
     }
 
     validateIdUnique(event: any) {

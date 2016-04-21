@@ -24,6 +24,8 @@ export class QuestionComponent implements OnInit, DraggableComponentTrait {
 
     elementRef: ElementRef;
 
+    invalidIdentifiers: string;
+
     constructor(
         elementRef: ElementRef,
         @Inject(forwardRef(() => QuestionnaireComponent)) private _parentComponent
@@ -37,7 +39,7 @@ export class QuestionComponent implements OnInit, DraggableComponentTrait {
     }
 
     validateIdExists(event: any) {
-        (new QuestionnaireValidate()).isIdExist(this._parentComponent);
+        (new QuestionnaireValidate()).isIdExist(this._parentComponent, this);
     }
 
     validateIdUnique(event: any) {

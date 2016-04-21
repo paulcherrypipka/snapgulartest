@@ -51,7 +51,7 @@
         <div class="col-xs-12  col-md-10">
             <input (keyup)="validateIdExists($event)" [(ngModel)]="item.formula" type="text" class="form-control q-section-formula" placeholder="formula" [attr.aria-describedby]="'view-' + item.cid + '-formulaHelpBlock'">
             <span *ngIf="item.haveFormulaError" id="view-{{ item.cid }}-formulaHelpBlock" class="help-block">
-                Unknown identifiers: {{ item.formula }}
+                Unknown identifiers: {{ invalidIdentifiers }}
             </span>
         </div>
     </div>
