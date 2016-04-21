@@ -37,6 +37,8 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
 
     elementRef: ElementRef;
 
+    invalidIdentifiers: string;
+
     constructor(
         private _questionnaireService: QuestionnaireService,
         elementRef: ElementRef

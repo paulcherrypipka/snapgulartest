@@ -8,24 +8,24 @@ export abstract class BaseCollection implements ICollection {
         this.items = [];
     }
 
-    get(id: number) {
+    get(id: string) {
         return this.items.filter(item => item.id === id)[0];
     }
 
-    getAll() {
+    getAll(): any[] {
         return this.items;
     }
 
-    addItem(item: any) {
+    addItem(item: any): void {
         this.items.push(item);
     }
 
-    removeItem(item: any) {
+    removeItem(item: any): void {
         let ndx = this.items.indexOf(item);
         this.items.splice(ndx, 1);
     }
 
-    sortBySelectorsOrder() {
+    sortBySelectorsOrder(): void {
         this.items = this.items.sort((elemFirst: any, elemSecond: any) => {
 
             //noinspection TypeScriptUnresolvedFunction

@@ -4,18 +4,89 @@ import {Question} from "../entity/question";
 
 export class QuestionnaireValidate {
 
+    component: any;
+
     constructor() { }
 
-    // @todo implements validate isIdExist
-    isIdExist(component: QuestionnaireComponent): boolean {
-        console.log('Validate: isIdExist');
+    private idCheckExist(id: string): boolean {
 
-        return true;
+        let result = false;
+
+        // Check Sections
+        let findedSection = this.component.item.getSection(id);
+        if (findedSection !== undefined) {
+            result = true;
+        }
+
+        // Check Q Questions
+        let findedQuestion = this.component.item.getQuestion(id);
+        if (findedQuestion !== undefined) {
+            result = true;
+        }
+
+        // Check Q Q Answers
+        this.component.item.getQuestions().forEach((question: Question) => {
+
+            let answer = question.getAnswer(id);
+            if (answer !== undefined) {
+                result = true;
+                return false; // forEach() => break;
+            }
+        });
+
+
+        this.component.item.getSections().forEach((section: Section) => {
+
+            // Check section's Question
+            let question = section.getQuestion(id);
+            if (question !== undefined) {
+                result = true;
+                return false; // break;
+            }
+
+            section.getQuestions().forEach((question: Question) => {
+
+                // Check Sec Question's answers
+                let answer = question.getAnswer(id);
+                if (answer !== undefined) {
+                    result = true;
+                    return false; // break;
+                }
+            })
+        });
+        return result;
     }
 
-    // @todo implements validate isIdUnique
-    isIdUnique(component: QuestionnaireComponent): any[] {
-        console.log('Validate: isIdUnique eventObj => ', component);
+    isIdExist(component: QuestionnaireComponent): void {
+
+        // Refresh error status
+        component.item.haveFormulaError = false;
+        this.component = component;
+
+        //noinspection TypeScriptUnresolvedVariable
+        let inputedFormula = event.target.value;
+        let idExpr = /{([^{}]+)}/g;
+
+        let matches,
+            parsedId,
+            isValid = true,
+            invalidIds = [];
+
+        while (matches = idExpr.exec(inputedFormula)) {
+            parsedId = matches[1];
+            if (!this.idCheckExist(parsedId)) {
+                invalidIds.push(parsedId);
+                isValid = false;
+            }
+        }
+
+        if (!isValid) {
+            component.item.haveFormulaError = true;
+            component.invalidIdentifiers = invalidIds.join(', ');
+        }
+    }
+
+    isIdUnique(component: QuestionnaireComponent): void {
 
         //noinspection TypeScriptUnresolvedVariable
         let inputedId = event.target.value;
@@ -41,7 +112,7 @@ export class QuestionnaireValidate {
                 equallyIdElements.push(section);
             }
 
-            // Check Section Questions
+            // Check Section's Questions
             this.checkQuestions(section, inputedId).forEach((question) => {
                 equallyIdElements.push(question);
             })
@@ -52,16 +123,12 @@ export class QuestionnaireValidate {
             equallyIdElements.push(question);
         })
 
-        console.log('equallyIdElemets => ', equallyIdElements);
         if (equallyIdElements.length > 1) {
             console.log('!!! SHOW ERROR MESSAGE !!!');
             equallyIdElements.forEach((elem: any) => {
                 elem.haveEqualIdError = true;
             });
         }
-
-        // Must return array of components that have equally ids
-        return equallyIdElements;
     }
 
     private checkQuestions(parentQuestions: any, inputedId: string): Question[] {

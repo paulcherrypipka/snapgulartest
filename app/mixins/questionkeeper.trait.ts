@@ -19,7 +19,7 @@ export class QuestionKeeperTrait implements IQuestionKeeper {
         return this.questions.getAll();
     }
 
-    getQuestion(id: number): Question {
+    getQuestion(id: string): Question {
         return this.questions.get(id);
     }
 

@@ -12,7 +12,7 @@ import {ElementKeeperTrait} from "app/mixins/element-keeper.trait";
 
 export class Section implements QuestionKeeperTrait, ImageKeeperTrait, ElementKeeperTrait {
 
-    id: number;
+    id: string;
     name: string;
     formula: string;
     enabled: boolean;
@@ -22,7 +22,9 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait, ElementKe
     image: Image;
     cid: string;
     collapsed: boolean;
+
     haveEqualIdError: boolean;
+    haveFormulaError: boolean;
 
     elementRef: any;
 
@@ -39,6 +41,7 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait, ElementKe
         this.cid = Guid.guid();
         this.collapsed = false;
         this.haveEqualIdError = false;
+        this.haveFormulaError = false;
     }
 
     collapse() {
@@ -63,7 +66,7 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait, ElementKe
 
     addQuestion: (item: Question = null) => Question;
     getQuestions: () => Question[];
-    getQuestion: (id: number) => Question;
+    getQuestion: (id: string) => Question;
     removeQuestion: (item: Question) => void;
 
     imageFileChange: (event: any) => void;

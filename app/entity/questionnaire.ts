@@ -25,6 +25,7 @@ export class Questionnaire implements SectionKeeperTrait, QuestionKeeperTrait, I
     image: Image;
 
     haveEqualIdError: boolean;
+    haveFormulaError: boolean;
 
     constructor(data: any = new Object()) {
         this.id = data.id || null;
@@ -38,6 +39,7 @@ export class Questionnaire implements SectionKeeperTrait, QuestionKeeperTrait, I
         this.cid = Guid.guid();
         this.image = data.image || new Image();
         this.haveEqualIdError = false;
+        this.haveFormulaError = false;
     }
 
     toJSON(): string {

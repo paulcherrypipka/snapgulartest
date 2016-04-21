@@ -4,6 +4,6 @@ export interface ISectionKeeper {
 
     addSection(item: Section = null): Section;
     getSections(): Section[];
-    getSection(id: number): Section;
+    getSection(id: string): Section;
     removeSection(item: Section): void;
 }

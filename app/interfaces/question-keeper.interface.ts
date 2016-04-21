@@ -4,6 +4,6 @@ export interface IQuestionKeeper {
 
     addQuestion(item: Question = null): Question;
     getQuestions(): Question[];
-    getQuestion(id: number): Question;
+    getQuestion(id: string): Question;
     removeQuestion(item: Question): void;
 }

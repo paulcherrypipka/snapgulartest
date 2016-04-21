@@ -15,7 +15,7 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait, ElementKeeperT
     public static CHOISE_TYPE_MULTIPLY = 'm';
     public static CHOISE_TYPE_SINGLE = 's';
 
-    id: number;
+    id: string;
     choiseType: any;
     formula: string;
     text: string;
@@ -27,6 +27,7 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait, ElementKeeperT
     cid: string;
     collapsed: boolean;
     haveEqualIdError: boolean;
+    haveFormulaError: boolean;
 
     elementRef: any;
 
@@ -43,6 +44,7 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait, ElementKeeperT
         this.cid = Guid.guid();
         this.collapsed = false;
         this.haveEqualIdError = false;
+        this.haveFormulaError = false;
     }
 
     addAnswer(item: Answer = null): Answer {
@@ -58,7 +60,7 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait, ElementKeeperT
         return this.answers.getAll();
     }
 
-    getAnswer(id: number): Answer {
+    getAnswer(id: string): Answer {
         return this.answers.get(id);
     }
 

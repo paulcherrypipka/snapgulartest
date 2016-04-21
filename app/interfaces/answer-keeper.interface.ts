@@ -4,7 +4,7 @@ export interface IAnswerKeeper {
 
     addAnswer(item: Answer = null): Answer;
     getAnswers(): Answer[];
-    getAnswer(id: number) : Answer;
+    getAnswer(id: string) : Answer;
     removeAnswer(item: Answer): void;
 
 }
