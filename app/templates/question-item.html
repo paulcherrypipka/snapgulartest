@@ -37,11 +37,13 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" [class.has-error]="item.haveEqualIdError">
         <label class="col-xs-2 control-label">Id</label>
         <div class="col-xs-10">
-            <input [(ngModel)]="item.id" type="text" class="form-control q-question-id" placeholder="id" [attr.area-describedby]="'view-' + item.cid + '-idHelpBlock'">
-            <span id="view-{{ item.cid }}-idHelpBlock" class="help-block"></span>
+            <input (keyup)="validateIdUnique($event)" [(ngModel)]="item.id" type="text" class="form-control q-question-id" placeholder="id" [attr.area-describedby]="'view-' + item.cid + '-idHelpBlock'">
+            <span *ngIf="item.haveEqualIdError" id="view-{{ item.cid }}-idHelpBlock" class="help-block">
+                Id '{{ item.id }}' is already used
+            </span>
         </div>
     </div>
 
@@ -58,7 +60,7 @@
     <div class="form-group">
         <label class="col-xs-2 control-label">Formula</label>
         <div class="col-xs-10">
-            <input [(ngModel)]="item.formula" type="text" class="form-control q-question-formula" placeholder="formula" [attr.aria-describedby]="'view-' + item.cid + '-formulaHelpBlock'">
+            <input (keyup)="validateIdExists($event)" [(ngModel)]="item.formula" type="text" class="form-control q-question-formula" placeholder="formula" [attr.aria-describedby]="'view-' + item.cid + '-formulaHelpBlock'">
             <span id="view-{{ item.cid }}-formulaHelpBlock" class="help-block"></span>
         </div>
     </div>

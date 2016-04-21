@@ -22,6 +22,7 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait, ElementKe
     image: Image;
     cid: string;
     collapsed: boolean;
+    haveEqualIdError: boolean;
 
     elementRef: any;
 
@@ -37,6 +38,7 @@ export class Section implements QuestionKeeperTrait, ImageKeeperTrait, ElementKe
         this.image = data.image || new Image();
         this.cid = Guid.guid();
         this.collapsed = false;
+        this.haveEqualIdError = false;
     }
 
     collapse() {

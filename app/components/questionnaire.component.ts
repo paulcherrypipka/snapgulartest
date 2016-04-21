@@ -2,6 +2,8 @@
 import {Component, OnInit, ElementRef} from 'angular2/core';
 
 import {QuestionnaireService} from 'app/services/questionnaire.service';
+import {QuestionnaireValidate} from 'app/utils/questionnaire.validate';
+
 import {Answer} from "app/entity/answer";
 import {Section} from "app/entity/section";
 import {Question} from "app/entity/question";
@@ -121,29 +123,14 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
         console.log('AppComponent init');
         this.initializeDragAndDrop(this.sectionsContainer(), '.move-form-section-button', 'sections');
         this.initializeDragAndDrop(this.questionsContainer(), '.move-form-question-button', 'questions');
+    }
 
-        // Test add sections and questions
-        //var sec = this._questionnaireService.addSection();
+    validateIdExists(event: any) {
+        (new QuestionnaireValidate()).isIdExist(this);
+    }
 
-        //var q1 = sec.addQuestion();
-        //var q2 = sec.addQuestion();
-        //var q3 = sec.addQuestion();
-        //q1.addAnswer();
-        //q1.addAnswer();
-        //q1.addAnswer();
-        //q2.addAnswer();
-        //q2.addAnswer();
-        //q2.addAnswer();
-        //q3.addAnswer();
-        //q3.addAnswer();
-        //q3.addAnswer();
-
-        //var qq1 = this._questionnaireService.addQuestion();
-        //var qq2 = this._questionnaireService.addQuestion();
-        //qq1.addAnswer();
-        //qq1.addAnswer();
-        //qq2.addAnswer();
-        //qq2.addAnswer();
+    validateIdUnique(event: any) {
+        (new QuestionnaireValidate()).isIdUnique(this);
     }
 
     questionsContainer(): any {

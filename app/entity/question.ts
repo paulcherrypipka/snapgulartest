@@ -26,6 +26,7 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait, ElementKeeperT
     image: Image;
     cid: string;
     collapsed: boolean;
+    haveEqualIdError: boolean;
 
     elementRef: any;
 
@@ -41,6 +42,7 @@ export class Question implements IAnswerKeeper, ImageKeeperTrait, ElementKeeperT
         this.image = data.image || new Image();
         this.cid = Guid.guid();
         this.collapsed = false;
+        this.haveEqualIdError = false;
     }
 
     addAnswer(item: Answer = null): Answer {

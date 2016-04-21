@@ -11,11 +11,13 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" [class.has-error]="item.haveEqualIdError">
                 <label class="col-xs-3  col-md-2  control-label" for="q-id">Id</label>
                 <div class="col-xs-9  col-md-10">
-                    <input [(ngModel)]="item.id" type="text" class="form-control" id="q-id" placeholder="id" >
-                    <span id="view-{{ item.cid }}-idHelpBlock" class="help-block"></span>
+                    <input (keyup)="validateIdUnique($event)" [(ngModel)]="item.id" type="text" class="form-control" id="q-id" placeholder="id" >
+                    <span *ngIf="item.haveEqualIdError" id="view-{{ item.cid }}-idHelpBlock" class="help-block">
+                        Id '{{ item.id }}' is already used
+                    </span>
                 </div>
             </div>
 
@@ -29,7 +31,7 @@
             <div class="form-group">
                 <label class="col-xs-3  col-md-2  control-label" for="q-formula">Formula</label>
                 <div class="col-xs-9  col-md-10">
-                    <input [(ngModel)]="item.formula" type="text" class="form-control" id="q-formula" placeholder="formula" >
+                    <input (keyup)="validateIdExists($event)" [(ngModel)]="item.formula" type="text" class="form-control" id="q-formula" placeholder="formula" >
                     <span id="view-{{ item.cid }}-formulaHelpBlock" class="help-block"></span>
                 </div>
             </div>
