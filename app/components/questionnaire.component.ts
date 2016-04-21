@@ -40,6 +40,8 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
 
     invalidIdentifiers: string;
 
+    isGlobalError: boolean;
+
     constructor(
         private _questionnaireService: QuestionnaireService,
         elementRef: ElementRef
@@ -51,6 +53,7 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
         this.qquestions = this.item.getQuestions();
 
         this.elementRef = elementRef;
+        this.isGlobalError = false;
     }
 
     // Events click define:

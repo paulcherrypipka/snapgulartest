@@ -10,9 +10,11 @@ export class QuestionnaireValidate {
 
     isIdExist(questionnaireComponent: QuestionnaireComponent, targetComponent: any): void {
 
+        this.component = questionnaireComponent;
+
         // Refresh error status
         targetComponent.item.haveFormulaError = false;
-        this.component = questionnaireComponent;
+        questionnaireComponent.isGlobalError = false;
 
         //noinspection TypeScriptUnresolvedVariable
         let inputedFormula = event.target.value;
@@ -35,6 +37,7 @@ export class QuestionnaireValidate {
             console.log('event => ', event);
             targetComponent.item.haveFormulaError = true;
             targetComponent.invalidIdentifiers = invalidIds.join(', ');
+            questionnaireComponent.isGlobalError = true;
         }
     }
 
@@ -42,12 +45,11 @@ export class QuestionnaireValidate {
 
         //noinspection TypeScriptUnresolvedVariable
         let inputedId = event.target.value;
-        console.log('inputedId => ', inputedId);
-
         let equallyIdElements = [];
 
         // Check questionnaire
         component.item.haveEqualIdError = false;
+        component.isGlobalError = false;
         //noinspection TypeScriptUnresolvedVariable,TypeScriptUnresolvedFunction
         if ($(component.elementRef.nativeElement).find('input#q-id').val() === inputedId) {
             equallyIdElements.push(component.item);
@@ -73,10 +75,11 @@ export class QuestionnaireValidate {
         //Check Q Questions
         this.checkQuestions(component.item, inputedId).forEach((question) => {
             equallyIdElements.push(question);
-        })
+        });
 
         if (equallyIdElements.length > 1) {
             console.log('!!! SHOW ERROR MESSAGE !!!');
+            component.isGlobalError = true;
             equallyIdElements.forEach((elem: any) => {
                 elem.haveEqualIdError = true;
             });
