@@ -19,7 +19,7 @@ export class Answer implements ElementKeeperTrait {
         this.text = data.text || null;
         this.score = data.score || null;
         this.cid = Guid.guid();
-        this.collapsed = false;
+        this.collapsed = true;
     }
 
     collapse() {
