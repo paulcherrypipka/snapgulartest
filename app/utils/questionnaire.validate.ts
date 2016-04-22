@@ -5,8 +5,6 @@ import {Question} from "../entity/question";
 export class QuestionnaireValidate {
 
     component: any;
-    
-    constructor() {}
 
     isIdExist(questionnaireComponent: QuestionnaireComponent, targetComponent: any): void {
 
@@ -34,7 +32,6 @@ export class QuestionnaireValidate {
         }
 
         if (!isValid) {
-            console.log('event => ', event);
             targetComponent.item.haveFormulaError = true;
             targetComponent.invalidIdentifiers = invalidIds.join(', ');
             questionnaireComponent.isGlobalError = true;
@@ -79,7 +76,6 @@ export class QuestionnaireValidate {
         });
 
         if (equallyIdElements.length > 1) {
-            console.log('!!! SHOW ERROR MESSAGE !!!');
             component.isGlobalError = true;
             this.initGlobalErrorLabel();
             equallyIdElements.forEach((elem: any) => {

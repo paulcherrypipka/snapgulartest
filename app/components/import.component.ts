@@ -1,4 +1,4 @@
-import {Component, OnInit, ElementRef} from "angular2/core";
+import {Component, ElementRef} from "angular2/core";
 
 import {QuestionnaireService} from "../services/questionnaire.service";
 
@@ -7,7 +7,7 @@ import {QuestionnaireService} from "../services/questionnaire.service";
     templateUrl: 'app/templates/import.html'
 })
 
-export class ImportComponent implements OnInit {
+export class ImportComponent {
 
     elementRef: ElementRef;
     selectedImportFileContent: string;
@@ -81,9 +81,5 @@ export class ImportComponent implements OnInit {
                 this.isValid = true;
             }
         }
-    }
-
-    ngOnInit() {
-        console.log('Import component init');
     }
 }

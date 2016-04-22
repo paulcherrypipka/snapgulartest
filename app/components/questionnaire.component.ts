@@ -66,8 +66,6 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
     }
 
     importClick(): void {
-        console.log('Import start in questionnaire component');
-
         let openedClass = 'modal-open';
         //noinspection TypeScriptUnresolvedVariable,TypeScriptUnresolvedFunction
         let bodyMainView = $(this.elementRef.nativeElement);
@@ -78,55 +76,11 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
     }
 
     saveQuestionnaireClick(): void {
-
-        let formData = this._questionnaireService.getQuestionnaire().toJSON();
-        let fileName = 'data.json';
-        let allImages = [];
-
-        let quesionnaire = this._questionnaireService.getQuestionnaire();
-
-        if (quesionnaire.image.name)
-            allImages.push(quesionnaire.image);
-
-        quesionnaire.getQuestions().forEach((question: Question) => {
-            if (question.image)
-                allImages.push(question.image);
-        });
-        quesionnaire.getSections().forEach((section: Section) => {
-            if (section.image.name)
-                allImages.push(section.image);
-            section.getQuestions().forEach((question: Question) => {
-                if (question.image.name)
-                    allImages.push(question.image);
-            })
-        });
-
-        //noinspection TypeScriptUnresolvedFunction
-        let zip = new JSZip();
-        zip.file(fileName, formData);
-        // Add images to archive
-        allImages.forEach((image) => {
-            let raw = atob(image.source.split('base64,')[1]);
-            let rawLength = raw.length;
-            var imageContent = new Uint8Array(new ArrayBuffer(rawLength));
-            for(let i = 0; i < rawLength; i ++) {
-                imageContent[i] = raw.charCodeAt(i);
-            }
-            zip.file(image.name, imageContent);
-        });
-
-        let content = zip.generate();
-        //location.href="data:application/zip;base64," + content;
-        let a = document.createElement("a");
-        a.style = "display: none";
-        a.href = "data:application/zip;base64," + content;
-        a.download = (this.item.name || 'questionnaire') + '_' + (new Date).getTime() + '.zip';
-        a.click();
+        this._questionnaireService.exportQuestionnaire();
     }
 
 
     ngOnInit() {
-        console.log('AppComponent init');
         this.initializeDragAndDrop(this.sectionsContainer(), '.move-form-section-button', 'sections');
         this.initializeDragAndDrop(this.questionsContainer(), '.move-form-question-button', 'questions');
     }

@@ -49,6 +49,53 @@ export class QuestionnaireService {
         QUESTIONNAIRE.removeSection(section);
     }
 
+    exportQuestionnaire(): void {
+
+        let formData = this.getQuestionnaire().toJSON();
+        let fileName = 'data.json';
+        let allImages = [];
+
+        let quesionnaire = this.getQuestionnaire();
+
+        if (quesionnaire.image.name)
+            allImages.push(quesionnaire.image);
+
+        quesionnaire.getQuestions().forEach((question: Question) => {
+            if (question.image)
+                allImages.push(question.image);
+        });
+        quesionnaire.getSections().forEach((section: Section) => {
+            if (section.image.name)
+                allImages.push(section.image);
+            section.getQuestions().forEach((question: Question) => {
+                if (question.image.name)
+                    allImages.push(question.image);
+            })
+        });
+
+        //noinspection TypeScriptUnresolvedFunction
+        let zip = new JSZip();
+        zip.file(fileName, formData);
+        // Add images to archive
+        allImages.forEach((image) => {
+            let raw = atob(image.source.split('base64,')[1]);
+            let rawLength = raw.length;
+            var imageContent = new Uint8Array(new ArrayBuffer(rawLength));
+            for(let i = 0; i < rawLength; i ++) {
+                imageContent[i] = raw.charCodeAt(i);
+            }
+            zip.file(image.name, imageContent);
+        });
+
+        let content = zip.generate();
+        //location.href="data:application/zip;base64," + content;
+        let a = document.createElement("a");
+        a.style = "display: none";
+        a.href = "data:application/zip;base64," + content;
+        a.download = (this.getQuestionnaire().name || 'questionnaire') + '_' + (new Date).getTime() + '.zip';
+        a.click();
+    }
+
     buildQuestionnaire(dataJson: string, images: any[]): void {
 
         let parsedQuestionnaireData = JSON.parse(dataJson);
@@ -76,7 +123,7 @@ export class QuestionnaireService {
         this.component.qquestions = QUESTIONNAIRE.getQuestions();
     }
 
-    buildAnswers(dataAnswers: any): AnswerCollection {
+    private buildAnswers(dataAnswers: any): AnswerCollection {
         let answerCollection = new AnswerCollection();
         dataAnswers.forEach((data) => {
             answerCollection.addItem(new Answer({
@@ -88,7 +135,7 @@ export class QuestionnaireService {
         return answerCollection;
     }
 
-    buildQuestions(dataQuestions: any, images: any[]): QuestionCollection {
+    private buildQuestions(dataQuestions: any, images: any[]): QuestionCollection {
         let questionCollection = new QuestionCollection();
         dataQuestions.forEach((data) => {
             questionCollection.addItem(new Question({
@@ -106,7 +153,7 @@ export class QuestionnaireService {
         return questionCollection;
     }
 
-    buildSections(dataSections: any, images: any[]): SectionCollection {
+    private buildSections(dataSections: any, images: any[]): SectionCollection {
         let sectionCollection = new SectionCollection();
         dataSections.forEach((data) => {
             sectionCollection.addItem(new Section({
@@ -123,7 +170,7 @@ export class QuestionnaireService {
         return sectionCollection;
     }
 
-    buildAlertOptions(dataAlertOptions: any): AlertOptions {
+    private buildAlertOptions(dataAlertOptions: any): AlertOptions {
         let alertOptions = new AlertOptions({
             type: dataAlertOptions.type,
             text: dataAlertOptions.text,
