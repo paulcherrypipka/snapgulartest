@@ -2,7 +2,7 @@
     <div id="questionnaire">
         <h1 class="text-center" id="q-title">Survey builder</h1>
 
-        <div *ngIf="isGlobalError" id="ic-global-error-notice-container" style=""><a href=""><img src="/app/img/error-img.png"></a></div>
+        <div [style.display]="isGlobalError ? 'block' : 'none'" id="ic-global-error-notice-container" style=""><a href=""><img src="/app/img/error-img.png"></a></div>
 
         <div class="form-horizontal">
 

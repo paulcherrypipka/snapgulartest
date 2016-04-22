@@ -5,8 +5,8 @@ import {Question} from "../entity/question";
 export class QuestionnaireValidate {
 
     component: any;
-
-    constructor() { }
+    
+    constructor() {}
 
     isIdExist(questionnaireComponent: QuestionnaireComponent, targetComponent: any): void {
 
@@ -38,6 +38,7 @@ export class QuestionnaireValidate {
             targetComponent.item.haveFormulaError = true;
             targetComponent.invalidIdentifiers = invalidIds.join(', ');
             questionnaireComponent.isGlobalError = true;
+            this.initGlobalErrorLabel();
         }
     }
 
@@ -80,6 +81,7 @@ export class QuestionnaireValidate {
         if (equallyIdElements.length > 1) {
             console.log('!!! SHOW ERROR MESSAGE !!!');
             component.isGlobalError = true;
+            this.initGlobalErrorLabel();
             equallyIdElements.forEach((elem: any) => {
                 elem.haveEqualIdError = true;
             });
@@ -136,6 +138,19 @@ export class QuestionnaireValidate {
             })
         });
         return result;
+    }
+
+    private initGlobalErrorLabel() {
+        let indexError = 0;
+        var clickWarn = function() {
+            //noinspection TypeScriptUnresolvedFunction
+            var errorInputs = $('.form-group.has-error input');
+            errorInputs[indexError % errorInputs.length].focus();
+            indexError ++;
+            return false;
+        }
+        //noinspection TypeScriptUnresolvedFunction
+        $('#ic-global-error-notice-container').unbind('click').bind('click', clickWarn);
     }
 
     private checkQuestions(parentQuestions: any, inputedId: string): Question[] {
