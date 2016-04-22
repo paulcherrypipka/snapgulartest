@@ -40,11 +40,11 @@ export class QuestionComponent implements OnInit, DraggableComponentTrait {
     }
 
     validateIdExists(event: any) {
-        (new QuestionnaireValidate()).isIdExist(this._parentComponent, this);
+        QuestionnaireValidate.isIdExist(this._parentComponent, this);
     }
 
     validateIdUnique(event: any) {
-        (new QuestionnaireValidate()).isIdUnique(this._parentComponent);
+        QuestionnaireValidate.isIdUnique(this._parentComponent);
     }
 
     answersContainer(): any {

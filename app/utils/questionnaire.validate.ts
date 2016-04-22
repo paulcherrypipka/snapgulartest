@@ -4,11 +4,11 @@ import {Question} from "../entity/question";
 
 export class QuestionnaireValidate {
 
-    component: any;
+    static Component: any;
 
-    isIdExist(questionnaireComponent: QuestionnaireComponent, targetComponent: any): void {
+    static isIdExist(questionnaireComponent: QuestionnaireComponent, targetComponent: any): void {
 
-        this.component = questionnaireComponent;
+        QuestionnaireValidate.Component = questionnaireComponent;
 
         // Refresh error status
         targetComponent.item.haveFormulaError = false;
@@ -25,7 +25,7 @@ export class QuestionnaireValidate {
 
         while (matches = idExpr.exec(inputedFormula)) {
             parsedId = matches[1];
-            if (!this.idCheckExistHelper(parsedId)) {
+            if (!QuestionnaireValidate.idCheckExistHelper(parsedId)) {
                 invalidIds.push(parsedId);
                 isValid = false;
             }
@@ -35,11 +35,11 @@ export class QuestionnaireValidate {
             targetComponent.item.haveFormulaError = true;
             targetComponent.invalidIdentifiers = invalidIds.join(', ');
             questionnaireComponent.isGlobalError = true;
-            this.initGlobalErrorLabel();
+            QuestionnaireValidate.initGlobalErrorLabel();
         }
     }
 
-    isIdUnique(component: QuestionnaireComponent): void {
+    static isIdUnique(component: QuestionnaireComponent): void {
 
         //noinspection TypeScriptUnresolvedVariable
         let inputedId = event.target.value;
@@ -65,46 +65,46 @@ export class QuestionnaireValidate {
             }
 
             // Check Section's Questions
-            this.checkQuestions(section, inputedId).forEach((question) => {
+            QuestionnaireValidate.checkQuestions(section, inputedId).forEach((question) => {
                 equallyIdElements.push(question);
             })
         });
 
         //Check Q Questions
-        this.checkQuestions(component.item, inputedId).forEach((question) => {
+        QuestionnaireValidate.checkQuestions(component.item, inputedId).forEach((question) => {
             equallyIdElements.push(question);
         });
 
         if (equallyIdElements.length > 1) {
             component.isGlobalError = true;
-            this.initGlobalErrorLabel();
+            QuestionnaireValidate.initGlobalErrorLabel();
             equallyIdElements.forEach((elem: any) => {
                 elem.haveEqualIdError = true;
             });
         }
     }
 
-    private idCheckExistHelper(id: string): boolean {
+    private static idCheckExistHelper(id: string): boolean {
 
         let result = false;
-        if (this.component.item.id == id) {
+        if (QuestionnaireValidate.Component.item.id == id) {
             return true;
         }
 
         // Check Sections
-        let findedSection = this.component.item.getSection(id);
+        let findedSection = QuestionnaireValidate.Component.item.getSection(id);
         if (findedSection !== undefined) {
             result = true;
         }
 
         // Check Q Questions
-        let findedQuestion = this.component.item.getQuestion(id);
+        let findedQuestion = QuestionnaireValidate.Component.item.getQuestion(id);
         if (findedQuestion !== undefined) {
             result = true;
         }
 
         // Check Q Q Answers
-        this.component.item.getQuestions().forEach((question: Question) => {
+        QuestionnaireValidate.Component.item.getQuestions().forEach((question: Question) => {
 
             let answer = question.getAnswer(id);
             if (answer !== undefined) {
@@ -114,7 +114,7 @@ export class QuestionnaireValidate {
         });
 
 
-        this.component.item.getSections().forEach((section: Section) => {
+        QuestionnaireValidate.Component.item.getSections().forEach((section: Section) => {
 
             // Check section's Question
             let question = section.getQuestion(id);
@@ -136,7 +136,7 @@ export class QuestionnaireValidate {
         return result;
     }
 
-    private initGlobalErrorLabel() {
+    private static initGlobalErrorLabel() {
         let indexError = 0;
         var clickWarn = function() {
             //noinspection TypeScriptUnresolvedFunction
@@ -149,7 +149,7 @@ export class QuestionnaireValidate {
         $('#ic-global-error-notice-container').unbind('click').bind('click', clickWarn);
     }
 
-    private checkQuestions(parentQuestions: any, inputedId: string): Question[] {
+    private static checkQuestions(parentQuestions: any, inputedId: string): Question[] {
 
         let equallyIdElements = [];
 

@@ -69,7 +69,7 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
         let openedClass = 'modal-open';
         //noinspection TypeScriptUnresolvedVariable,TypeScriptUnresolvedFunction
         let bodyMainView = $(this.elementRef.nativeElement);
-        bodyMainView.find('.modal').addClass('in').slideDown(1000);
+        bodyMainView.find('.modal').addClass('in').slideDown(500);
         bodyMainView.addClass(openedClass);
         //noinspection TypeScriptUnresolvedFunction
         bodyMainView.find('.modal').after($('<div>').addClass('modal-backdrop fade in'));
@@ -86,11 +86,11 @@ export class QuestionnaireComponent implements OnInit, DraggableComponentTrait {
     }
 
     validateIdExists(event: any) {
-        (new QuestionnaireValidate()).isIdExist(this, this);
+        QuestionnaireValidate.isIdExist(this, this);
     }
 
     validateIdUnique(event: any) {
-        (new QuestionnaireValidate()).isIdUnique(this);
+        QuestionnaireValidate.isIdUnique(this);
     }
 
     questionsContainer(): any {
